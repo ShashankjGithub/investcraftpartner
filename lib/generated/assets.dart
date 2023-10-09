@@ -17,6 +17,7 @@ class Assets {
   static const String assetsCbli = 'assets/cbli.svg';
   static const String assetsCongrulation = 'assets/congrulation.png';
   static const String assetsCredit = 'assets/credit.svg';
+  static const String assetsCreditCard = 'assets/creditCard.svg';
   static const String assetsCreditScoreSmall = 'assets/creditScoreSmall.png';
   static const String assetsCreditscorePlane = 'assets/creditscorePlane.png';
   static const String assetsDashboardBackArrow = 'assets/dashboardBackArrow.svg';
@@ -33,6 +34,7 @@ class Assets {
   static const String assetsGoogle = 'assets/google.webp';
   static const String assetsHomesave = 'assets/homesave.png';
   static const String assetsHometrust = 'assets/hometrust.png';
+  static const String assetsInsuranceProduct = 'assets/insuranceProduct.svg';
   static const String assetsInvestamount = 'assets/investamount.svg';
   static const String assetsKapil = 'assets/kapil.png';
   static const String assetsMudra = 'assets/mudra.png';
@@ -46,11 +48,14 @@ class Assets {
   static const String assetsOfferImg = 'assets/offer-img.png';
   static const String assetsOnboardback = 'assets/onboardback.png';
   static const String assetsPancard = 'assets/pancard.svg';
+  static const String assetsPersonaLoan = 'assets/personaLoan.svg';
+  static const String assetsPluseIcon = 'assets/pluseIcon.svg';
   static const String assetsPngwing = 'assets/pngwing.png';
   static const String assetsProfile = 'assets/profile.svg';
   static const String assetsProfilesearch = 'assets/profilesearch.svg';
   static const String assetsProtfoliyoActive = 'assets/protfoliyoActive.svg';
   static const String assetsProtfoliyoInActive = 'assets/protfoliyoInActive.svg';
+  static const String assetsReferal1 = 'assets/referal1.svg';
   static const String assetsSearch = 'assets/search.svg';
   static const String assetsSearch2 = 'assets/search2.png';
   static const String assetsSipcal = 'assets/sipcal.png';
@@ -58,6 +63,7 @@ class Assets {
   static const String assetsUploadClode = 'assets/uploadClode.svg';
   static const String assetsUploadIcon = 'assets/uploadIcon.svg';
   static const String assetsVideoKyc = 'assets/videoKyc.svg';
+  static const String assetsViewAll = 'assets/viewAll.svg';
   static const String bottomActiveHome = 'assets/bottom/activeHome.svg';
   static const String bottomActiveMore = 'assets/bottom/activeMore.svg';
   static const String bottomActivecontactus = 'assets/bottom/activecontactus.svg';
