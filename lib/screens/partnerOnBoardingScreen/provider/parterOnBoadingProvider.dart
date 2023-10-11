@@ -77,9 +77,75 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   TextEditingController presentAddressClt = TextEditingController();
   TextEditingController pinCodeClt = TextEditingController();
   String gender = "Male";
+  bool pasaca = false;
   changeGender(value){
     gender = value;
     notifyListeners();
   }
+
+  changePASACA(){
+    pasaca = !pasaca;
+    notifyListeners();
+  }
+  var selectedState;
+  var selectedCity;
+  var selectedQualificaion;
+
+
+
+  /////////////////////////////////////// Business Detail //////////////////////
+  TextEditingController businessNameClt = TextEditingController();
+  TextEditingController businessEmailClt = TextEditingController();
+  TextEditingController businessWebsiteUrlClt = TextEditingController();
+  TextEditingController businessPhoneNumberClt = TextEditingController();
+  TextEditingController businessAddressClt = TextEditingController();
+  TextEditingController businessPinCodeClt = TextEditingController();
+
+  var selectedBusinessType;
+  var selectedBusinessStateType;
+  var selectedBusinessCityType;
+
+  String selectedGSTAvailable = "Yes";
+  changeSelectedGSTAvailable(value){
+    selectedGSTAvailable = value;
+    notifyListeners();
+  }
+  List monthlyBusinessList = [
+    "0-5 Lakhs",
+    "5-10 Lakhs",
+    "10-50 Lakhs",
+    "> 2 Crores",
+  ];
+  String selectedMonthlyBusiness = "0-5 Lakhs";
+  changeSelectedMB(value){
+    selectedMonthlyBusiness = value;
+    notifyListeners();
+  }
+
+  List areaCoveredList = [
+    "PAN India",
+    "State",
+    "City",
+
+  ];
+  String selectedAreaCovered = "PAN India";
+  changeAreaCovered(value){
+    selectedAreaCovered = value;
+    notifyListeners();
+  }
+
+  List experienceInBusinessList = [
+    "0-6 Months",
+    "6 Months-2 Years",
+    ">2 Years",
+  ];
+  String selectedexperienceInBusiness = "0-6 Months";
+  changeExperienceInBusiness(value){
+    selectedexperienceInBusiness = value;
+    notifyListeners();
+  }
+
+
+
 
 }

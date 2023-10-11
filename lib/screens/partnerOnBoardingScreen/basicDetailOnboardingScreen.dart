@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:investcraftpartner/screens/partnerOnBoardingScreen/parterOnBoadingProvider.dart';
+import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/personalDetailScreen.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/nextButton.dart';
 import 'package:investcraftpartner/widgets/backgroundwidget.dart';
@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
 import 'basicDetailScreen.dart';
+import 'businessDetailScreen.dart';
 
 class PartnerOnboardingScreen extends StatefulWidget {
   const PartnerOnboardingScreen({super.key});
@@ -248,6 +249,15 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                             child: Column(
                               children: [
                                 PersonalDetailScreen(),
+                                Gap(15),
+                                CustomNextButton()
+                              ],
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                BusinessDetailScreen(),
                                 Gap(15),
                                 CustomNextButton()
                               ],

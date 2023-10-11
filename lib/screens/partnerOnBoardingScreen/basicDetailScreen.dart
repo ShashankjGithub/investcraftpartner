@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:investcraftpartner/screens/partnerOnBoardingScreen/parterOnBoadingProvider.dart';
+import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customtextField.dart';
 import 'package:provider/provider.dart';
 
