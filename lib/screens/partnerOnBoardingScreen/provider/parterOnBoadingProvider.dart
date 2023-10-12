@@ -1,5 +1,6 @@
 
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 class PartnerOnBoardingProvider extends ChangeNotifier{
@@ -144,7 +145,21 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
     selectedexperienceInBusiness = value;
     notifyListeners();
   }
+///////////////////////////////////////////////////////////////////////////
+////////////////////// Bank Account Details //////////////////////////////
 
+  TextEditingController bankAccountNumberClt = TextEditingController();
+  TextEditingController bankIFSCClt  = TextEditingController();
+  var selectedBankName;
+  List bankList = [];
+
+  ///////////////////////////////////////////////////////////////////////
+////////////////////////// KYC Details/////////////////////////
+  FilePickerResult? panCardFile;
+  FilePickerResult? aadhaarCardFile;
+  FilePickerResult? passportCardFile;
+  FilePickerResult? businessCardFile;
+  ////////////////////////////////////////
 
 
 

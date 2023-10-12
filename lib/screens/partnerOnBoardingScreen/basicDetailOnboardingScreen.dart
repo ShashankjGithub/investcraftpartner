@@ -10,8 +10,12 @@ import 'package:investcraftpartner/widgets/backgroundwidget.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
+import 'agreementScreen.dart';
+import 'bankAccountDetailsScreens.dart';
 import 'basicDetailScreen.dart';
 import 'businessDetailScreen.dart';
+import 'congratulationsScreen.dart';
+import 'kycDetailsScreen.dart';
 
 class PartnerOnboardingScreen extends StatefulWidget {
   const PartnerOnboardingScreen({super.key});
@@ -118,6 +122,13 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                         ),
                       ],
                     ),
+                    pp.currentStep == 7?Container(
+                      padding: EdgeInsets.only(left: 5,right: 5),
+                      alignment: Alignment.center,
+                      height: 22.h,
+                      width: 75.w,
+
+                    ):
                     InkWell(
                       onTap: (){
                         pp.nextButtonPressed();
@@ -258,6 +269,42 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                             child: Column(
                               children: [
                                 BusinessDetailScreen(),
+                                Gap(15),
+                                CustomNextButton()
+                              ],
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                BankAccountDetailScreen(),
+                                Gap(15),
+                                CustomNextButton()
+                              ],
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                KycDetailsScreen(),
+                                Gap(15),
+                                CustomNextButton()
+                              ],
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                AgreementScreen(),
+                                Gap(15),
+                                CustomNextButton()
+                              ],
+                            ),
+                          ),
+                          SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                CongratulationsScreen(),
                                 Gap(15),
                                 CustomNextButton()
                               ],
