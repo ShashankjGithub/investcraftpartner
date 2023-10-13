@@ -303,10 +303,11 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                           ),
                           SingleChildScrollView(
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 CongratulationsScreen(),
                                 Gap(15),
-                                CustomNextButton()
+                                CustomNextButton(title: "Download QR Code",showArrow: false,)
                               ],
                             ),
                           ),

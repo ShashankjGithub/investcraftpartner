@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import '../config/themeConfig.dart';
 import '../generated/assets.dart';
 import '../widgets/bottomBar.dart';
+import 'authScreens/loginScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _afterSplash(){
     Future.delayed(Duration(seconds: 3)).then((value) {
-     Get.offAll(BottomBarScreen());
+     Get.offAll(LoginScreen());
     });
   }
 

@@ -5,8 +5,10 @@ import 'package:gap/gap.dart';
 import '../../../config/themeConfig.dart';
 
 class CustomNextButton extends StatelessWidget {
-   CustomNextButton({super.key, this.onTap});
+   CustomNextButton({super.key, this.onTap, this.title, this.showArrow});
  final Function()? onTap;
+ final String?title;
+ final bool? showArrow;
   @override
   Widget build(BuildContext context) {
     return  Padding(
@@ -26,7 +28,7 @@ class CustomNextButton extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Next',
+                title??'Next',
                   style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -34,6 +36,7 @@ class CustomNextButton extends StatelessWidget {
                   ),
               ),
               Gap(5),
+              if(showArrow==null)
               Icon(Icons.arrow_circle_right,color: Colors.white,size: 18,)
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/splashScreen.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
     return  MultiProvider(
       providers: [
         ChangeNotifierProvider<PartnerOnBoardingProvider>(create: (context) => PartnerOnBoardingProvider()),
+        ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

@@ -8,7 +8,7 @@ import '../../../config/themeConfig.dart';
 
 class TextFieldCustom extends StatelessWidget {
   const TextFieldCustom({
-    super.key, required this.hint, this.readonly, this.suffixIcon, this.maxLine, this.height, this.alignment, this.topAliment,  this.clt, this.type, this.textCapitalization, this.focusNode, this.onChanged, this.validator, this.showRequried, required this.title,
+    super.key, required this.hint, this.readonly, this.suffixIcon, this.maxLine, this.height, this.alignment, this.topAliment,  this.clt, this.type, this.textCapitalization, this.focusNode, this.onChanged, this.validator, this.showRequried, required this.title, this.obscureText,
 
   });
   final TextEditingController? clt;
@@ -26,6 +26,7 @@ class TextFieldCustom extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool? showRequried;
   final String title;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +66,7 @@ class TextFieldCustom extends StatelessWidget {
               ],
               borderRadius: BorderRadius.circular(100.r)),
           child: TextFormField(
+            obscureText: obscureText??false,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validator,
             onChanged: onChanged,

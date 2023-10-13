@@ -5,6 +5,8 @@ import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/part
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customtextField.dart';
 import 'package:provider/provider.dart';
 
+import '../../generated/assets.dart';
+
 class CongratulationsScreen extends StatefulWidget {
   const CongratulationsScreen({super.key});
 
@@ -40,30 +42,82 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
 
             ),
           ),
-          Gap(15),
-          TextFieldCustom(
-            hint: "",clt: pp.nameClt,
-            title: "Name (as per pan card )",
-            textCapitalization: TextCapitalization.characters,
+
+          Container(
+            height: 430.h,
+            width: size.width,
+            decoration: BoxDecoration(color: Colors.white),
+            child: Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                  height: 390.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(
+                      colors: [
+                        Color(0xffFCA377),
+                        Color(0xffDC6BB1),
+                        Color(0xffD868BB),
+                        Color(0xff6B7DAE),
+                      ]
+                    )
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Aayush Sharma',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontWeight: FontWeight.w700,
+
+                        ),
+                      ),
+                      Gap(15),
+                      Container(
+                        width: 286,
+                        height: 262,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(image: AssetImage(
+                            Assets.assetsQr
+                          ))
+                        ),
+                      ),
+                      Gap(15),
+                      Text(
+                        'Scan to Get Insta Loan',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Positioned(
+                  top: 0,
+                  child: Container(
+                    height: 80.h,
+                    width: 80.w,
+                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    child: Image.asset(Assets.assetsCon),
+
+                  ),
+                ),
+              ],
+            ),
           ),
-          Gap(20),
-          TextFieldCustom(
-            hint: "",clt: pp.emailIDClt,
-            title: "Email ID",
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(20),
-          TextFieldCustom(
-            hint: "",clt: pp.phoneNumberClt,
-            title: "Phone Number",
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(20),
-          TextFieldCustom(
-            hint: "",clt: pp.businessTypeClt,
-            title: "Business Type",
-            textCapitalization: TextCapitalization.characters,
-          ),
+
         ],
       ),
     );

@@ -15,6 +15,7 @@ class Assets {
   static const String assetsBgc = 'assets/bgc.svg';
   static const String assetsBoyseeting = 'assets/boyseeting.png';
   static const String assetsCbli = 'assets/cbli.svg';
+  static const String assetsCon = 'assets/con.png';
   static const String assetsCongrulation = 'assets/congrulation.png';
   static const String assetsCredit = 'assets/credit.svg';
   static const String assetsCreditCard = 'assets/creditCard.svg';
@@ -27,6 +28,7 @@ class Assets {
   static const String assetsEdit = 'assets/edit.svg';
   static const String assetsEye = 'assets/eye.svg';
   static const String assetsFacebook = 'assets/facebook.png';
+  static const String assetsFilter = 'assets/filter.svg';
   static const String assetsFinalLogo = 'assets/finalLogo.png';
   static const String assetsFingerprint = 'assets/fingerprint.svg';
   static const String assetsFlagpay = 'assets/flagpay.svg';
@@ -56,9 +58,11 @@ class Assets {
   static const String assetsProfilesearch = 'assets/profilesearch.svg';
   static const String assetsProtfoliyoActive = 'assets/protfoliyoActive.svg';
   static const String assetsProtfoliyoInActive = 'assets/protfoliyoInActive.svg';
+  static const String assetsQr = 'assets/qr.png';
   static const String assetsReferal1 = 'assets/referal1.svg';
   static const String assetsSearch = 'assets/search.svg';
   static const String assetsSearch2 = 'assets/search2.png';
+  static const String assetsSearchIcon = 'assets/searchIcon.svg';
   static const String assetsSipcal = 'assets/sipcal.png';
   static const String assetsSplashlogo = 'assets/splashlogo.png';
   static const String assetsUploadClode = 'assets/uploadClode.svg';

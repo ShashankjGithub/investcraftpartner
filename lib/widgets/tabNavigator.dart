@@ -5,6 +5,7 @@ import 'package:investcraftpartner/screens/termsSceens/termScreen.dart';
 import 'package:provider/provider.dart';
 
 import '../screens/homeScreens/homeScreen.dart';
+import '../screens/leadsScreens/viewLeadScreen.dart';
 import '../screens/moreScreens/moreScreen.dart';
 
 
@@ -27,7 +28,7 @@ class TabNavigator extends StatelessWidget {
     if(tabItem == "Page1")
       child = HomeScreen();
     else if(tabItem == "Page2")
-      child = LeadScreen();
+      child = ViewLeadScreen();
     else if(tabItem == "Page3")
       child = TermScreens();
     else if(tabItem == "Page4")
