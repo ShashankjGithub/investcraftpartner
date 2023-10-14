@@ -18,25 +18,30 @@ class CustomRadioButton extends StatelessWidget {
     return Expanded(
       child: InkWell(
         onTap:onTap,
-        child: Row(
-          children: [
-            Container(
-              alignment: Alignment.center,
-              height: 18.h,
-              width: 18.w,
-              decoration: BoxDecoration(color: color,shape: BoxShape.circle),
-              child: Icon(Icons.check,size: 15,color: Colors.white,),
-            ),
-            Gap(10),
-            Text(
-              '$title',
-              style: TextStyle(
-                color: textColor,
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w400,
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                alignment: Alignment.center,
+                height: 18.h,
+                width: 18.w,
+                decoration: BoxDecoration(color: color,shape: BoxShape.circle),
+                child: Icon(Icons.check,size: 15,color: Colors.white,),
               ),
-            ),
-          ],
+              Gap(10),
+              Expanded(
+                child: Text(
+                  '$title',
+                  style: TextStyle(
+                    color: textColor,
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
