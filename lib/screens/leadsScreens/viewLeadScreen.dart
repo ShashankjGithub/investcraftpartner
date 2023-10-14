@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:investcraftpartner/generated/assets.dart';
 
 import '../../config/themeConfig.dart';
+import 'leadDetailScreen.dart';
 
 class ViewLeadScreen extends StatefulWidget {
   const ViewLeadScreen({super.key});
@@ -216,7 +217,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                             ),
                                                           ),
                                                         ],),
-                                                      Gap(30.w),
+                                                      Gap(58.w),
                                                       Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
@@ -283,6 +284,9 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                           Gap(8),
                                                           InkWell(
                                                             onTap:(){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                                                return LeadDetailScreen();
+                                                              }));
 
                                                             },
                                                             child: Row(

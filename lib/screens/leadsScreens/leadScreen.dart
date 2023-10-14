@@ -39,7 +39,6 @@ class _LeadScreenState extends State<LeadScreen> {
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24.sp,
-
                   fontWeight: FontWeight.w700,
 
                 ),

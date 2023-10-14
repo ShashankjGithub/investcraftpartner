@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:investcraftpartner/config/themeConfig.dart';
 import 'package:investcraftpartner/generated/assets.dart';
 
+import '../leadsScreens/createLeadScreen.dart';
 import '../partnerOnBoardingScreen/basicDetailOnboardingScreen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -131,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: GestureDetector(
                             onTap: (){
                               Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return PartnerOnboardingScreen();
+                                return CreateLeadScreen();
                               }));
                             },
                             child: Container(
