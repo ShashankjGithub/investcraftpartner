@@ -125,7 +125,7 @@ class SignUpScreen extends StatelessWidget {
                             "Select",
                             style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                           ),
-                          items: []
+                          items: ap.businessType
                               .map((item) => DropdownMenuItem(
                             value: item,
                             child: Text(
@@ -136,7 +136,7 @@ class SignUpScreen extends StatelessWidget {
                               .toList(),
                           value: ap.selectedBusinessType,
                           onChanged: (value) {
-
+                            ap.changeSelectedBusinessType(value);
                           },
                           buttonStyleData: ButtonStyleData(
                             padding: EdgeInsets.symmetric(horizontal: 12),
