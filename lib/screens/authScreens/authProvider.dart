@@ -1,10 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:investcraftpartner/config/appConfig.dart';
+import 'package:investcraftpartner/screens/authScreens/loginScreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/apiServices.dart';
+import '../../widgets/bottomBar.dart';
 
 class AuthProvider extends ChangeNotifier{
 
@@ -32,6 +36,8 @@ class AuthProvider extends ChangeNotifier{
   TextEditingController phoneNumberClt = TextEditingController();
   TextEditingController passwordSignClt = TextEditingController();
   TextEditingController confirmPasswordClt = TextEditingController();
+  final signUpKey = GlobalKey<FormState>();
+  final loginKey = GlobalKey<FormState>();
 
   List businessType = [
     "Individual",
@@ -47,35 +53,47 @@ class AuthProvider extends ChangeNotifier{
   }
 
   logine(BuildContext context){
-    changeLoading(true);
-    ApiServices().postData(login,{
-      "email":emailClt.text,
-      "password":passwordClt.text,
-    },context,he: "").then((response) {
-      if (response!=null) {
-        saveUserData(json.decode(response.body)["token"]);
-        changeLoading(false);
-      }else{
-        changeLoading(false);
-      }
-    });
+    if(loginKey.currentState!.validate()){
+      changeLoading(true);
+      ApiServices().postData(login,{
+        "email":emailClt.text,
+        "password":passwordClt.text,
+      },context,he: "").then((response) {
+        if (response!=null) {
+          if (json.decode(response.body)["token"]!=null) {
+            saveUserData(json.decode(response.body)["token"]);
+            changeLoading(false);
+
+          }  else{
+            Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+            changeLoading(false);
+          }
+        }else{
+          changeLoading(false);
+        }
+      });
+    }
   }
   register(BuildContext context){
-    changeLoading(true);
-    ApiServices().postData(login,{
-      "name":nameClt.text,
-      "email":emailIdClt.text,
-      "mobile":phoneNumberClt.text,
-      "business_type":"partner",
-      "password":passwordClt.text,
-    },context,he: "").then((response) {
-      if (response!=null) {
-        saveUserData(json.decode(response.body)["token"]);
-        changeLoading(false);
-      }else{
-        changeLoading(false);
-      }
-    });
+    if(signUpKey.currentState!.validate()){
+      changeLoading(true);
+      ApiServices().postData(sign_up,{
+        "name":nameClt.text,
+        "email":emailIdClt.text,
+        "mobile":phoneNumberClt.text,
+        "business_type":selectedBusinessType.value,
+        "password":passwordSignClt.text,
+      },context,he: "").then((response) {
+        if (response!=null) {
+          Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+          changeLoading(false);
+          clearSignupTextField();
+          Get.back();
+        }else{
+          changeLoading(false);
+        }
+      });
+    }
   }
 
 
@@ -84,6 +102,7 @@ class AuthProvider extends ChangeNotifier{
     tokenn = token;
     await sp.setString("token", token);
     await sp.setBool("isLogin", true);
+    Get.offAll(()=>BottomBarScreen());
     notifyListeners();
   }
 
@@ -92,6 +111,27 @@ class AuthProvider extends ChangeNotifier{
     tokenn = sp.getString("token");
     alreadyLogin = sp.getBool("isLogin")??false;
     notifyListeners();
+  }
+
+
+  deleteUserData(BuildContext context)async{
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    ApiServices().postData(logoutApi, "", context,header: true,he: tokenn).then((value) async{
+      sp.clear();
+      tokenn = null;
+      alreadyLogin = false;
+      Get.offAll(()=>LoginScreen());
+    });
+    notifyListeners();
+  }
+
+  clearSignupTextField(){
+     nameClt.clear();
+     emailIdClt.clear();
+     phoneNumberClt.clear();
+     passwordSignClt.clear();
+     confirmPasswordClt.clear();
+     notifyListeners();
   }
 
 

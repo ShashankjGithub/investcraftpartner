@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
+import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../config/themeConfig.dart';
 import '../generated/assets.dart';
@@ -26,11 +29,14 @@ class _SplashScreenState extends State<SplashScreen> {
   getData(){
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _afterSplash();
+      context.read<PartnerFromDataProvider>().getPartnerModual(context);
     });
   }
 
   _afterSplash(){
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
     Future.delayed(Duration(seconds: 3)).then((value) {
+      ap.alreadyLogin?Get.offAll(BottomBarScreen()):
      Get.offAll(LoginScreen());
     });
   }

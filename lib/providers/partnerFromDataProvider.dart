@@ -14,7 +14,14 @@ class PartnerFromDataProvider extends ChangeNotifier{
   DatumPartnerFrom? kycDetail;
   DatumPartnerFrom? bankDetails;
   DatumPartnerFrom? congratulation;
-  DatumPartnerFrom? leadForm1;
+  DatumPartnerFrom? leadFormPersonal;
+  DatumPartnerFrom? leadFormEmployement;
+  DatumPartnerFrom? leadFormDocumentUpload;
+  DatumPartnerFrom? homePageForm;
+  DatumPartnerFrom? subForm;
+  DatumPartnerFrom? viewLeadForm;
+  DatumPartnerFrom? signupForm;
+  DatumPartnerFrom? loginForm;
 
   getPartnerModual(BuildContext context){
     ApiServices().postData(partner_from,{
@@ -34,7 +41,15 @@ class PartnerFromDataProvider extends ChangeNotifier{
     kycDetail = data.firstWhere((element) => element.form == "KYC_DETAIL");
     bankDetails = data.firstWhere((element) => element.form == "BANK_DETAILS");
     congratulation = data.firstWhere((element) => element.form == "CONGRATULATION");
-    leadForm1 = data.firstWhere((element) => element.form == "LEAD_FORM");
+    leadFormPersonal = data.firstWhere((element) => element.form == "LEAD_FORM_PERSONAL");
+    leadFormEmployement = data.firstWhere((element) => element.form == "LEAD_FORM_EMPLOYEMNT");
+    leadFormDocumentUpload = data.firstWhere((element) => element.form == "LEAD_FORM_DOCUMENT_UPLOAD");
+    homePageForm = data.firstWhere((element) => element.form == "HOMEPAGE_FORM");
+    subForm = data.firstWhere((element) => element.form == "SUB_FORM");
+    viewLeadForm = data.firstWhere((element) => element.form == "VIEW_LEADS_FORM");
+    signupForm = data.firstWhere((element) => element.form == "SIGNUP_FORM");
+    loginForm = data.firstWhere((element) => element.form == "LOGIN_FORM");
+    notifyListeners();
   }
 
 

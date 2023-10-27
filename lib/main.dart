@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
 import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<PartnerOnBoardingProvider>(create: (context) => PartnerOnBoardingProvider()),
         ChangeNotifierProvider<AuthProvider>(create: (context) => AuthProvider()),
         ChangeNotifierProvider<LeadProvider>(create: (context) => LeadProvider()),
+        ChangeNotifierProvider<PartnerFromDataProvider>(create: (context) => PartnerFromDataProvider()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(360, 690),

@@ -2,7 +2,8 @@ const String baseUrl = "https://www.testpartner.investkraft.com/api/";
 
 const String partner_from = "partner-form";
 const String login = "login";
-
+const String sign_up = "sign-up";
+const String logoutApi = "logout";
 
 
 

@@ -89,28 +89,24 @@ class Element {
 }
 
 class ListElement {
-  String? listKey;
-  String? listValue;
+
   String? key;
   String? value;
 
   ListElement({
-    this.listKey,
-    this.listValue,
+
     this.key,
     this.value,
   });
 
   factory ListElement.fromJson(Map<String, dynamic> json) => ListElement(
-    listKey: json["key"],
-    listValue: json["value"],
-    key: json["Key"],
-    value: json["Value"],
+
+    key: json["key"],
+    value: json["value"],
   );
 
   Map<String, dynamic> toJson() => {
-    "key": listKey,
-    "value": listValue,
+
     "Key": key,
     "Value": value,
   };
