@@ -1,7 +1,13 @@
 
 
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart' as  http;
+import '../../../config/appConfig.dart';
+import '../../../services/apiServices.dart';
 
 class PartnerOnBoardingProvider extends ChangeNotifier{
   int persent = 10;
@@ -101,6 +107,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   TextEditingController businessPhoneNumberClt = TextEditingController();
   TextEditingController businessAddressClt = TextEditingController();
   TextEditingController businessPinCodeClt = TextEditingController();
+  TextEditingController businessGstNoClt = TextEditingController();
 
   var selectedBusinessType;
   var selectedBusinessStateType;
@@ -111,35 +118,20 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
     selectedGSTAvailable = value;
     notifyListeners();
   }
-  List monthlyBusinessList = [
-    "0-5 Lakhs",
-    "5-10 Lakhs",
-    "10-50 Lakhs",
-    "> 2 Crores",
-  ];
+
   String selectedMonthlyBusiness = "0-5 Lakhs";
   changeSelectedMB(value){
     selectedMonthlyBusiness = value;
     notifyListeners();
   }
 
-  List areaCoveredList = [
-    "PAN India",
-    "State",
-    "City",
 
-  ];
   String selectedAreaCovered = "PAN India";
   changeAreaCovered(value){
     selectedAreaCovered = value;
     notifyListeners();
   }
 
-  List experienceInBusinessList = [
-    "0-6 Months",
-    "6 Months-2 Years",
-    ">2 Years",
-  ];
   String selectedexperienceInBusiness = "0-6 Months";
   changeExperienceInBusiness(value){
     selectedexperienceInBusiness = value;
@@ -161,6 +153,129 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   FilePickerResult? businessCardFile;
   ////////////////////////////////////////
 
+  savePersonalDetail(BuildContext context){
+    ApiServices().postData(save_personal_details,{
+      "pan":panCardNumberClt.text,
+      "aadhar":aadhaarCardNumberClt.text,
+      "gender":gender,
+      "dob":dobClt.text,
+      "permanent_address":permanentHomeAddressClt.value,
+      "present_address":presentAddressClt.text,
+      "state":selectedState.value,
+      "city":selectedCity.value,
+      "pin":pinCodeClt.text,
+      "education":selectedQualificaion.value,
+    },context,he: "").then((response) {
+      if (response!=null) {
+        Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
 
+      }else{
+
+      }
+    });
+  }
+  saveBusinessDetail(BuildContext context){
+    ApiServices().postData(save_bussiness_detail,{
+      "type":selectedBusinessType.value,
+      "name":businessNameClt.text,
+      "email":businessEmailClt.text,
+      "website":businessWebsiteUrlClt.text,
+      "phone":businessPhoneNumberClt.value,
+      "gst_available":selectedGSTAvailable,
+      "gst_number":businessGstNoClt.text,
+      "monthly_business":selectedMonthlyBusiness,
+      "business_area":selectedAreaCovered,
+      "experience":selectedexperienceInBusiness,
+      "address":businessAddressClt.text,
+      "state" :selectedBusinessStateType.value,
+      "city":selectedBusinessCityType.value,
+      "pin":businessPinCodeClt.value,
+    },context,he: "").then((response) {
+      if (response!=null) {
+        Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+
+      }else{
+
+      }
+    });
+  }
+
+  saveBankDetail(BuildContext context){
+    ApiServices().postData(save_bank_detail,{
+      "account_number":bankAccountNumberClt.text,
+      "ifsc_code":bankIFSCClt.text,
+      "bank_name":selectedBankName.value,
+    },context,he: "").then((response) {
+      if (response!=null) {
+        Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+
+      }else{
+
+      }
+    });
+  }
+
+
+  Future saveKycDetails(BuildContext context,id)async{
+
+    try {
+
+      var request = http.MultipartRequest(
+          'POST',
+          Uri.parse(baseUrl+save_kyc_detail)); // your server url
+      request.headers.addAll({
+        //"Authorization": "Bearer "+up.userData.token,
+
+      });
+
+      if(panCardFile!=null){
+        request.files
+            .add(await http.MultipartFile.fromPath('pan_file', panCardFile!.paths[0]!));
+      }else{
+        request.files
+            .add(await http.MultipartFile.fromString('pan_file', ""));
+      }
+      if(aadhaarCardFile!=null){
+        request.files
+            .add(await http.MultipartFile.fromPath('aadhar_file', aadhaarCardFile!.paths[0]!));
+      }else{
+        request.files
+            .add(await http.MultipartFile.fromString('aadhar_file', ""));
+      }
+      if(passportCardFile!=null){
+        request.files
+            .add(await http.MultipartFile.fromPath('photo_file', passportCardFile!.paths[0]!));
+      }else{
+        request.files
+            .add(await http.MultipartFile.fromString('photo_file', ""));
+      }
+      if(businessCardFile!=null){
+        request.files
+            .add(await http.MultipartFile.fromPath('business_file', businessCardFile!.paths[0]!));
+      }else{
+        request.files
+            .add(await http.MultipartFile.fromString('business_file', ""));
+      }
+
+
+
+      http.StreamedResponse response = await request.send();
+      print(response.statusCode);
+      final res = await http.Response.fromStream(response);
+      print(res.body);
+      if (response.statusCode == 200) {
+
+        Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
+        return "${json.decode(res.body)["Message"]}";
+      }else{
+        Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
+
+      }
+    } catch (e) {
+
+      print("error in partnerOnBoardFile  uploade kyc ${e.toString()}");
+    }
+
+  }
 
 }

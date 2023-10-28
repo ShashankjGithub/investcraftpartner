@@ -1,4 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
+import 'package:investcraftpartner/services/apiServices.dart';
+import 'package:provider/provider.dart';
+
+import '../../config/appConfig.dart';
+import '../../modals/leadmodal.dart';
 
 class LeadProvider extends ChangeNotifier{
   List titles = [
@@ -113,5 +119,30 @@ class LeadProvider extends ChangeNotifier{
      submittedDocumentsUpload = false;
     notifyListeners();
   }
+  bool noLeadList = false;
+  List<Lead> leadsList = [];
+  getLead(BuildContext context){
+    noLeadList = false;
+    leadsList.clear();
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    ApiServices().getData(leads_view,tocken: ap.tokenn).then((response) {
+      if (response!=null) {
+        if (response.statusCode == 200) {
+          leadsList.addAll(leadModalFromJson(response.body).leads);
+          if(leadsList.isEmpty){
+            noLeadList = true;
+          }
+        }else{
+          noLeadList = true;
+        }
+      }else{
+        noLeadList = true;
+      }
+    });
+    notifyListeners();
+  }
+
+  createLead(BuildContext co){}
+
 
 }

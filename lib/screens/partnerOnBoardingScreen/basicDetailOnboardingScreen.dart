@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/personalDetailScreen.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/nextButton.dart';
+import 'package:investcraftpartner/services/getLabels.dart';
 import 'package:investcraftpartner/widgets/backgroundwidget.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +34,7 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
       statusBarColor: mainColor,
     ));
     final PartnerOnBoardingProvider pp = context.watch<PartnerOnBoardingProvider>();
+    final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return  Scaffold(
       body: Container(
         height: size.height,
@@ -252,7 +255,9 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                               children: [
                                 BasicDetailScreen(),
                                 Gap(15),
-                                CustomNextButton()
+                                CustomNextButton(
+                                  title: getLabel(label: "NEXT", form: pf.basicDetail!),
+                                )
                               ],
                             ),
                           ),
@@ -261,7 +266,9 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                               children: [
                                 PersonalDetailScreen(),
                                 Gap(15),
-                                CustomNextButton()
+                                CustomNextButton(
+                                  title:  getLabel(label: "NEXT", form: pf.personalDetailFromData!),
+                                )
                               ],
                             ),
                           ),
@@ -270,7 +277,9 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                               children: [
                                 BusinessDetailScreen(),
                                 Gap(15),
-                                CustomNextButton()
+                                CustomNextButton(
+                                  title:  getLabel(label: "NEXT", form: pf.businessDetails!),
+                                )
                               ],
                             ),
                           ),
@@ -279,7 +288,9 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                               children: [
                                 BankAccountDetailScreen(),
                                 Gap(15),
-                                CustomNextButton()
+                                CustomNextButton(
+                                  title:  getLabel(label: "NEXT", form: pf.bankDetails!),
+                                )
                               ],
                             ),
                           ),
@@ -288,7 +299,9 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                               children: [
                                 KycDetailsScreen(),
                                 Gap(15),
-                                CustomNextButton()
+                                CustomNextButton(
+                                  title:  getLabel(label: "NEXT", form: pf.kycDetail!),
+                                )
                               ],
                             ),
                           ),
@@ -307,7 +320,7 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                               children: [
                                 CongratulationsScreen(),
                                 Gap(15),
-                                CustomNextButton(title: "Download QR Code",showArrow: false,)
+                                CustomNextButton(title: getLabel(label: "BUTTON_LABEL", form: pf.congratulation!),showArrow: false,)
                               ],
                             ),
                           ),

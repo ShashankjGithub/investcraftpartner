@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
@@ -33,6 +34,8 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
     ));
     final Size size = MediaQuery.of(context).size;
     final LeadProvider lp = context.watch<LeadProvider>();
+    final PartnerFromDataProvider fp = context.watch<PartnerFromDataProvider>();
+
     return  WillPopScope(
       onWillPop: ()async{
         lp.clearTextFields();

@@ -36,6 +36,7 @@ class PartnerFromDataProvider extends ChangeNotifier{
 
   setData(){
     personalDetailFromData = data.firstWhere((element) => element.form == "PERSONAL_DETAIL");
+    agreement = data.firstWhere((element) => element.form == "AGREEMENT");
     basicDetail = data.firstWhere((element) => element.form == "BASIC_DETAILS");
     businessDetails = data.firstWhere((element) => element.form == "BUSSINESS_DETAIL");
     kycDetail = data.firstWhere((element) => element.form == "KYC_DETAIL");

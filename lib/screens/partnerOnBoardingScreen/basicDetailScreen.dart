@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customtextField.dart';
+import 'package:investcraftpartner/services/getLabels.dart';
 import 'package:provider/provider.dart';
 
 class BasicDetailScreen extends StatefulWidget {
@@ -17,13 +19,14 @@ class _BasicDetailScreenState extends State<BasicDetailScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final PartnerOnBoardingProvider pp = context.watch<PartnerOnBoardingProvider>();
+    final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Basic Details',
+            "${pf.basicDetail!.title}",
             style: TextStyle(
               color: Colors.black,
               fontSize: 30.sp,
@@ -32,7 +35,7 @@ class _BasicDetailScreenState extends State<BasicDetailScreen> {
           ),
           Gap(5),
           Text(
-            'Fill your basic details\n',
+            "${pf.basicDetail!.content}",
             style: TextStyle(
               color: Color(0xFFD7206A),
               fontSize: 16,
@@ -43,25 +46,25 @@ class _BasicDetailScreenState extends State<BasicDetailScreen> {
           Gap(15),
           TextFieldCustom(
             hint: "",clt: pp.nameClt,
-            title: "Name (as per pan card )",
+            title: getLabel(label: "NAME_LABEL", form: pf.basicDetail!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.emailIDClt,
-            title: "Email ID",
+            title: getLabel(label: "EMAIL_LABEL", form: pf.basicDetail!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.phoneNumberClt,
-            title: "Phone Number",
+            title:  getLabel(label: "PHONE_NUMBER_LABEL", form: pf.basicDetail!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.businessTypeClt,
-            title: "Business Type",
+            title: getLabel(label: "BUSSINESS_TYPE_LABEL", form: pf.basicDetail!),
             textCapitalization: TextCapitalization.characters,
           ),
         ],

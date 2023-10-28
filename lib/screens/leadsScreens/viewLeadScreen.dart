@@ -4,6 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/generated/assets.dart';
+import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
+import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
 import 'leadDetailScreen.dart';
@@ -29,6 +31,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: mainColor,
     ));
+    final LeadProvider lp = context.watch<LeadProvider>();
     return  Scaffold(
       body: SafeArea(
         child: Column(
@@ -96,7 +99,11 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 20),
-                child: ValueListenableBuilder(
+                child:
+                lp.noLeadList==true?Center(child: Text("No Lead Found"),):
+                    lp.leadsList.isEmpty?Center(child: CircularProgressIndicator(color: mainColor,),):
+
+                ValueListenableBuilder(
                     valueListenable: currentIndex,
                     builder: (context,value,_) {
                       return Container(
@@ -104,7 +111,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                           decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(30)),
                           child: ListView(
                             children: List.generate(
-                                4, (index) {
+                                lp.leadsList.length, (index) {
 
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 15),

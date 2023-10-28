@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customtextField.dart';
+import 'package:investcraftpartner/services/getLabels.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
@@ -22,13 +24,14 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final PartnerOnBoardingProvider pp = context.watch<PartnerOnBoardingProvider>();
+    final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Bank Account Details',
+            '${pf.bankDetails!.title}',
             style: TextStyle(
               color: Colors.black,
               fontSize: 30.sp,
@@ -37,7 +40,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
           ),
           Gap(5),
           Text(
-            'Verify you bank account details\n',
+            "${pf.bankDetails!.content}",
             style: TextStyle(
               color: Color(0xFFD7206A),
               fontSize: 16,
@@ -48,13 +51,13 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
           Gap(15),
           TextFieldCustom(
             hint: "",clt: pp.bankAccountNumberClt,
-            title: "Account Number",
+            title: getLabel(label: "ACCOUNT_NUMBER_LABEL", form: pf.bankDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.bankIFSCClt,
-            title: "IFSC Code",
+            title: getLabel(label: "IFSC_CODE_LABEL", form: pf.bankDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
 
@@ -64,7 +67,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
               Row(
                 children: [
                   Text(
-                    'Bank Name',
+                    getLabel(label: "BANK_NAME-_LABEL", form: pf.bankDetails!),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -103,14 +106,14 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                     isExpanded: true,
                     hint: Text(
-                      "Select bank name",
+                      getPlaceHolder(label: "SELECT_BANK", form: pf.bankDetails!),
                       style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                     ),
-                    items: []
+                    items: pf.bankDetails!.element.firstWhere((element) => element.key == "SELECT_BANK").list
                         .map((item) => DropdownMenuItem(
                       value: item,
                       child: Text(
-                        item,
+                        item.key!,
                         style: TextStyle(color: Color(0xff5B6469)),
                       ),
                     ))

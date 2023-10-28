@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customtextField.dart';
 import 'package:provider/provider.dart';
@@ -19,13 +20,14 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final PartnerOnBoardingProvider pp = context.watch<PartnerOnBoardingProvider>();
+    final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Congratulations!',
+            "${pf.congratulation!.title}",
             style: TextStyle(
               color: Colors.black,
               fontSize: 30.sp,
@@ -34,7 +36,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
           ),
           Gap(5),
           Text(
-            'Your QR code is Generated\n',
+            "${pf.congratulation!.content}",
             style: TextStyle(
               color: Color(0xFFD7206A),
               fontSize: 16,

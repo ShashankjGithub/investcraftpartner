@@ -59,7 +59,7 @@ class DatumPartnerFrom {
 class Element {
   String key;
   String label;
-  Placeholder placeholder;
+  String placeholder;
   String elementType;
   List<ListElement> list;
 
@@ -74,7 +74,7 @@ class Element {
   factory Element.fromJson(Map<String, dynamic> json) => Element(
     key: json["key"],
     label: json["label"],
-    placeholder: placeholderValues.map[json["placeholder"]]!,
+    placeholder:  json["placeholder"],
     elementType: json["element_type"],
     list: List<ListElement>.from(json["list"].map((x) => ListElement.fromJson(x))),
   );
@@ -82,7 +82,7 @@ class Element {
   Map<String, dynamic> toJson() => {
     "key": key,
     "label": label,
-    "placeholder": placeholderValues.reverse[placeholder],
+    "placeholder": placeholder,
     "element_type": elementType,
     "list": List<dynamic>.from(list.map((x) => x.toJson())),
   };

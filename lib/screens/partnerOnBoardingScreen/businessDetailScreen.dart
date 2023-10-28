@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customRadioButton.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customtextField.dart';
+import 'package:investcraftpartner/services/getLabels.dart';
 import 'package:provider/provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import '../../config/themeConfig.dart';
@@ -18,13 +20,14 @@ class BusinessDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final PartnerOnBoardingProvider pp = context.watch<PartnerOnBoardingProvider>();
+    final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Business Details',
+            '${pf.businessDetails!.title}',
             style: TextStyle(
               color: Colors.black,
               fontSize: 30.sp,
@@ -33,7 +36,7 @@ class BusinessDetailScreen extends StatelessWidget {
           ),
           Gap(5),
           Text(
-            'Enter detail of your business',
+            "${pf.businessDetails!.content}",
             style: TextStyle(
               color: Color(0xFFD7206A),
               fontSize: 16,
@@ -47,7 +50,7 @@ class BusinessDetailScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Business type',
+                    getLabel(label: "BUSSINESS_TYPE_LABEL", form: pf.businessDetails!),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -86,14 +89,14 @@ class BusinessDetailScreen extends StatelessWidget {
                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                     isExpanded: true,
                     hint: Text(
-                      "Select Business type",
+                      getPlaceHolder(label: "BUSSINESS_TYPE_PLACEHOLDER", form: pf.businessDetails!),
                       style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                     ),
-                    items: []
+                    items: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_TYPE_PLACEHOLDER").list
                         .map((item) => DropdownMenuItem(
                       value: item,
                       child: Text(
-                        item,
+                        item.key!,
                         style: TextStyle(color: Color(0xff5B6469)),
                       ),
                     ))
@@ -120,33 +123,33 @@ class BusinessDetailScreen extends StatelessWidget {
 
           TextFieldCustom(
             hint: "",clt: pp.businessNameClt,
-            title: "Business Name",
+            title: getLabel(label: "BUSINESS_NAME_LABEL", form: pf.businessDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.businessEmailClt,
-            title: "Business Email",
+            title: getLabel(label: "BUSINESS_EMAIL_LABEL", form: pf.businessDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.businessWebsiteUrlClt,
-            title: "Website URL",
+            title: getLabel(label: "WEBSITE_URL_LABEL", form: pf.businessDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(25),
 
           TextFieldCustom(
             hint: "",clt: pp.businessPhoneNumberClt,
-            title: "Business Phone Number",
+            title: getLabel(label: "BUSINESS_NUMBER_LABEL", form: pf.businessDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(25),
           Row(
             children: [
               Text(
-                'GST Available',
+                getLabel(label: "GST_LABEL", form: pf.businessDetails!),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -177,7 +180,7 @@ class BusinessDetailScreen extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Monthly Business',
+                getLabel(label: "BUSSINESS_LABEL", form: pf.businessDetails!),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -193,7 +196,7 @@ class BusinessDetailScreen extends StatelessWidget {
             padding: EdgeInsets.zero,
             shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: pp.monthlyBusinessList.length,
+              itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 25,
                   mainAxisSpacing: 25,
@@ -201,7 +204,7 @@ class BusinessDetailScreen extends StatelessWidget {
                   crossAxisCount: 2), itemBuilder: (context,index){
             return InkWell(
               onTap: (){
-                pp.changeSelectedMB(pp.monthlyBusinessList[index]);
+                pp.changeSelectedMB(pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key);
               },
               child: Container(
                 alignment:Alignment.center,
@@ -226,15 +229,15 @@ class BusinessDetailScreen extends StatelessWidget {
                       width: 18.w,
                       decoration: BoxDecoration(
                           border: Border.all(color: bordercolor),
-                          shape: BoxShape.circle,color: pp.selectedMonthlyBusiness==pp.monthlyBusinessList[index]?mainColor:grayColor2),
+                          shape: BoxShape.circle,color: pp.selectedMonthlyBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key?mainColor:grayColor2),
                     child: Icon(Icons.check,size: 15,color: Colors.white,),
 
                     ),
                     Gap(20),
                     Text(
-                      pp.monthlyBusinessList[index],
+                      pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].value.toString(),
                       style: TextStyle(
-                        color: pp.selectedMonthlyBusiness==pp.monthlyBusinessList[index]?mainColor:Colors.black,
+                        color: pp.selectedMonthlyBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key?mainColor:Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -248,7 +251,7 @@ class BusinessDetailScreen extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Area Covered',
+                getLabel(label: "AREA_COVERED_LABEL", form: pf.businessDetails!),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -264,7 +267,7 @@ class BusinessDetailScreen extends StatelessWidget {
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: pp.areaCoveredList.length,
+              itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 25,
                   mainAxisSpacing: 25,
@@ -272,7 +275,7 @@ class BusinessDetailScreen extends StatelessWidget {
                   crossAxisCount: 2), itemBuilder: (context,index){
             return InkWell(
               onTap: (){
-                pp.changeAreaCovered(pp.areaCoveredList[index]);
+                pp.changeAreaCovered(pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key);
               },
               child: Container(
                 alignment:Alignment.center,
@@ -297,15 +300,15 @@ class BusinessDetailScreen extends StatelessWidget {
                       width: 18.w,
                       decoration: BoxDecoration(
                           border: Border.all(color: bordercolor),
-                          shape: BoxShape.circle,color: pp.selectedAreaCovered==pp.areaCoveredList[index]?mainColor:grayColor2),
+                          shape: BoxShape.circle,color: pp.selectedAreaCovered==pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key?mainColor:grayColor2),
                       child: Icon(Icons.check,size: 15,color: Colors.white,),
 
                     ),
                     Gap(20),
                     Text(
-                      pp.areaCoveredList[index],
+                      pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].value.toString(),
                       style: TextStyle(
-                        color: pp.selectedAreaCovered==pp.areaCoveredList[index]?mainColor:Colors.black,
+                        color: pp.selectedAreaCovered==pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key?mainColor:Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
@@ -319,7 +322,7 @@ class BusinessDetailScreen extends StatelessWidget {
           Row(
             children: [
               Text(
-                'Experience in Business',
+                getLabel(label: "BUSSINESS_EXPERINCE_LABEL", form: pf.businessDetails!),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -335,7 +338,7 @@ class BusinessDetailScreen extends StatelessWidget {
               padding: EdgeInsets.zero,
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
-              itemCount: pp.experienceInBusinessList.length,
+              itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list.length,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 25,
                   mainAxisSpacing: 25,
@@ -343,7 +346,7 @@ class BusinessDetailScreen extends StatelessWidget {
                   crossAxisCount: 2), itemBuilder: (context,index){
             return InkWell(
               onTap: (){
-                pp.changeExperienceInBusiness(pp.experienceInBusinessList[index]);
+                pp.changeExperienceInBusiness(pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key);
               },
               child: Container(
                 alignment:Alignment.center,
@@ -368,15 +371,15 @@ class BusinessDetailScreen extends StatelessWidget {
                       width: 18.w,
                       decoration: BoxDecoration(
                           border: Border.all(color: bordercolor),
-                          shape: BoxShape.circle,color: pp.selectedexperienceInBusiness==pp.experienceInBusinessList[index]?mainColor:grayColor2),
+                          shape: BoxShape.circle,color: pp.selectedexperienceInBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key?mainColor:grayColor2),
                       child: Icon(Icons.check,size: 15,color: Colors.white,),
 
                     ),
                     Gap(10),
                     Text(
-                      pp.experienceInBusinessList[index],
+                      pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].value.toString(),
                       style: TextStyle(
-                        color: pp.selectedexperienceInBusiness==pp.experienceInBusinessList[index]?mainColor:Colors.black,
+                        color: pp.selectedexperienceInBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key?mainColor:Colors.black,
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
@@ -389,7 +392,7 @@ class BusinessDetailScreen extends StatelessWidget {
           Gap(25),
           TextFieldCustom(
             hint: "",clt: pp.businessAddressClt,
-            title: "Business Address",
+            title: getLabel(label: "BUSSINESS_ADDRESS_LABEL", form: pf.businessDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(25),
@@ -398,7 +401,7 @@ class BusinessDetailScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'State',
+                    "${getLabel(label: "STATE_LABEL", form: pf.businessDetails!)}",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -437,14 +440,14 @@ class BusinessDetailScreen extends StatelessWidget {
                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                     isExpanded: true,
                     hint: Text(
-                      "Select State",
+                      getPlaceHolder(label: "STATE_PLACEHOLDER", form: pf.businessDetails!),
                       style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                     ),
-                    items: []
+                    items: pf.businessDetails!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
                         .map((item) => DropdownMenuItem(
                       value: item,
                       child: Text(
-                        item,
+                        item.key!,
                         style: TextStyle(color: Color(0xff5B6469)),
                       ),
                     ))
@@ -473,7 +476,7 @@ class BusinessDetailScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'City',
+                    '${getLabel(label: "CITY_LABEL", form: pf.businessDetails!)}',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -512,14 +515,14 @@ class BusinessDetailScreen extends StatelessWidget {
                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                     isExpanded: true,
                     hint: Text(
-                      "Select City",
+                      "${getPlaceHolder(label: "CITY_PLACEHOLDER", form: pf.businessDetails!)}",
                       style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                     ),
-                    items: []
+                    items: pf.businessDetails!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
                         .map((item) => DropdownMenuItem(
                       value: item,
                       child: Text(
-                        item,
+                        item.key!,
                         style: TextStyle(color: Color(0xff5B6469)),
                       ),
                     ))
@@ -546,7 +549,7 @@ class BusinessDetailScreen extends StatelessWidget {
 
           TextFieldCustom(
             hint: "",clt: pp.businessPinCodeClt,
-            title: "PIN Code",
+            title: getLabel(label: "PIN_CODE", form: pf.businessDetails!),
             textCapitalization: TextCapitalization.characters,
           ),
 

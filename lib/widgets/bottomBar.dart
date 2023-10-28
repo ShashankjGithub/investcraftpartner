@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:investcraftpartner/widgets/tabNavigator.dart';
 
 import 'package:provider/provider.dart';
@@ -55,8 +56,16 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     if(widget.screenid!=null&&widget.screenid==2){
       changeIndex(1);
     }
+    getLead();
 
     super.initState();
+  }
+
+
+  getLead(){
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<LeadProvider>().getLead(context);
+    });
   }
 
   @override

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customRadioButton.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/customtextField.dart';
+import 'package:investcraftpartner/services/getLabels.dart';
 import 'package:provider/provider.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import '../../config/themeConfig.dart';
@@ -18,13 +20,14 @@ class PersonalDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     final PartnerOnBoardingProvider pp = context.watch<PartnerOnBoardingProvider>();
+    final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Personal Details',
+            '${pf.personalDetailFromData!.title}',
             style: TextStyle(
               color: Colors.black,
               fontSize: 30.sp,
@@ -33,7 +36,7 @@ class PersonalDetailScreen extends StatelessWidget {
           ),
           Gap(5),
           Text(
-            'Fill and save all personal details to add a partner',
+            '${pf.personalDetailFromData!.content}',
             style: TextStyle(
               color: Color(0xFFD7206A),
               fontSize: 16,
@@ -44,20 +47,20 @@ class PersonalDetailScreen extends StatelessWidget {
           Gap(15),
           TextFieldCustom(
             hint: "",clt: pp.panCardNumberClt,
-            title: "PAN Card Number",
+            title: getLabel(label: "PAN_CARD_LABEL", form: pf.personalDetailFromData!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.aadhaarCardNumberClt,
-            title: "Aadhaar Card Number",
+            title: getLabel(label: "AADHAR_CARD_LABEL", form: pf.personalDetailFromData!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(20),
           Row(
             children: [
               Text(
-                'Gender',
+                getLabel(label: "GENDER_LABEL", form: pf.personalDetailFromData!),
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 16,
@@ -89,11 +92,11 @@ class PersonalDetailScreen extends StatelessWidget {
             ],
           ),
           Gap(30),
-          CustomizeDatePicker(clt: pp.dobClt,text: "Date Of Birth"),
+          CustomizeDatePicker(clt: pp.dobClt,text: getLabel(label: "DATE_OF_BIRTH", form: pf.personalDetailFromData!),),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.permanentHomeAddressClt,
-            title: "Permanent Home address",
+            title: getLabel(label: "PERMANENT_HOME_ADDRESS_LABEL", form: pf.personalDetailFromData!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(25),
@@ -118,7 +121,7 @@ class PersonalDetailScreen extends StatelessWidget {
                 ),
                 Gap(15),
                 Text(
-                  'Permanent address same as Current address',
+                  getLabel(label: "CHEKC_BOX_BUTTON", form: pf.personalDetailFromData!),
                   style: TextStyle(
                     color: Color(0xFF66707F),
                     fontSize: 14,
@@ -131,7 +134,7 @@ class PersonalDetailScreen extends StatelessWidget {
           Gap(25),
           TextFieldCustom(
             hint: "",clt: pp.presentAddressClt,
-            title: "Present address",
+            title:getLabel(label: "PERSENT_ADDRESS_LABEL", form: pf.personalDetailFromData!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(25),
@@ -140,7 +143,7 @@ class PersonalDetailScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'State',
+                    getLabel(label: "STATE_LABEL", form: pf.personalDetailFromData!),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -179,14 +182,14 @@ class PersonalDetailScreen extends StatelessWidget {
                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                     isExpanded: true,
                     hint: Text(
-                      "Select State",
+                      "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").elementType}",
                       style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                     ),
-                    items: []
+                    items: pf.personalDetailFromData!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
                         .map((item) => DropdownMenuItem(
                       value: item,
                       child: Text(
-                        item,
+                        item.key!,
                         style: TextStyle(color: Color(0xff5B6469)),
                       ),
                     ))
@@ -215,7 +218,7 @@ class PersonalDetailScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'City',
+                    getLabel(label: "CITY_LABEL", form: pf.personalDetailFromData!),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -254,14 +257,14 @@ class PersonalDetailScreen extends StatelessWidget {
                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                     isExpanded: true,
                     hint: Text(
-                      "Select City",
+                      "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").elementType}",
                       style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                     ),
-                    items: []
+                    items: pf.personalDetailFromData!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
                         .map((item) => DropdownMenuItem(
                       value: item,
                       child: Text(
-                        item,
+                        item.key!,
                         style: TextStyle(color: Color(0xff5B6469)),
                       ),
                     ))
@@ -288,7 +291,7 @@ class PersonalDetailScreen extends StatelessWidget {
           TextFieldCustom(
             hint: "",clt: pp.pinCodeClt,
             type: TextInputType.number,
-            title: "Pin Code",
+            title: getLabel(label: "PIN_CODE", form: pf.personalDetailFromData!),
             textCapitalization: TextCapitalization.characters,
           ),
           Gap(25),
@@ -297,7 +300,7 @@ class PersonalDetailScreen extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Education Qualification',
+                    getLabel(label: "EDUCATION_QUALIFICATION", form: pf.personalDetailFromData!),
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 16,
@@ -336,14 +339,14 @@ class PersonalDetailScreen extends StatelessWidget {
                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                     isExpanded: true,
                     hint: Text(
-                      "Select Qualification",
+                      "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "EDUCATION_QUALIFICATION_SELECT").elementType}",
                       style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                     ),
-                    items: []
+                    items: pf.personalDetailFromData!.element.firstWhere((element) => element.key == "EDUCATION_QUALIFICATION_SELECT").list
                         .map((item) => DropdownMenuItem(
                       value: item,
                       child: Text(
-                        item,
+                        item.key!,
                         style: TextStyle(color: Color(0xff5B6469)),
                       ),
                     ))
