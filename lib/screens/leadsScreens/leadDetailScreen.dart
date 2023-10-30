@@ -6,9 +6,11 @@ import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
+import '../../modals/leadmodal.dart';
 
 class LeadDetailScreen extends StatefulWidget {
-  const LeadDetailScreen({super.key});
+ final Lead data;
+  const LeadDetailScreen({super.key, required this.data});
 
   @override
   State<LeadDetailScreen> createState() => _LeadDetailScreenState();
@@ -41,7 +43,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
             children: [
               Gap(20),
               Text(
-                'IVK001',
+                '${widget.data.leadNumber}',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24,
@@ -92,7 +94,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
                                 ),
                                 Gap(8),
                                 Text(
-                                  'Partial docs received',
+                                  '${widget.data.leadStatus}',
                                   style: TextStyle(
                                     color: mainColor,
                                     fontSize: 15,
@@ -140,7 +142,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
                                 ),
                                 Gap(8),
                                 Text(
-                                  'Saurav Kumar',
+                                  '${widget.data.assignedAgentId}',
                                   style: TextStyle(
                                     color: mainColor,
                                     fontSize: 15,
@@ -178,7 +180,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
                           controller: controller,
                             children: [
                               PersonalDetailWidget(),
-                              PersonalDetailWidget(),
+                              EmployeeDetailWidget(),
                               UploadeDocumentDetailWidget(),
                         ]),
                       ),
@@ -198,37 +200,81 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Full Name",data: "Manjit Singh",)),
+                child: LeadDetailContainer(title: "Full Name",data: "${widget.data.firstName}",)),
             Gap(15),
             Expanded(
-                child: LeadDetailContainer(title: "Mother's Name",data: "Shanti Devi",)),
+                child: LeadDetailContainer(title: "Mother's Name",data: "${widget.data.motherName}",)),
           ],
         ),
         Gap(30),
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Phone",data: "(+91) 1234567890",)),
+                child: LeadDetailContainer(title: "Phone",data: "(+91) ${widget.data.mobile}",)),
             Gap(15),
             Expanded(
-                child: LeadDetailContainer(title: "State",data: "Rajasthan",),),
+                child: LeadDetailContainer(title: "State",data: "${widget.data.state}",),),
           ],
         ),
         Gap(30),
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Email",data: "manjit.dh81@gmail.com",)),
+                child: LeadDetailContainer(title: "Email",data: "${widget.data.email}",)),
             Gap(15),
             Expanded(
-                child: LeadDetailContainer(title: "Pin Code",data: "213407",)),
+                child: LeadDetailContainer(title: "Pin Code",data: "${widget.data.pincode}",)),
           ],
         ),
         Gap(30),
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Address",data: "Street 110-B Kalians Bag, Dewan,Gorakhpur. Uttar Predesh",)),
+                child: LeadDetailContainer(title: "Address",data: "${widget.data.residenceAddress}",)),
+
+          ],
+        ),
+      ],
+    );
+  }
+  Widget EmployeeDetailWidget(){
+    return ListView(
+      padding: EdgeInsets.only(left: 20,top: 20,right: 10,bottom: 15),
+      children: [
+        Row(
+          children: [
+            Expanded(
+                child: LeadDetailContainer(title: "Full Name",data: "${widget.data.firstName}",)),
+            Gap(15),
+            Expanded(
+                child: LeadDetailContainer(title: "Mother's Name",data: "${widget.data.motherName}",)),
+          ],
+        ),
+        Gap(30),
+        Row(
+          children: [
+            Expanded(
+                child: LeadDetailContainer(title: "Phone",data: "(+91) ${widget.data.mobile}",)),
+            Gap(15),
+            Expanded(
+                child: LeadDetailContainer(title: "State",data: "${widget.data.state}",),),
+          ],
+        ),
+        Gap(30),
+        Row(
+          children: [
+            Expanded(
+                child: LeadDetailContainer(title: "Email",data: "${widget.data.email}",)),
+            Gap(15),
+            Expanded(
+                child: LeadDetailContainer(title: "Pin Code",data: "${widget.data.pincode}",)),
+          ],
+        ),
+        Gap(30),
+        Row(
+          children: [
+            Expanded(
+                child: LeadDetailContainer(title: "Address",data: "${widget.data.officeAddress}",)),
 
           ],
         ),

@@ -131,12 +131,12 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                           child: GestureDetector(
                             onTap: (){
-                              // Navigator.push(context, MaterialPageRoute(builder: (context){
-                              //   return CreateLeadScreen();
-                              // }));
                               Navigator.push(context, MaterialPageRoute(builder: (context){
-                                return PartnerOnboardingScreen();
+                                return CreateLeadScreen();
                               }));
+                              // Navigator.push(context, MaterialPageRoute(builder: (context){
+                              //   return PartnerOnboardingScreen();
+                              // }));
                             },
                             child: Container(
                               padding: EdgeInsets.only(left: 10, right: 10),

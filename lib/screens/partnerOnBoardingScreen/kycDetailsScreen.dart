@@ -50,13 +50,33 @@ class _KycDetailsScreenState extends State<KycDetailsScreen> {
             ),
           ),
           Gap(15),
-          DoteddedContainer(label: getLabel(label: "UPLOAD_PAN_FILE", form: pf.kycDetail!), placeholder: getPlaceHolder(label: "PANFILE_PLACEHOLDER", form: pf.kycDetail!),onTap: (){},),
+          DoteddedContainer(label: getLabel(label: "UPLOAD_PAN_FILE", form: pf.kycDetail!),
+            placeholder:
+            pp.panCardFile!=null?pp.panCardFile!.files[0].name:
+            getPlaceHolder(label: "PANFILE_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
+            pp.choosePanFile();
+          },),
           Gap(15),
-          DoteddedContainer(label: getLabel(label: "UPLOAD_AADHAR_FILE", form: pf.kycDetail!), placeholder: getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: pf.kycDetail!),onTap: (){},),
+          DoteddedContainer(label: getLabel(label: "UPLOAD_AADHAR_FILE", form: pf.kycDetail!),
+            placeholder:
+            pp.aadhaarCardFile!=null?pp.aadhaarCardFile!.files[0].name:
+            getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
+              pp.chooseaadharFile();
+            },),
           Gap(15),
-          DoteddedContainer(label: getLabel(label: "UPLOAD_PASSPORT_SIZE_FILE", form: pf.kycDetail!), placeholder: getPlaceHolder(label: "UPLOAD_PASSPORT_SIZE_PHOTO_PLACEHOLDER", form: pf.kycDetail!),onTap: (){},),
+          DoteddedContainer(label: getLabel(label: "UPLOAD_PASSPORT_SIZE_FILE", form: pf.kycDetail!),
+            placeholder:
+            pp.passportCardFile!=null?pp.passportCardFile!.files[0].name:
+            getPlaceHolder(label: "UPLOAD_PASSPORT_SIZE_PHOTO_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
+            pp.choosepassportFile();
+            },),
           Gap(15),
-          DoteddedContainer(label: getLabel(label: "UPLOAD_BUSSINESS_PHOTO_LABEL", form: pf.kycDetail!), placeholder: getPlaceHolder(label: "UPLOAD_BUSSINESS_PHOTO_PLACEHOLDER", form: pf.kycDetail!),onTap: (){},),
+          DoteddedContainer(label: getLabel(label: "UPLOAD_BUSSINESS_PHOTO_LABEL", form: pf.kycDetail!),
+            placeholder:
+            pp.businessCardFile!=null?pp.businessCardFile!.files[0].name:
+            getPlaceHolder(label: "UPLOAD_BUSSINESS_PHOTO_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
+              pp.chooseBusinessFile();
+            },),
         ],
       ),
     );

@@ -201,6 +201,14 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                 ),
                 Gap(25.h),
                 TextFieldCustom(
+                  showRequried: false,
+                  hint: "",clt: lp.lastnameClt,
+                  title: "Last Name",
+
+                  textCapitalization: TextCapitalization.characters,
+                ),
+                Gap(25.h),
+                TextFieldCustom(
                   hint: "",clt: lp.mobileClt,
                   title: "Mobile Number",
                   textCapitalization: TextCapitalization.characters,

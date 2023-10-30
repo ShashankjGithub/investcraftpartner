@@ -6,6 +6,9 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as  http;
+import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
+import 'package:investcraftpartner/services/filePicker.dart';
+import 'package:provider/provider.dart';
 import '../../../config/appConfig.dart';
 import '../../../services/apiServices.dart';
 
@@ -15,6 +18,12 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   dynamic currentStep = 1;
   String currentForm = "Basic Details";
   PageController pageController = PageController();
+
+  bool loading = false;
+  changeLoading(val){
+    loading = val;
+    notifyListeners();
+  }
 
   changeForm({required int currentstep, required int perse, required String formName}){
     currentStep = currentstep;
@@ -77,6 +86,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   TextEditingController phoneNumberClt = TextEditingController();
   TextEditingController businessTypeClt = TextEditingController();
   ////////////////////// Personal Detail ////////////////////////////////////////////////////
+  final personalDetailKey = GlobalKey<FormState>();
   TextEditingController panCardNumberClt = TextEditingController();
   TextEditingController aadhaarCardNumberClt = TextEditingController();
   TextEditingController dobClt = TextEditingController();
@@ -98,9 +108,23 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   var selectedCity;
   var selectedQualificaion;
 
+  changeSelectState(value){
+    selectedState = value;
+    notifyListeners();
+  }
+  changeSelectCity(value){
+    selectedCity = value;
+    notifyListeners();
+  }
+  changeSelectQulification(value){
+    selectedQualificaion = value;
+    notifyListeners();
+  }
+
 
 
   /////////////////////////////////////// Business Detail //////////////////////
+  final businessDetailKey = GlobalKey<FormState>();
   TextEditingController businessNameClt = TextEditingController();
   TextEditingController businessEmailClt = TextEditingController();
   TextEditingController businessWebsiteUrlClt = TextEditingController();
@@ -113,37 +137,56 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   var selectedBusinessStateType;
   var selectedBusinessCityType;
 
+  changeBusinessType(value){
+    selectedBusinessType = value;
+    notifyListeners();
+  }
+  changeBusinessState(value){
+    selectedBusinessStateType = value;
+    notifyListeners();
+  }
+  changeBusinessCity(value){
+    selectedBusinessCityType = value;
+    notifyListeners();
+  }
+
+
+
   String selectedGSTAvailable = "Yes";
   changeSelectedGSTAvailable(value){
     selectedGSTAvailable = value;
     notifyListeners();
   }
 
-  String selectedMonthlyBusiness = "0-5 Lakhs";
+  String selectedMonthlyBusiness = "";
   changeSelectedMB(value){
     selectedMonthlyBusiness = value;
     notifyListeners();
   }
 
 
-  String selectedAreaCovered = "PAN India";
+  String selectedAreaCovered = "";
   changeAreaCovered(value){
     selectedAreaCovered = value;
     notifyListeners();
   }
 
-  String selectedexperienceInBusiness = "0-6 Months";
+  String selectedexperienceInBusiness = "";
   changeExperienceInBusiness(value){
     selectedexperienceInBusiness = value;
     notifyListeners();
   }
 ///////////////////////////////////////////////////////////////////////////
 ////////////////////// Bank Account Details //////////////////////////////
-
+  final bankDetailKey = GlobalKey<FormState>();
   TextEditingController bankAccountNumberClt = TextEditingController();
   TextEditingController bankIFSCClt  = TextEditingController();
   var selectedBankName;
   List bankList = [];
+  changeSelectBank(value){
+    selectedBankName = value;
+    notifyListeners();
+  }
 
   ///////////////////////////////////////////////////////////////////////
 ////////////////////////// KYC Details/////////////////////////
@@ -151,81 +194,142 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   FilePickerResult? aadhaarCardFile;
   FilePickerResult? passportCardFile;
   FilePickerResult? businessCardFile;
-  ////////////////////////////////////////
 
-  savePersonalDetail(BuildContext context){
-    ApiServices().postData(save_personal_details,{
-      "pan":panCardNumberClt.text,
-      "aadhar":aadhaarCardNumberClt.text,
-      "gender":gender,
-      "dob":dobClt.text,
-      "permanent_address":permanentHomeAddressClt.value,
-      "present_address":presentAddressClt.text,
-      "state":selectedState.value,
-      "city":selectedCity.value,
-      "pin":pinCodeClt.text,
-      "education":selectedQualificaion.value,
-    },context,he: "").then((response) {
+  choosePanFile()async{
+    panCardFile = await pickFile();
+    notifyListeners();
+  }
+  chooseaadharFile()async{
+    aadhaarCardFile = await pickFile();
+    notifyListeners();
+  }
+  choosepassportFile()async{
+    passportCardFile = await pickFile();
+    notifyListeners();
+  }
+  chooseBusinessFile()async{
+    businessCardFile = await pickFile();
+    notifyListeners();
+  }
+
+
+
+
+
+
+  ////////////////////////////////////////
+  saveBasicDetail(BuildContext context){
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    changeLoading(true);
+    ApiServices().postData(save_basic_details,{
+      "name":nameClt.text,
+      "business_type":businessTypeClt.text,
+    },context,he: ap.tokenn,header: true).then((response) {
       if (response!=null) {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
-
+        changeLoading(false);
+        nextButtonPressed();
       }else{
-
+        changeLoading(false);
       }
     });
   }
+  savePersonalDetail(BuildContext context){
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    if(personalDetailKey.currentState!.validate()){
+      changeLoading(true);
+      ApiServices().postData(save_personal_details,{
+        "pan":panCardNumberClt.text,
+        "aadhar":aadhaarCardNumberClt.text,
+        "gender":gender,
+        "dob":dobClt.text,
+        "permanent_address":permanentHomeAddressClt.text,
+        "present_address":presentAddressClt.text,
+        "state":selectedState.value,
+        "city":selectedCity.value,
+        "pin":pinCodeClt.text,
+        "education":selectedQualificaion.value,
+      },context,he: ap.tokenn,header: true).then((response) {
+        if (response!=null) {
+          Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+          changeLoading(false);
+          nextButtonPressed();
+        }else{
+          changeLoading(false);
+        }
+      });
+    }
+  }
   saveBusinessDetail(BuildContext context){
-    ApiServices().postData(save_bussiness_detail,{
-      "type":selectedBusinessType.value,
-      "name":businessNameClt.text,
-      "email":businessEmailClt.text,
-      "website":businessWebsiteUrlClt.text,
-      "phone":businessPhoneNumberClt.value,
-      "gst_available":selectedGSTAvailable,
-      "gst_number":businessGstNoClt.text,
-      "monthly_business":selectedMonthlyBusiness,
-      "business_area":selectedAreaCovered,
-      "experience":selectedexperienceInBusiness,
-      "address":businessAddressClt.text,
-      "state" :selectedBusinessStateType.value,
-      "city":selectedBusinessCityType.value,
-      "pin":businessPinCodeClt.value,
-    },context,he: "").then((response) {
-      if (response!=null) {
-        Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
-
-      }else{
-
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    if(businessDetailKey.currentState!.validate()){
+      if(selectedMonthlyBusiness==""){
+        Fluttertoast.showToast(msg: "Please select Monthly Business");
+      }else if (selectedAreaCovered=="") {
+        Fluttertoast.showToast(msg: "Please select area coverd");
+      }  else if (selectedexperienceInBusiness == "") {
+        Fluttertoast.showToast(msg: "Please select experience in business");
+      }  else{
+        changeLoading(true);
+        ApiServices().postData(save_bussiness_detail,{
+          "type":selectedBusinessType.value,
+          "name":businessNameClt.text,
+          "email":businessEmailClt.text,
+          "website":businessWebsiteUrlClt.text,
+          "phone":businessPhoneNumberClt.text,
+          "gst_available":selectedGSTAvailable,
+          "gst_number":businessGstNoClt.text,
+          "monthly_business":selectedMonthlyBusiness,
+          "business_area":selectedAreaCovered,
+          "experience":selectedexperienceInBusiness,
+          "address":businessAddressClt.text,
+          "state" :selectedBusinessStateType.value,
+          "city":selectedBusinessCityType.value,
+          "pin":businessPinCodeClt.text,
+        },context,he: ap.tokenn,header: true).then((response) {
+          if (response!=null) {
+            Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+            nextButtonPressed();
+            changeLoading(false);
+          }else{
+            changeLoading(false);
+          }
+        });
       }
-    });
+
+    }
   }
 
   saveBankDetail(BuildContext context){
-    ApiServices().postData(save_bank_detail,{
-      "account_number":bankAccountNumberClt.text,
-      "ifsc_code":bankIFSCClt.text,
-      "bank_name":selectedBankName.value,
-    },context,he: "").then((response) {
-      if (response!=null) {
-        Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
-
-      }else{
-
-      }
-    });
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    if(bankDetailKey.currentState!.validate()){
+      changeLoading(true);
+      ApiServices().postData(save_bank_detail,{
+        "account_number":bankAccountNumberClt.text,
+        "ifsc_code":bankIFSCClt.text,
+        "bank_name":selectedBankName.value,
+      },context,he: ap.tokenn,header: true).then((response) {
+        if (response!=null) {
+          Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+          nextButtonPressed();
+          changeLoading(false);
+        }else{
+          changeLoading(false);
+        }
+      });
+    }
   }
 
 
-  Future saveKycDetails(BuildContext context,id)async{
-
+  Future saveKycDetails(BuildContext context)async{
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
     try {
-
+      changeLoading(true);
       var request = http.MultipartRequest(
           'POST',
           Uri.parse(baseUrl+save_kyc_detail)); // your server url
       request.headers.addAll({
-        //"Authorization": "Bearer "+up.userData.token,
-
+        "Authorization": "Bearer "+ap.tokenn!
       });
 
       if(panCardFile!=null){
@@ -264,15 +368,16 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
       final res = await http.Response.fromStream(response);
       print(res.body);
       if (response.statusCode == 200) {
-
         Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
-        return "${json.decode(res.body)["Message"]}";
+        changeLoading(false);
+        nextButtonPressed();
       }else{
         Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
+        changeLoading(false);
 
       }
     } catch (e) {
-
+      changeLoading(false);
       print("error in partnerOnBoardFile  uploade kyc ${e.toString()}");
     }
 

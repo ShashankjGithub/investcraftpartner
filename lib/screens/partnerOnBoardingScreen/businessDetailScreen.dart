@@ -23,538 +23,580 @@ class BusinessDetailScreen extends StatelessWidget {
     final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '${pf.businessDetails!.title}',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w700,
+      child: Form(
+        key: pp.businessDetailKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${pf.businessDetails!.title}',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 30.sp,
+                fontWeight: FontWeight.w700,
+              ),
             ),
-          ),
-          Gap(5),
-          Text(
-            "${pf.businessDetails!.content}",
-            style: TextStyle(
-              color: Color(0xFFD7206A),
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
+            Gap(5),
+            Text(
+              "${pf.businessDetails!.content}",
+              style: TextStyle(
+                color: Color(0xFFD7206A),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
 
+              ),
             ),
-          ),
-          Gap(25),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    getLabel(label: "BUSSINESS_TYPE_LABEL", form: pf.businessDetails!),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
+            Gap(25),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      getLabel(label: "BUSSINESS_TYPE_LABEL", form: pf.businessDetails!),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    Gap(5),
+
+                    Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                  ],
+                ),
+                Gap(15.h),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 8),
+                  height: 60.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(100.r)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButtonFormField2(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (vv){
+                        if (vv==null) {
+                          return getPlaceHolder(label: "BUSSINESS_TYPE_PLACEHOLDER", form: pf.businessDetails!);
+                        }
+                      },
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(top: 15)
+                      ),
+                      iconStyleData: IconStyleData(
+                          icon: SvgPicture.asset(Assets.assetsDropdownicon)),
+                      isExpanded: true,
+                      hint: Text(
+                        getPlaceHolder(label: "BUSSINESS_TYPE_PLACEHOLDER", form: pf.businessDetails!),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                      ),
+                      items: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_TYPE_PLACEHOLDER").list
+                          .map((item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(
+                          item.key!,
+                          style: TextStyle(color: Color(0xff5B6469)),
+                        ),
+                      ))
+                          .toList(),
+                      value: pp.selectedBusinessType,
+                      onChanged: (value) {
+                         pp.changeBusinessType(value);
+                      },
+                      buttonStyleData: ButtonStyleData(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        height: 40,
+                        width: 200,
+                      ),
+                      menuItemStyleData: MenuItemStyleData(
+                        height: 40,
+                      ),
+                      dropdownStyleData: DropdownStyleData(width: 200),
                     ),
                   ),
-                  Gap(5),
-
-                  Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                ],
-              ),
-              Gap(15.h),
-              Container(
-                padding: EdgeInsets.only(left: 10, right: 8),
-                height: 60.h,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(100.r)),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField2(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (vv){},
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 15)
-                    ),
-                    iconStyleData: IconStyleData(
-                        icon: SvgPicture.asset(Assets.assetsDropdownicon)),
-                    isExpanded: true,
-                    hint: Text(
-                      getPlaceHolder(label: "BUSSINESS_TYPE_PLACEHOLDER", form: pf.businessDetails!),
-                      style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
-                    ),
-                    items: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_TYPE_PLACEHOLDER").list
-                        .map((item) => DropdownMenuItem(
-                      value: item,
-                      child: Text(
-                        item.key!,
-                        style: TextStyle(color: Color(0xff5B6469)),
-                      ),
-                    ))
-                        .toList(),
-                    value: pp.selectedBusinessType,
-                    onChanged: (value) {
-
-                    },
-                    buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      height: 40,
-                      width: 200,
-                    ),
-                    menuItemStyleData: MenuItemStyleData(
-                      height: 40,
-                    ),
-                    dropdownStyleData: DropdownStyleData(width: 200),
-                  ),
                 ),
-              ),
-            ],
-          ),
-          Gap(25),
+              ],
+            ),
+            Gap(25),
 
-          TextFieldCustom(
-            hint: "",clt: pp.businessNameClt,
-            title: getLabel(label: "BUSINESS_NAME_LABEL", form: pf.businessDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(20),
-          TextFieldCustom(
-            hint: "",clt: pp.businessEmailClt,
-            title: getLabel(label: "BUSINESS_EMAIL_LABEL", form: pf.businessDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(20),
-          TextFieldCustom(
-            hint: "",clt: pp.businessWebsiteUrlClt,
-            title: getLabel(label: "WEBSITE_URL_LABEL", form: pf.businessDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(25),
-
-          TextFieldCustom(
-            hint: "",clt: pp.businessPhoneNumberClt,
-            title: getLabel(label: "BUSINESS_NUMBER_LABEL", form: pf.businessDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(25),
-          Row(
-            children: [
-              Text(
-                getLabel(label: "GST_LABEL", form: pf.businessDetails!),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Gap(5),
-              Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-            ],
-          ),
-          Gap(20),
-          Row(
-            children: [
-              CustomRadioButton(title: "Yes",color: pp.selectedGSTAvailable=="Yes"?mainColor:grayColor2,onTap: (){
-                pp.changeSelectedGSTAvailable("Yes");
+            TextFieldCustom(
+              hint: "",clt: pp.businessNameClt,
+              title: getLabel(label: "BUSINESS_NAME_LABEL", form: pf.businessDetails!),
+              textCapitalization: TextCapitalization.characters,
+              validator: (val){
+                if(val!.isEmpty){
+                  return getLabel(label: "BUSINESS_NAME_LABEL", form: pf.businessDetails!);
+                }
               },
-                textColor: pp.selectedGSTAvailable=="Yes"?mainColor:textgrayColor,
-              ),
-              CustomRadioButton(title: "No",color: pp.selectedGSTAvailable=="No"?mainColor:grayColor2,
-                onTap: (){
-                  pp.changeSelectedGSTAvailable("No");
+            ),
+            Gap(20),
+            TextFieldCustom(
+              hint: "",clt: pp.businessEmailClt,
+              title: getLabel(label: "BUSINESS_EMAIL_LABEL", form: pf.businessDetails!),
+              textCapitalization: TextCapitalization.characters,
+              validator: (val){
+                if(val!.isEmpty){
+                  return getLabel(label: "BUSINESS_EMAIL_LABEL", form: pf.businessDetails!);
+                }
+              },
+            ),
+            Gap(20),
+            TextFieldCustom(
+              hint: "",clt: pp.businessWebsiteUrlClt,
+              title: getLabel(label: "WEBSITE_URL_LABEL", form: pf.businessDetails!),
+              textCapitalization: TextCapitalization.characters,
+
+              validator: (val){
+                if(val!.isEmpty){
+                  return getLabel(label: "WEBSITE_URL_LABEL", form: pf.businessDetails!);
+                }
+              },
+            ),
+            Gap(25),
+
+            TextFieldCustom(
+              hint: "",clt: pp.businessPhoneNumberClt,
+              title: getLabel(label: "BUSINESS_NUMBER_LABEL", form: pf.businessDetails!),
+              textCapitalization: TextCapitalization.characters,
+              validator: (val){
+                if(val!.isEmpty){
+                  return getLabel(label: "BUSINESS_NUMBER_LABEL", form: pf.businessDetails!);
+                }
+              },
+            ),
+            Gap(25),
+            Row(
+              children: [
+                Text(
+                  getLabel(label: "GST_LABEL", form: pf.businessDetails!),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Gap(5),
+                Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+              ],
+            ),
+            Gap(20),
+            Row(
+              children: [
+                CustomRadioButton(title: "Yes",color: pp.selectedGSTAvailable=="Yes"?mainColor:grayColor2,onTap: (){
+                  pp.changeSelectedGSTAvailable("Yes");
                 },
-                textColor: pp.selectedGSTAvailable=="No"?mainColor:textgrayColor,),
+                  textColor: pp.selectedGSTAvailable=="Yes"?mainColor:textgrayColor,
+                ),
+                CustomRadioButton(title: "No",color: pp.selectedGSTAvailable=="No"?mainColor:grayColor2,
+                  onTap: (){
+                    pp.changeSelectedGSTAvailable("No");
+                  },
+                  textColor: pp.selectedGSTAvailable=="No"?mainColor:textgrayColor,),
 
-            ],
-          ),
-          Gap(35),
-          Row(
-            children: [
-              Text(
-                getLabel(label: "BUSSINESS_LABEL", form: pf.businessDetails!),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
+              ],
+            ),
+            Gap(35),
+            Row(
+              children: [
+                Text(
+                  getLabel(label: "BUSSINESS_LABEL", form: pf.businessDetails!),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
-              ),
-              Gap(5),
-              Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-            ],
-          ),
-          Gap(20),
-          GridView.builder(
-            padding: EdgeInsets.zero,
-            shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 25,
-                  mainAxisSpacing: 25,
-                  mainAxisExtent: 65,
-                  crossAxisCount: 2), itemBuilder: (context,index){
-            return InkWell(
-              onTap: (){
-                pp.changeSelectedMB(pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key);
-              },
-              child: Container(
-                alignment:Alignment.center,
-                padding: EdgeInsets.only(left: 20, right: 8),
-                height: 65.h,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(10.r)),
-                child: Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 18.h,
-                      width: 18.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: bordercolor),
-                          shape: BoxShape.circle,color: pp.selectedMonthlyBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key?mainColor:grayColor2),
-                    child: Icon(Icons.check,size: 15,color: Colors.white,),
-
-                    ),
-                    Gap(20),
-                    Text(
-                      pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].value.toString(),
-                      style: TextStyle(
-                        color: pp.selectedMonthlyBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key?mainColor:Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
-          Gap(35),
-          Row(
-            children: [
-              Text(
-                getLabel(label: "AREA_COVERED_LABEL", form: pf.businessDetails!),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Gap(5),
-              Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-            ],
-          ),
-          Gap(20),
-          GridView.builder(
+                Gap(5),
+                Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+              ],
+            ),
+            Gap(20),
+            GridView.builder(
               padding: EdgeInsets.zero,
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 25,
-                  mainAxisSpacing: 25,
-                  mainAxisExtent: 65,
-                  crossAxisCount: 2), itemBuilder: (context,index){
-            return InkWell(
-              onTap: (){
-                pp.changeAreaCovered(pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key);
-              },
-              child: Container(
-                alignment:Alignment.center,
-                padding: EdgeInsets.only(left: 20, right: 8),
-                height: 65.h,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(10.r)),
-                child: Row(
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 18.h,
-                      width: 18.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: bordercolor),
-                          shape: BoxShape.circle,color: pp.selectedAreaCovered==pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key?mainColor:grayColor2),
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 25,
+                    mainAxisSpacing: 25,
+                    mainAxisExtent: 65,
+                    crossAxisCount: 2), itemBuilder: (context,index){
+              return InkWell(
+                onTap: (){
+                  pp.changeSelectedMB(pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key);
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  padding: EdgeInsets.only(left: 20, right: 8),
+                  height: 65.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10.r)),
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        height: 18.h,
+                        width: 18.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: bordercolor),
+                            shape: BoxShape.circle,color: pp.selectedMonthlyBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key?mainColor:grayColor2),
                       child: Icon(Icons.check,size: 15,color: Colors.white,),
 
-                    ),
-                    Gap(20),
+                      ),
+                      Gap(20),
+                      Text(
+                        pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].value.toString(),
+                        style: TextStyle(
+                          color: pp.selectedMonthlyBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_AMOUNT_BUTTON").list[index].key?mainColor:Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+            Gap(35),
+            Row(
+              children: [
+                Text(
+                  getLabel(label: "AREA_COVERED_LABEL", form: pf.businessDetails!),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Gap(5),
+                Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+              ],
+            ),
+            Gap(20),
+            GridView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 25,
+                    mainAxisSpacing: 25,
+                    mainAxisExtent: 65,
+                    crossAxisCount: 2), itemBuilder: (context,index){
+              return InkWell(
+                onTap: (){
+                  pp.changeAreaCovered(pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key);
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  padding: EdgeInsets.only(left: 20, right: 8),
+                  height: 65.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10.r)),
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        height: 18.h,
+                        width: 18.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: bordercolor),
+                            shape: BoxShape.circle,color: pp.selectedAreaCovered==pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key?mainColor:grayColor2),
+                        child: Icon(Icons.check,size: 15,color: Colors.white,),
+
+                      ),
+                      Gap(20),
+                      Text(
+                        pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].value.toString(),
+                        style: TextStyle(
+                          color: pp.selectedAreaCovered==pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key?mainColor:Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+            Gap(35),
+            Row(
+              children: [
+                Text(
+                  getLabel(label: "BUSSINESS_EXPERINCE_LABEL", form: pf.businessDetails!),
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                Gap(5),
+                Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+              ],
+            ),
+            Gap(20),
+            GridView.builder(
+                padding: EdgeInsets.zero,
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 25,
+                    mainAxisSpacing: 25,
+                    mainAxisExtent: 65,
+                    crossAxisCount: 2), itemBuilder: (context,index){
+              return InkWell(
+                onTap: (){
+                  pp.changeExperienceInBusiness(pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key);
+                },
+                child: Container(
+                  alignment:Alignment.center,
+                  padding: EdgeInsets.only(left: 20, right: 8),
+                  height: 65.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(10.r)),
+                  child: Row(
+                    children: [
+                      Container(
+                        alignment: Alignment.center,
+                        height: 18.h,
+                        width: 18.w,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: bordercolor),
+                            shape: BoxShape.circle,color: pp.selectedexperienceInBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key?mainColor:grayColor2),
+                        child: Icon(Icons.check,size: 15,color: Colors.white,),
+
+                      ),
+                      Gap(10),
+                      Text(
+                        pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].value.toString(),
+                        style: TextStyle(
+                          color: pp.selectedexperienceInBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key?mainColor:Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
+            Gap(25),
+            TextFieldCustom(
+              hint: "",clt: pp.businessAddressClt,
+              title: getLabel(label: "BUSSINESS_ADDRESS_LABEL", form: pf.businessDetails!),
+              textCapitalization: TextCapitalization.characters,
+              validator: (val){
+                if(val!.isEmpty){
+                  return getLabel(label: "BUSSINESS_ADDRESS_LABEL", form: pf.businessDetails!);
+                }
+              },
+            ),
+            Gap(25),
+            Column(
+              children: [
+                Row(
+                  children: [
                     Text(
-                      pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].value.toString(),
+                      "${getLabel(label: "STATE_LABEL", form: pf.businessDetails!)}",
                       style: TextStyle(
-                        color: pp.selectedAreaCovered==pf.businessDetails!.element.firstWhere((element) => element.key == "ARED_COVERED_BUTTON").list[index].key?mainColor:Colors.black,
+                        color: Colors.black,
                         fontSize: 16,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
+                    Gap(5),
+
+                    Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
                   ],
                 ),
-              ),
-            );
-          }),
-          Gap(35),
-          Row(
-            children: [
-              Text(
-                getLabel(label: "BUSSINESS_EXPERINCE_LABEL", form: pf.businessDetails!),
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Gap(5),
-              Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-            ],
-          ),
-          Gap(20),
-          GridView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 25,
-                  mainAxisSpacing: 25,
-                  mainAxisExtent: 65,
-                  crossAxisCount: 2), itemBuilder: (context,index){
-            return InkWell(
-              onTap: (){
-                pp.changeExperienceInBusiness(pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key);
-              },
-              child: Container(
-                alignment:Alignment.center,
-                padding: EdgeInsets.only(left: 20, right: 8),
-                height: 65.h,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 10,
-                        spreadRadius: 0,
+                Gap(15.h),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 8),
+                  height: 60.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(100.r)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButtonFormField2(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (vv){
+                        if (vv==null) {
+                          return getPlaceHolder(label: "STATE_PLACEHOLDER", form: pf.businessDetails!);
+                        }
+                      },
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(top: 15)
                       ),
-                    ],
-                    borderRadius: BorderRadius.circular(10.r)),
-                child: Row(
+                      iconStyleData: IconStyleData(
+                          icon: SvgPicture.asset(Assets.assetsDropdownicon)),
+                      isExpanded: true,
+                      hint: Text(
+                        getPlaceHolder(label: "STATE_PLACEHOLDER", form: pf.businessDetails!),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                      ),
+                      items: pf.businessDetails!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
+                          .map((item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(
+                          item.key!,
+                          style: TextStyle(color: Color(0xff5B6469)),
+                        ),
+                      ))
+                          .toList(),
+                      value: pp.selectedBusinessStateType,
+                      onChanged: (value) {
+                          pp.changeBusinessState(value);
+                      },
+                      buttonStyleData: ButtonStyleData(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        height: 40,
+                        width: 200,
+                      ),
+                      menuItemStyleData: MenuItemStyleData(
+                        height: 40,
+                      ),
+                      dropdownStyleData: DropdownStyleData(width: 200),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Gap(25),
+            Column(
+              children: [
+                Row(
                   children: [
-                    Container(
-                      alignment: Alignment.center,
-                      height: 18.h,
-                      width: 18.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: bordercolor),
-                          shape: BoxShape.circle,color: pp.selectedexperienceInBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key?mainColor:grayColor2),
-                      child: Icon(Icons.check,size: 15,color: Colors.white,),
-
-                    ),
-                    Gap(10),
                     Text(
-                      pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].value.toString(),
+                      '${getLabel(label: "CITY_LABEL", form: pf.businessDetails!)}',
                       style: TextStyle(
-                        color: pp.selectedexperienceInBusiness==pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_EXPERINCE_BUTTON").list[index].key?mainColor:Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
+                    Gap(5),
+
+                    Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
                   ],
                 ),
-              ),
-            );
-          }),
-          Gap(25),
-          TextFieldCustom(
-            hint: "",clt: pp.businessAddressClt,
-            title: getLabel(label: "BUSSINESS_ADDRESS_LABEL", form: pf.businessDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(25),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    "${getLabel(label: "STATE_LABEL", form: pf.businessDetails!)}",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Gap(5),
-
-                  Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                ],
-              ),
-              Gap(15.h),
-              Container(
-                padding: EdgeInsets.only(left: 10, right: 8),
-                height: 60.h,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 10,
-                        spreadRadius: 0,
+                Gap(15.h),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 8),
+                  height: 60.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(100.r)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButtonFormField2(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (vv){
+                        if (vv==null) {
+                          return getPlaceHolder(label: "CITY_PLACEHOLDER", form: pf.businessDetails!);
+                        }
+                      },
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(top: 15)
                       ),
-                    ],
-                    borderRadius: BorderRadius.circular(100.r)),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField2(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (vv){},
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 15)
-                    ),
-                    iconStyleData: IconStyleData(
-                        icon: SvgPicture.asset(Assets.assetsDropdownicon)),
-                    isExpanded: true,
-                    hint: Text(
-                      getPlaceHolder(label: "STATE_PLACEHOLDER", form: pf.businessDetails!),
-                      style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
-                    ),
-                    items: pf.businessDetails!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
-                        .map((item) => DropdownMenuItem(
-                      value: item,
-                      child: Text(
-                        item.key!,
-                        style: TextStyle(color: Color(0xff5B6469)),
+                      iconStyleData: IconStyleData(
+                          icon: SvgPicture.asset(Assets.assetsDropdownicon)),
+                      isExpanded: true,
+                      hint: Text(
+                        "${getPlaceHolder(label: "CITY_PLACEHOLDER", form: pf.businessDetails!)}",
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                       ),
-                    ))
-                        .toList(),
-                    value: pp.selectedBusinessStateType,
-                    onChanged: (value) {
-
-                    },
-                    buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      height: 40,
-                      width: 200,
+                      items: pf.businessDetails!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
+                          .map((item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(
+                          item.key!,
+                          style: TextStyle(color: Color(0xff5B6469)),
+                        ),
+                      ))
+                          .toList(),
+                      value: pp.selectedBusinessCityType,
+                      onChanged: (value) {
+                          pp.changeBusinessCity(value);
+                      },
+                      buttonStyleData: ButtonStyleData(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        height: 40,
+                        width: 200,
+                      ),
+                      menuItemStyleData: MenuItemStyleData(
+                        height: 40,
+                      ),
+                      dropdownStyleData: DropdownStyleData(width: 200),
                     ),
-                    menuItemStyleData: MenuItemStyleData(
-                      height: 40,
-                    ),
-                    dropdownStyleData: DropdownStyleData(width: 200),
                   ),
                 ),
-              ),
-            ],
-          ),
-          Gap(25),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    '${getLabel(label: "CITY_LABEL", form: pf.businessDetails!)}',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Gap(5),
+              ],
+            ),
+            Gap(25),
 
-                  Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                ],
-              ),
-              Gap(15.h),
-              Container(
-                padding: EdgeInsets.only(left: 10, right: 8),
-                height: 60.h,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(100.r)),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField2(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (vv){},
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 15)
-                    ),
-                    iconStyleData: IconStyleData(
-                        icon: SvgPicture.asset(Assets.assetsDropdownicon)),
-                    isExpanded: true,
-                    hint: Text(
-                      "${getPlaceHolder(label: "CITY_PLACEHOLDER", form: pf.businessDetails!)}",
-                      style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
-                    ),
-                    items: pf.businessDetails!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
-                        .map((item) => DropdownMenuItem(
-                      value: item,
-                      child: Text(
-                        item.key!,
-                        style: TextStyle(color: Color(0xff5B6469)),
-                      ),
-                    ))
-                        .toList(),
-                    value: pp.selectedBusinessCityType,
-                    onChanged: (value) {
-
-                    },
-                    buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      height: 40,
-                      width: 200,
-                    ),
-                    menuItemStyleData: MenuItemStyleData(
-                      height: 40,
-                    ),
-                    dropdownStyleData: DropdownStyleData(width: 200),
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Gap(25),
-
-          TextFieldCustom(
-            hint: "",clt: pp.businessPinCodeClt,
-            title: getLabel(label: "PIN_CODE", form: pf.businessDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
+            TextFieldCustom(
+              hint: "",clt: pp.businessPinCodeClt,
+              title: getLabel(label: "PIN_CODE", form: pf.businessDetails!),
+              textCapitalization: TextCapitalization.characters,
+              type: TextInputType.number ,
+            ),
 
 
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:investcraftpartner/generated/assets.dart';
 import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:intl/intl.dart';
 import '../../config/themeConfig.dart';
 import 'leadDetailScreen.dart';
 
@@ -141,7 +141,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                     ),
                                                     Gap(8),
                                                     Text(
-                                                      'IVK001',
+                                                      '${lp.leadsList[index].leadNumber}',
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 14.sp,
@@ -166,7 +166,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                     ),
                                                     Gap(8),
                                                     Text(
-                                                      'Open Fresh',
+                                                      '${lp.leadsList[index].leadStatus}',
                                                       style: TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 12.sp,
@@ -216,7 +216,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                           ),
                                                           Gap(8),
                                                           Text(
-                                                            'Manjit Singh',
+                                                            '${lp.leadsList[index].firstName}',
                                                             style: TextStyle(
                                                               color: Colors.black,
                                                               fontSize: 12.sp,
@@ -239,7 +239,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                           ),
                                                           Gap(8),
                                                           Text(
-                                                            '01 Sep 23',
+                                                            '${DateFormat("dd MMM yy").format(lp.leadsList[index].createdAt)}',
                                                             style: TextStyle(
                                                               color: Colors.black,
                                                               fontSize: 12.sp,
@@ -267,7 +267,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                           ),
                                                           Gap(8),
                                                           Text(
-                                                            '5,00,000.00',
+                                                            "${lp.leadsList[index].loanAmount}",
                                                             style: TextStyle(
                                                               color: Colors.black,
                                                               fontSize: 12.sp,
@@ -292,7 +292,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                           InkWell(
                                                             onTap:(){
                                                               Navigator.push(context, MaterialPageRoute(builder: (context){
-                                                                return LeadDetailScreen();
+                                                                return LeadDetailScreen(data: lp.leadsList[index],);
                                                               }));
 
                                                             },

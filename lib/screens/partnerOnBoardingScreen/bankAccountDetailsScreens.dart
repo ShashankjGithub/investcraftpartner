@@ -27,116 +27,133 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
     final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '${pf.bankDetails!.title}',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w700,
-            ),
-          ),
-          Gap(5),
-          Text(
-            "${pf.bankDetails!.content}",
-            style: TextStyle(
-              color: Color(0xFFD7206A),
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-
-            ),
-          ),
-          Gap(15),
-          TextFieldCustom(
-            hint: "",clt: pp.bankAccountNumberClt,
-            title: getLabel(label: "ACCOUNT_NUMBER_LABEL", form: pf.bankDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
-          Gap(20),
-          TextFieldCustom(
-            hint: "",clt: pp.bankIFSCClt,
-            title: getLabel(label: "IFSC_CODE_LABEL", form: pf.bankDetails!),
-            textCapitalization: TextCapitalization.characters,
-          ),
-
-          Gap(25),
-          Column(
-            children: [
-              Row(
-                children: [
-                  Text(
-                    getLabel(label: "BANK_NAME-_LABEL", form: pf.bankDetails!),
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ),
-                  Gap(5),
-
-                  Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                ],
+      child: Form(
+        key: pp.bankDetailKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              '${pf.bankDetails!.title}',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 30.sp,
+                fontWeight: FontWeight.w700,
               ),
-              Gap(15.h),
-              Container(
-                padding: EdgeInsets.only(left: 10, right: 8),
-                height: 60.h,
-                width: size.width,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.25),
-                        blurRadius: 10,
-                        spreadRadius: 0,
-                      ),
-                    ],
-                    borderRadius: BorderRadius.circular(100.r)),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButtonFormField2(
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (vv){},
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.only(top: 15)
-                    ),
-                    iconStyleData: IconStyleData(
-                        icon: SvgPicture.asset(Assets.assetsDropdownicon)),
-                    isExpanded: true,
-                    hint: Text(
-                      getPlaceHolder(label: "SELECT_BANK", form: pf.bankDetails!),
-                      style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
-                    ),
-                    items: pf.bankDetails!.element.firstWhere((element) => element.key == "SELECT_BANK").list
-                        .map((item) => DropdownMenuItem(
-                      value: item,
-                      child: Text(
-                        item.key!,
-                        style: TextStyle(color: Color(0xff5B6469)),
-                      ),
-                    ))
-                        .toList(),
-                    value: pp.selectedBankName,
-                    onChanged: (value) {
+            ),
+            Gap(5),
+            Text(
+              "${pf.bankDetails!.content}",
+              style: TextStyle(
+                color: Color(0xFFD7206A),
+                fontSize: 16,
+                fontWeight: FontWeight.w400,
 
-                    },
-                    buttonStyleData: ButtonStyleData(
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      height: 40,
-                      width: 200,
+              ),
+            ),
+            Gap(15),
+            TextFieldCustom(
+              hint: "",clt: pp.bankAccountNumberClt,
+              title: getLabel(label: "ACCOUNT_NUMBER_LABEL", form: pf.bankDetails!),
+              textCapitalization: TextCapitalization.characters,
+              validator: (val){
+                if (val!.isEmpty) {
+                  return getLabel(label: "ACCOUNT_NUMBER_LABEL", form: pf.bankDetails!);
+                }
+              },
+            ),
+            Gap(20),
+            TextFieldCustom(
+              hint: "",clt: pp.bankIFSCClt,
+              title: getLabel(label: "IFSC_CODE_LABEL", form: pf.bankDetails!),
+              textCapitalization: TextCapitalization.characters,
+              validator: (val){
+                if (val!.isEmpty) {
+                  return getLabel(label: "IFSC_CODE_LABEL", form: pf.bankDetails!);
+                }
+              },
+            ),
+
+            Gap(25),
+            Column(
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      getLabel(label: "BANK_NAME-_LABEL", form: pf.bankDetails!),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
-                    menuItemStyleData: MenuItemStyleData(
-                      height: 40,
+                    Gap(5),
+
+                    Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                  ],
+                ),
+                Gap(15.h),
+                Container(
+                  padding: EdgeInsets.only(left: 10, right: 8),
+                  height: 60.h,
+                  width: size.width,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.25),
+                          blurRadius: 10,
+                          spreadRadius: 0,
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(100.r)),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButtonFormField2(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (vv){
+                        if (vv==null) {
+                          return   getPlaceHolder(label: "SELECT_BANK", form: pf.bankDetails!);
+                        }
+                      },
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.only(top: 15)
+                      ),
+                      iconStyleData: IconStyleData(
+                          icon: SvgPicture.asset(Assets.assetsDropdownicon)),
+                      isExpanded: true,
+                      hint: Text(
+                        getPlaceHolder(label: "SELECT_BANK", form: pf.bankDetails!),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                      ),
+                      items: pf.bankDetails!.element.firstWhere((element) => element.key == "SELECT_BANK").list
+                          .map((item) => DropdownMenuItem(
+                        value: item,
+                        child: Text(
+                          item.key!,
+                          style: TextStyle(color: Color(0xff5B6469)),
+                        ),
+                      ))
+                          .toList(),
+                      value: pp.selectedBankName,
+                      onChanged: (value) {
+                        pp.changeSelectBank(value);
+                      },
+                      buttonStyleData: ButtonStyleData(
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        height: 40,
+                        width: 200,
+                      ),
+                      menuItemStyleData: MenuItemStyleData(
+                        height: 40,
+                      ),
+                      dropdownStyleData: DropdownStyleData(width: 200),
                     ),
-                    dropdownStyleData: DropdownStyleData(width: 200),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
