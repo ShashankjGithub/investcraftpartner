@@ -12,6 +12,8 @@ const String save_bussiness_detail = "save-bussiness-detail";
 const String save_bank_detail = "save-bank-detail";
 const String save_kyc_detail = "save-kyc-detail";
 const String leads_view = "leads-view";
+const String get_lead_data = "get-lead-data";
+const String myqr = "myqr";
 
 
 

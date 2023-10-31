@@ -8,6 +8,8 @@ import 'package:provider/provider.dart';
 
 import '../config/themeConfig.dart';
 import '../generated/assets.dart';
+import '../providers/leadDataProvider.dart';
+import '../providers/myQrProvider.dart';
 
 
 
@@ -65,6 +67,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   getLead(){
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<LeadProvider>().getLead(context);
+      context.read<LeadDataProvider>().getLeadData(context);
+      context.read<MyQrProvider>().getQrData(context);
     });
   }
 

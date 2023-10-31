@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
+import 'package:investcraftpartner/services/getLabels.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
@@ -187,444 +188,486 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
 
   Widget PersonalDetailWidget(LeadProvider lp){
+    final PartnerFromDataProvider fp = Provider.of<PartnerFromDataProvider>(context,listen: false);
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15,right: 15),
-            child: Column(
-              children: [
-                TextFieldCustom(
-                  hint: "",clt: lp.nameClt,
-                  title: "Name",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-                TextFieldCustom(
-                  showRequried: false,
-                  hint: "",clt: lp.lastnameClt,
-                  title: "Last Name",
-
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-                TextFieldCustom(
-                  hint: "",clt: lp.mobileClt,
-                  title: "Mobile Number",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-                TextFieldCustom(
-                  hint: "",clt: lp.emailClt,
-                  title: "Email",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-                Row(
-                  children: [
-                    Text(
-                      'Gender',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Gap(5),
-                    Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                  ],
-                ),
-                Gap(20),
-                Row(
-                  children: [
-                    CustomRadioButton(title: "Male",color: lp.gender=="Male"?mainColor:grayColor2,onTap: (){
-                      lp.changeGender("Male");
+      child: Form(
+        key: lp.personalDetailKey,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15),
+              child: Column(
+                children: [
+                  TextFieldCustom(
+                    hint: "",clt: lp.nameClt,
+                    title: getLabel(label: "NAME_LABEL", form: fp.leadFormPersonal!),
+                    textCapitalization: TextCapitalization.characters,
+                    validator: (v){
+                      if (v!.isEmpty) {
+                        return getLabel(label: "NAME_LABEL", form: fp.leadFormPersonal!);
+                      }
                     },
-                      textColor: lp.gender=="Male"?mainColor:textgrayColor,
-                    ),
-                    CustomRadioButton(title: "Female",color: lp.gender=="Female"?mainColor:grayColor2,
-                      onTap: (){
-                        lp.changeGender("Female");
+                  ),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    showRequried: false,
+                    hint: "",clt: lp.lastnameClt,
+                    title: "Last Name",
+
+                    textCapitalization: TextCapitalization.characters,
+
+                  ),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.mobileClt,
+                    title: getLabel(label: "MOBILE_NUMBER_LABEL", form: fp.leadFormPersonal!),
+                    type: TextInputType.number,
+                    textCapitalization: TextCapitalization.characters,
+                    validator: (v){
+                      if (v!.isEmpty) {
+                        return getLabel(label: "MOBILE_NUMBER_LABEL", form: fp.leadFormPersonal!);
+                      }
+                    },
+                  ),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.emailClt,
+                    title: getLabel(label: "EMAIL_LABEL", form: fp.leadFormPersonal!),
+                    textCapitalization: TextCapitalization.characters,
+                    validator: (v){
+                      if (v!.isEmpty) {
+                        return getLabel(label: "EMAIL_LABEL", form: fp.leadFormPersonal!);
+                      }
+                    },
+                  ),
+                  Gap(25.h),
+                  Row(
+                    children: [
+                      Text(
+                        getLabel(label: "GENDER_LABEL", form: fp.leadFormPersonal!),
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                      Gap(5),
+                      Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                    ],
+                  ),
+                  Gap(20),
+                  Row(
+                    children: [
+                      CustomRadioButton(title: "Male",color: lp.gender=="Male"?mainColor:grayColor2,onTap: (){
+                        lp.changeGender("Male");
                       },
-                      textColor: lp.gender=="Female"?mainColor:textgrayColor,),
-                    CustomRadioButton(title: "Other",color: lp.gender=="Other"?mainColor:grayColor2,
-                      onTap: (){
-                        lp.changeGender("Other");
-                      },
-                      textColor: lp.gender=="Other"?mainColor:textgrayColor,),
-                  ],
-                ),
-                Gap(25.h),
-                TextFieldCustom(
-                  hint: "",clt: lp.panCardClt,
-                  title: "PAN Number",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-                CustomizeDatePicker(clt: lp.dobClt,text: "Date Of Birth"),
-                Gap(25.h),
-                TextFieldCustom(
-                  hint: "",clt: lp.motherNameClt,
-                  title: "Mother's Name",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-              ],
+                        textColor: lp.gender=="Male"?mainColor:textgrayColor,
+                      ),
+                      CustomRadioButton(title: "Female",color: lp.gender=="Female"?mainColor:grayColor2,
+                        onTap: (){
+                          lp.changeGender("Female");
+                        },
+                        textColor: lp.gender=="Female"?mainColor:textgrayColor,),
+                      CustomRadioButton(title: "Other",color: lp.gender=="Other"?mainColor:grayColor2,
+                        onTap: (){
+                          lp.changeGender("Other");
+                        },
+                        textColor: lp.gender=="Other"?mainColor:textgrayColor,),
+                    ],
+                  ),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.panCardClt,
+                    title: "PAN Number",
+                    textCapitalization: TextCapitalization.characters,
+                    validator: (v){
+                      if (v!.isEmpty) {
+                        return "Pan Number";
+                      }
+                    },
+                  ),
+                  Gap(25.h),
+                  CustomizeDatePicker(clt: lp.dobClt,text: getLabel(label: "DATE_OF_BIRTH", form: fp.leadFormPersonal!), validator: (v){
+                    if (v!.isEmpty) {
+                      return  getLabel(label: "DATE_OF_BIRTH", form: fp.leadFormPersonal!);
+                    }
+                  },),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.motherNameClt,
+                    title:  getLabel(label: "MOTHER_NAME_LABEL", form: fp.leadFormPersonal!),
+                    textCapitalization: TextCapitalization.characters,
+                    validator: (v){
+                      if (v!.isEmpty) {
+                        return getLabel(label: "MOTHER_NAME_LABEL", form: fp.leadFormPersonal!);
+                      }
+                    },
+                  ),
+                  Gap(25.h),
+                ],
+              ),
             ),
-          ),
-          CustomNextButton(
-            onTap: (){
-              lp.changeEmployeeDetailSumbiterd();
-            },
-          )
-        ],
+            CustomNextButton(
+              onTap: (){
+                if (lp.personalDetailKey.currentState!.validate()) {
+                  lp.changeEmployeeDetailSumbiterd();
+                }
+
+              },
+            )
+          ],
+        ),
       ),
     );
   }
   Widget EmployeeDetailWidget(LeadProvider lp,Size size){
+    final PartnerFromDataProvider fp = Provider.of<PartnerFromDataProvider>(context,listen: false);
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 15,right: 15),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      'Employment type',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
+      child: Form(
+        key: lp.employeeDetailKey,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        'Employment type',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
-                    ),
-                    Gap(5),
-                    Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                  ],
-                ),
-                Gap(20),
-                Row(
-                  children: [
-                    CustomRadioButton(title: "Salaried",color: lp.gender=="Salaried"?mainColor:grayColor2,onTap: (){
-                      lp.changeGender("Salaried");
-                    },
-                      textColor: lp.gender=="Salaried"?mainColor:textgrayColor,
-                    ),
-                    CustomRadioButton(title: "Self-employed",color: lp.gender=="Self-employed"?mainColor:grayColor2,
-                      onTap: (){
-                        lp.changeGender("Self-employed");
+                      Gap(5),
+                      Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                    ],
+                  ),
+                  Gap(20),
+                  Row(
+                    children: [
+                      CustomRadioButton(title: "Salaried",color: lp.gender=="Salaried"?mainColor:grayColor2,onTap: (){
+                        lp.changeGender("Salaried");
                       },
-                      textColor: lp.gender=="Self-employed"?mainColor:textgrayColor,),
+                        textColor: lp.gender=="Salaried"?mainColor:textgrayColor,
+                      ),
+                      CustomRadioButton(title: "Self-employed",color: lp.gender=="Self-employed"?mainColor:grayColor2,
+                        onTap: (){
+                          lp.changeGender("Self-employed");
+                        },
+                        textColor: lp.gender=="Self-employed"?mainColor:textgrayColor,),
 
-                  ],
-                ),
-                Gap(25),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'State',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Gap(5),
-
-                        Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                      ],
-                    ),
-                    Gap(15.h),
-                    Container(
-                      padding: EdgeInsets.only(left: 10, right: 8),
-                      height: 60.h,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              blurRadius: 10,
-                              spreadRadius: 0,
+                    ],
+                  ),
+                  Gap(25),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'State',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                             ),
-                          ],
-                          borderRadius: BorderRadius.circular(100.r)),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButtonFormField2(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (vv){},
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.only(top: 15)
                           ),
-                          iconStyleData: IconStyleData(
-                              icon: SvgPicture.asset(Assets.assetsDropdownicon)),
-                          isExpanded: true,
-                          hint: Text(
-                            "Select State",
-                            style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
-                          ),
-                          items: []
-                              .map((item) => DropdownMenuItem(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: TextStyle(color: Color(0xff5B6469)),
-                            ),
-                          ))
-                              .toList(),
-                          value: lp.selectedState,
-                          onChanged: (value) {
+                          Gap(5),
 
-                          },
-                          buttonStyleData: ButtonStyleData(
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                            height: 40,
-                            width: 200,
+                          Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                        ],
+                      ),
+                      Gap(15.h),
+                      Container(
+                        padding: EdgeInsets.only(left: 10, right: 8),
+                        height: 60.h,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                blurRadius: 10,
+                                spreadRadius: 0,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(100.r)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButtonFormField2(
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (vv){},
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(top: 15)
+                            ),
+                            iconStyleData: IconStyleData(
+                                icon: SvgPicture.asset(Assets.assetsDropdownicon)),
+                            isExpanded: true,
+                            hint: Text(
+                              "Select State",
+                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                            ),
+                            items: []
+                                .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: TextStyle(color: Color(0xff5B6469)),
+                              ),
+                            ))
+                                .toList(),
+                            value: lp.selectedState,
+                            onChanged: (value) {
+
+                            },
+                            buttonStyleData: ButtonStyleData(
+                              padding: EdgeInsets.symmetric(horizontal: 12),
+                              height: 40,
+                              width: 200,
+                            ),
+                            menuItemStyleData: MenuItemStyleData(
+                              height: 40,
+                            ),
+                            dropdownStyleData: DropdownStyleData(width: 200),
                           ),
-                          menuItemStyleData: MenuItemStyleData(
-                            height: 40,
-                          ),
-                          dropdownStyleData: DropdownStyleData(width: 200),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Gap(25),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'City',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
+                    ],
+                  ),
+                  Gap(25),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'City',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          Gap(5),
+
+                          Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                        ],
+                      ),
+                      Gap(15.h),
+                      Container(
+                        padding: EdgeInsets.only(left: 10, right: 8),
+                        height: 60.h,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                blurRadius: 10,
+                                spreadRadius: 0,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(100.r)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButtonFormField2(
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (vv){},
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(top: 15)
+                            ),
+                            iconStyleData: IconStyleData(
+                                icon: SvgPicture.asset(Assets.assetsDropdownicon)),
+                            isExpanded: true,
+                            hint: Text(
+                              "Select City",
+                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                            ),
+                            items: []
+                                .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: TextStyle(color: Color(0xff5B6469)),
+                              ),
+                            ))
+                                .toList(),
+                            value: lp.selectedCity,
+                            onChanged: (value) {
+
+                            },
+                            buttonStyleData: ButtonStyleData(
+                              padding: EdgeInsets.symmetric(horizontal: 12),
+                              height: 40,
+                              width: 200,
+                            ),
+                            menuItemStyleData: MenuItemStyleData(
+                              height: 40,
+                            ),
+                            dropdownStyleData: DropdownStyleData(width: 200),
                           ),
                         ),
-                        Gap(5),
-
-                        Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                      ],
-                    ),
-                    Gap(15.h),
-                    Container(
-                      padding: EdgeInsets.only(left: 10, right: 8),
-                      height: 60.h,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              blurRadius: 10,
-                              spreadRadius: 0,
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(100.r)),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButtonFormField2(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (vv){},
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.only(top: 15)
-                          ),
-                          iconStyleData: IconStyleData(
-                              icon: SvgPicture.asset(Assets.assetsDropdownicon)),
-                          isExpanded: true,
-                          hint: Text(
-                            "Select City",
-                            style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
-                          ),
-                          items: []
-                              .map((item) => DropdownMenuItem(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: TextStyle(color: Color(0xff5B6469)),
-                            ),
-                          ))
-                              .toList(),
-                          value: lp.selectedCity,
-                          onChanged: (value) {
-
-                          },
-                          buttonStyleData: ButtonStyleData(
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                            height: 40,
-                            width: 200,
-                          ),
-                          menuItemStyleData: MenuItemStyleData(
-                            height: 40,
-                          ),
-                          dropdownStyleData: DropdownStyleData(width: 200),
+                      ),
+                    ],
+                  ),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.pinCodeClt,
+                    title: "PIN Code",
+                    type: TextInputType.number,
+                    textCapitalization: TextCapitalization.characters,
+                  ),
+                  Gap(25.h),
+                  Row(
+                    children: [
+                      Text(
+                        'Residence type',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                Gap(25.h),
-                TextFieldCustom(
-                  hint: "",clt: lp.pinCodeClt,
-                  title: "PIN Code",
-                  type: TextInputType.number,
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-                Row(
-                  children: [
-                    Text(
-                      'Residence type',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Gap(5),
-                    Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                  ],
-                ),
-                Gap(20),
-                Row(
-                  children: [
-                    CustomRadioButton(title: "Owned",color: lp.gender=="Owned"?mainColor:grayColor2,onTap: (){
-                      lp.changeGender("Owned");
-                    },
-                      textColor: lp.gender=="Owned"?mainColor:textgrayColor,
-                    ),
-                    CustomRadioButton(title: "Rented",color: lp.gender=="Rented"?mainColor:grayColor2,
-                      onTap: (){
-                        lp.changeGender("Rented");
+                      Gap(5),
+                      Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                    ],
+                  ),
+                  Gap(20),
+                  Row(
+                    children: [
+                      CustomRadioButton(title: "Owned",color: lp.gender=="Owned"?mainColor:grayColor2,onTap: (){
+                        lp.changeGender("Owned");
                       },
-                      textColor: lp.gender=="Rented"?mainColor:textgrayColor,),
+                        textColor: lp.gender=="Owned"?mainColor:textgrayColor,
+                      ),
+                      CustomRadioButton(title: "Rented",color: lp.gender=="Rented"?mainColor:grayColor2,
+                        onTap: (){
+                          lp.changeGender("Rented");
+                        },
+                        textColor: lp.gender=="Rented"?mainColor:textgrayColor,),
 
-                  ],
-                ),
+                    ],
+                  ),
 
 
-                Gap(25.h),
-                TextFieldCustom(
-                  hint: "",clt: lp.requiredLoanAmountClt,
-                  title: "Required Loan amount",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-                TextFieldCustom(
-                  hint: "",clt: lp.monthlyIncomeClt,
-                  title: "Monthly Income",
-                  textCapitalization: TextCapitalization.characters,
-                ),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.requiredLoanAmountClt,
+                    title: "Required Loan amount",
+                    textCapitalization: TextCapitalization.characters,
+                  ),
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.monthlyIncomeClt,
+                    title: "Monthly Income",
+                    textCapitalization: TextCapitalization.characters,
+                  ),
 
-                Gap(25),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'Loan Type',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                        Gap(5),
-
-                        Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
-                      ],
-                    ),
-                    Gap(15.h),
-                    Container(
-                      padding: EdgeInsets.only(left: 10, right: 8),
-                      height: 60.h,
-                      width: size.width,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.25),
-                              blurRadius: 10,
-                              spreadRadius: 0,
+                  Gap(25),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Loan Type',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
                             ),
-                          ],
-                          borderRadius: BorderRadius.circular(100.r)),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButtonFormField2(
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (vv){},
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              contentPadding: EdgeInsets.only(top: 15)
                           ),
-                          iconStyleData: IconStyleData(
-                              icon: SvgPicture.asset(Assets.assetsDropdownicon)),
-                          isExpanded: true,
-                          hint: Text(
-                            "Select",
-                            style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
-                          ),
-                          items: []
-                              .map((item) => DropdownMenuItem(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: TextStyle(color: Color(0xff5B6469)),
-                            ),
-                          ))
-                              .toList(),
-                          value: lp.selectedLoanType,
-                          onChanged: (value) {
+                          Gap(5),
 
-                          },
-                          buttonStyleData: ButtonStyleData(
-                            padding: EdgeInsets.symmetric(horizontal: 12),
-                            height: 40,
-                            width: 200,
+                          Text("*",style: TextStyle(color: mainColor,fontSize: 16.sp),)
+                        ],
+                      ),
+                      Gap(15.h),
+                      Container(
+                        padding: EdgeInsets.only(left: 10, right: 8),
+                        height: 60.h,
+                        width: size.width,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.25),
+                                blurRadius: 10,
+                                spreadRadius: 0,
+                              ),
+                            ],
+                            borderRadius: BorderRadius.circular(100.r)),
+                        child: DropdownButtonHideUnderline(
+                          child: DropdownButtonFormField2(
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (vv){},
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                contentPadding: EdgeInsets.only(top: 15)
+                            ),
+                            iconStyleData: IconStyleData(
+                                icon: SvgPicture.asset(Assets.assetsDropdownicon)),
+                            isExpanded: true,
+                            hint: Text(
+                              "Select",
+                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                            ),
+                            items: []
+                                .map((item) => DropdownMenuItem(
+                              value: item,
+                              child: Text(
+                                item,
+                                style: TextStyle(color: Color(0xff5B6469)),
+                              ),
+                            ))
+                                .toList(),
+                            value: lp.selectedLoanType,
+                            onChanged: (value) {
+
+                            },
+                            buttonStyleData: ButtonStyleData(
+                              padding: EdgeInsets.symmetric(horizontal: 12),
+                              height: 40,
+                              width: 200,
+                            ),
+                            menuItemStyleData: MenuItemStyleData(
+                              height: 40,
+                            ),
+                            dropdownStyleData: DropdownStyleData(width: 200),
                           ),
-                          menuItemStyleData: MenuItemStyleData(
-                            height: 40,
-                          ),
-                          dropdownStyleData: DropdownStyleData(width: 200),
                         ),
                       ),
-                    ),
-                  ],
-                ),
+                    ],
+                  ),
 
 
-                Gap(25.h),
+                  Gap(25.h),
 
-                TextFieldCustom(
-                  hint: "",clt: lp.completeResidenceAddressClt,
-                  showRequried: false,
-                  title: "Complete Residence address",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.completeResidenceAddressClt,
+                    showRequried: false,
+                    title: "Complete Residence address",
+                    textCapitalization: TextCapitalization.characters,
+                  ),
+                  Gap(25.h),
 
-                TextFieldCustom(
-                  hint: "",clt: lp.completeOfficeAddressClt,
-                  showRequried: false,
-                  title: "Complete office address",
-                  textCapitalization: TextCapitalization.characters,
-                ),
-                Gap(25.h),
-              ],
+                  TextFieldCustom(
+                    hint: "",clt: lp.completeOfficeAddressClt,
+                    showRequried: false,
+                    title: "Complete office address",
+                    textCapitalization: TextCapitalization.characters,
+                  ),
+                  Gap(25.h),
+                ],
+              ),
             ),
-          ),
-          CustomNextButton(
-            onTap: (){
-              lp.changeDocumentUploadSumbiterd();
-            },
-          )
-        ],
+            CustomNextButton(
+              onTap: (){
+                lp.changeDocumentUploadSumbiterd();
+              },
+            )
+          ],
+        ),
       ),
     );
   }

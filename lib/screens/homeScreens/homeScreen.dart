@@ -5,7 +5,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/config/themeConfig.dart';
 import 'package:investcraftpartner/generated/assets.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/leadDataProvider.dart';
 import '../leadsScreens/createLeadScreen.dart';
 import '../partnerOnBoardingScreen/basicDetailOnboardingScreen.dart';
 
@@ -20,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final LeadDataProvider ldp = context.watch<LeadDataProvider>();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: mainColor,
     ));
@@ -200,20 +203,21 @@ class _HomeScreenState extends State<HomeScreen> {
                     left: 15, right: 15, top: 20, bottom: 10),
                 child: Column(
                   children: [
+
                     Row(
                       children: [
                         DecoractionContainer(
-                          number: "15",
+                          number: "${ldp.leadData==null?0:ldp.leadData!.leadsProcessed}",
                           title: "In Progress",
                         ),
                         Gap(20),
                         DecoractionContainer(
-                          number: "12",
+                          number: "${ldp.leadData==null?0:ldp.leadData!.leadsDisbursed}",
                           title: "Disburesed",
                         ),
                         Gap(20),
                         DecoractionContainer(
-                          number: "35",
+                          number: "${ldp.leadData==null?0:ldp.leadData!.registeredLeads}",
                           title: "Submitted",
                         ),
                       ],

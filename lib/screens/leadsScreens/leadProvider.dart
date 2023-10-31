@@ -53,7 +53,7 @@ class LeadProvider extends ChangeNotifier {
   PageController pageController = PageController();
 
   ///////////////////// Personal Detail fields///////////////////
-
+  final personalDetailKey = GlobalKey<FormState>();
   TextEditingController nameClt = TextEditingController();
   TextEditingController lastnameClt = TextEditingController();
   TextEditingController emailClt = TextEditingController();
@@ -69,7 +69,7 @@ class LeadProvider extends ChangeNotifier {
   }
 
   ///////////////////////// Employee Detail ////////////////////////
-
+  final  employeeDetailKey = GlobalKey<FormState>();
   String employeeType = "Salaried";
 
   changeEmployeeType(value) {
