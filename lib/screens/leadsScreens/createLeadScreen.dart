@@ -278,7 +278,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Gap(25.h),
                   TextFieldCustom(
                     hint: "",clt: lp.panCardClt,
-                    title: "PAN Number",
+                    title: getLabel(label: "PAN_NUMBER_LABEL", form: fp.leadFormPersonal!),
                     textCapitalization: TextCapitalization.characters,
                     validator: (v){
                       if (v!.isEmpty) {
@@ -348,16 +348,16 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Gap(20),
                   Row(
                     children: [
-                      CustomRadioButton(title: "Salaried",color: lp.gender=="Salaried"?mainColor:grayColor2,onTap: (){
+                      CustomRadioButton(title: "Salaried",color: lp.employeeType=="Salaried"?mainColor:grayColor2,onTap: (){
                         lp.changeGender("Salaried");
                       },
-                        textColor: lp.gender=="Salaried"?mainColor:textgrayColor,
+                        textColor: lp.employeeType=="Salaried"?mainColor:textgrayColor,
                       ),
-                      CustomRadioButton(title: "Self-employed",color: lp.gender=="Self-employed"?mainColor:grayColor2,
+                      CustomRadioButton(title: "Self-employed",color: lp.employeeType=="Self-employed"?mainColor:grayColor2,
                         onTap: (){
                           lp.changeGender("Self-employed");
                         },
-                        textColor: lp.gender=="Self-employed"?mainColor:textgrayColor,),
+                        textColor: lp.employeeType=="Self-employed"?mainColor:textgrayColor,),
 
                     ],
                   ),
@@ -367,7 +367,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                       Row(
                         children: [
                           Text(
-                            'State',
+                            getLabel(label: "STATE_LABEL", form: fp.leadFormEmployement!),
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
@@ -397,7 +397,11 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                         child: DropdownButtonHideUnderline(
                           child: DropdownButtonFormField2(
                             autovalidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (vv){},
+                            validator: (vv){
+                              if(vv==null){
+                              return  getLabel(label: "STATE_LABEL", form: fp.leadFormEmployement!);
+                              }
+                            },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.only(top: 15)
@@ -406,21 +410,21 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                             isExpanded: true,
                             hint: Text(
-                              "Select State",
+                              getPlaceHolder(label: "STATE_PLACEHOLDER", form: fp.leadFormEmployement!),
                               style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                             ),
-                            items: []
+                            items: fp.leadFormEmployement!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
-                                item,
+                                item.key!,
                                 style: TextStyle(color: Color(0xff5B6469)),
                               ),
                             ))
                                 .toList(),
                             value: lp.selectedState,
                             onChanged: (value) {
-
+                               lp.changeSelectedState(value);
                             },
                             buttonStyleData: ButtonStyleData(
                               padding: EdgeInsets.symmetric(horizontal: 12),
@@ -442,7 +446,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                       Row(
                         children: [
                           Text(
-                            'City',
+                            getLabel(label: "CITY_LABEL", form: fp.leadFormEmployement!),
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
@@ -472,7 +476,11 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                         child: DropdownButtonHideUnderline(
                           child: DropdownButtonFormField2(
                             autovalidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (vv){},
+                            validator: (vv){
+                              if(vv==null){
+                                return getPlaceHolder(label: "CITY_PLACEHOLDER", form: fp.leadFormEmployement!);
+                              }
+                            },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.only(top: 15)
@@ -481,21 +489,21 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                             isExpanded: true,
                             hint: Text(
-                              "Select City",
+                              getPlaceHolder(label: "CITY_PLACEHOLDER", form: fp.leadFormEmployement!),
                               style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                             ),
-                            items: []
+                            items: fp.leadFormEmployement!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
-                                item,
+                                item.key!,
                                 style: TextStyle(color: Color(0xff5B6469)),
                               ),
                             ))
                                 .toList(),
                             value: lp.selectedCity,
                             onChanged: (value) {
-
+                             lp.changeSelectedCity(value);
                             },
                             buttonStyleData: ButtonStyleData(
                               padding: EdgeInsets.symmetric(horizontal: 12),
@@ -514,15 +522,20 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Gap(25.h),
                   TextFieldCustom(
                     hint: "",clt: lp.pinCodeClt,
-                    title: "PIN Code",
+                    title: getLabel(label: "PIN_CODE_LABEL", form: fp.leadFormEmployement!),
                     type: TextInputType.number,
                     textCapitalization: TextCapitalization.characters,
+                    validator: (vv){
+                      if(vv!.isEmpty){
+                        return getLabel(label: "PIN_CODE_LABEL", form: fp.leadFormEmployement!);
+                      }
+                    },
                   ),
                   Gap(25.h),
                   Row(
                     children: [
                       Text(
-                        'Residence type',
+                        getLabel(label: "RESIDENT_LABEL", form: fp.leadFormEmployement!),
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -536,16 +549,16 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Gap(20),
                   Row(
                     children: [
-                      CustomRadioButton(title: "Owned",color: lp.gender=="Owned"?mainColor:grayColor2,onTap: (){
+                      CustomRadioButton(title: "Owned",color: lp.residentType=="Owned"?mainColor:grayColor2,onTap: (){
                         lp.changeGender("Owned");
                       },
-                        textColor: lp.gender=="Owned"?mainColor:textgrayColor,
+                        textColor: lp.residentType=="Owned"?mainColor:textgrayColor,
                       ),
-                      CustomRadioButton(title: "Rented",color: lp.gender=="Rented"?mainColor:grayColor2,
+                      CustomRadioButton(title: "Rented",color: lp.residentType=="Rented"?mainColor:grayColor2,
                         onTap: (){
                           lp.changeGender("Rented");
                         },
-                        textColor: lp.gender=="Rented"?mainColor:textgrayColor,),
+                        textColor: lp.residentType=="Rented"?mainColor:textgrayColor,),
 
                     ],
                   ),
@@ -554,14 +567,25 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Gap(25.h),
                   TextFieldCustom(
                     hint: "",clt: lp.requiredLoanAmountClt,
-                    title: "Required Loan amount",
+                    type: TextInputType.number,
+                    title:   getLabel(label: "REQUIRED_LOAN_AMOUNT_LABEL", form: fp.leadFormEmployement!),
                     textCapitalization: TextCapitalization.characters,
+                    validator: (vv){
+                      if(vv!.isEmpty){
+                        return getLabel(label: "REQUIRED_LOAN_AMOUNT_LABEL", form: fp.leadFormEmployement!);
+                      }
+                    },
                   ),
                   Gap(25.h),
                   TextFieldCustom(
                     hint: "",clt: lp.monthlyIncomeClt,
-                    title: "Monthly Income",
+                    title: getLabel(label: "MONTHLY_INCOME_LABEL", form: fp.leadFormEmployement!),
                     textCapitalization: TextCapitalization.characters,
+                    validator: (vv){
+                      if(vv!.isEmpty){
+                        return getLabel(label: "MONTHLY_INCOME_LABEL", form: fp.leadFormEmployement!);
+                      }
+                    },
                   ),
 
                   Gap(25),
@@ -570,7 +594,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                       Row(
                         children: [
                           Text(
-                            'Loan Type',
+                            getLabel(label: "LOAN_TYPE_LABEL", form: fp.leadFormEmployement!),
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 16,
@@ -600,7 +624,11 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                         child: DropdownButtonHideUnderline(
                           child: DropdownButtonFormField2(
                             autovalidateMode: AutovalidateMode.onUserInteraction,
-                            validator: (vv){},
+                            validator: (vv){
+                              if(vv==null){
+                                return getPlaceHolder(label: "LOAN_TYPE_PLACEHOLDER", form: fp.leadFormEmployement!);
+                              }
+                            },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
                                 contentPadding: EdgeInsets.only(top: 15)
@@ -609,21 +637,21 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
                             isExpanded: true,
                             hint: Text(
-                              "Select",
+                              getPlaceHolder(label: "LOAN_TYPE_PLACEHOLDER", form: fp.leadFormEmployement!),
                               style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
                             ),
-                            items: []
+                            items: fp.leadFormEmployement!.element.firstWhere((element) => element.key == "LOAN_TYPE_PLACEHOLDER").list
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
-                                item,
+                                item.key??"",
                                 style: TextStyle(color: Color(0xff5B6469)),
                               ),
                             ))
                                 .toList(),
                             value: lp.selectedLoanType,
                             onChanged: (value) {
-
+                               lp.changeSelectedLoanType(value);
                             },
                             buttonStyleData: ButtonStyleData(
                               padding: EdgeInsets.symmetric(horizontal: 12),
@@ -646,24 +674,38 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   TextFieldCustom(
                     hint: "",clt: lp.completeResidenceAddressClt,
                     showRequried: false,
-                    title: "Complete Residence address",
+                    title: getLabel(label: "COMPLETE_RESIDENCE_ADDRESS_LABEL", form: fp.leadFormEmployement!),
                     textCapitalization: TextCapitalization.characters,
+                    validator: (vv){
+                      if(vv!.isEmpty){
+                        return getLabel(label: "COMPLETE_RESIDENCE_ADDRESS_LABEL", form: fp.leadFormEmployement!);
+                      }
+                    },
                   ),
                   Gap(25.h),
 
                   TextFieldCustom(
                     hint: "",clt: lp.completeOfficeAddressClt,
                     showRequried: false,
-                    title: "Complete office address",
+                    title: getLabel(label: "COMPLETE_OFFICE_ADDRESS_LABEL", form: fp.leadFormEmployement!),
                     textCapitalization: TextCapitalization.characters,
+                    validator: (vv){
+                      if(vv!.isEmpty){
+                        return getLabel(label: "COMPLETE_OFFICE_ADDRESS_LABEL", form: fp.leadFormEmployement!);
+                      }
+                    },
                   ),
                   Gap(25.h),
                 ],
               ),
             ),
             CustomNextButton(
+              title: getLabel(label: "NEXT_LABEL", form: fp.leadFormEmployement!),
               onTap: (){
-                lp.changeDocumentUploadSumbiterd();
+                if(lp.employeeDetailKey.currentState!.validate()){
+                  lp.createLead(context);
+                }
+
               },
             )
           ],

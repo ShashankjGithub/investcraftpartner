@@ -88,11 +88,27 @@ class LeadProvider extends ChangeNotifier {
   var selectedCity;
   var selectedLoanType;
 
+  changeSelectedState(value){
+    selectedState = value;
+    notifyListeners();
+  }
+  changeSelectedCity(value){
+    selectedCity = value;
+    notifyListeners();
+  }
+  changeSelectedLoanType(value){
+    selectedLoanType = value;
+    notifyListeners();
+  }
+
   TextEditingController pinCodeClt = TextEditingController();
   TextEditingController requiredLoanAmountClt = TextEditingController();
   TextEditingController monthlyIncomeClt = TextEditingController();
   TextEditingController completeResidenceAddressClt = TextEditingController();
   TextEditingController completeOfficeAddressClt = TextEditingController();
+  TextEditingController loanAmountClt = TextEditingController();
+  TextEditingController companyName = TextEditingController();
+  TextEditingController companyType = TextEditingController();
 
 /////////////////////////////////////////////////////////////
   ////////////////Document Uploade //////////////
@@ -129,6 +145,9 @@ class LeadProvider extends ChangeNotifier {
     monthlyIncomeClt.clear();
     completeResidenceAddressClt.clear();
     completeOfficeAddressClt.clear();
+    selectedState = null;
+    selectedCity = null;
+    selectedLoanType = null;
     inPersonalDetail = true;
     inEmployeeDetail = false;
     inDocumentsUpload = false;
@@ -162,7 +181,7 @@ class LeadProvider extends ChangeNotifier {
     });
     notifyListeners();
   }
-
+  String leadId = "";
   createLead(BuildContext context) {
     final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
     ApiServices().postData(save_lead,
@@ -182,7 +201,7 @@ class LeadProvider extends ChangeNotifier {
               "city": selectedCity.value,
               "pincode": pinCodeClt.text,
               "residence_type": residentType,
-              "loan_amount": "",
+              "loan_amount": requiredLoanAmountClt.text,
               "product_type": selectedLoanType.value,
               "applyfor_product": selectedLoanType.value,
               "residence_address": completeResidenceAddressClt.text,
@@ -194,7 +213,8 @@ class LeadProvider extends ChangeNotifier {
         .then((response) {
       if (response != null) {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
-
+        leadId = "${json.decode(response.body)["lead_id"]}";
+        changeDocumentUploadSumbiterd();
       } else {}
     });
   }
