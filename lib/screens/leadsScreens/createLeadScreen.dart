@@ -331,6 +331,21 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
               padding: const EdgeInsets.only(left: 15,right: 15),
               child: Column(
                 children: [
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.companyName,
+                    title: "Company Name",
+                    textCapitalization: TextCapitalization.characters,
+                    validator: (v){
+                      if (v!.isEmpty) {
+                        return getLabel(label: "EMAIL_LABEL", form: fp.leadFormPersonal!);
+                      }
+                    },
+                  ),
+
+
+
+
                   Row(
                     children: [
                       Text(
@@ -579,6 +594,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Gap(25.h),
                   TextFieldCustom(
                     hint: "",clt: lp.monthlyIncomeClt,
+                    type: TextInputType.number,
                     title: getLabel(label: "MONTHLY_INCOME_LABEL", form: fp.leadFormEmployement!),
                     textCapitalization: TextCapitalization.characters,
                     validator: (vv){
