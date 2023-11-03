@@ -6,6 +6,7 @@ import '../services/apiServices.dart';
 
 class PartnerFromDataProvider extends ChangeNotifier{
   List<DatumPartnerFrom> data = [];
+  List<Product> homeScreenProducts = [];
 
   DatumPartnerFrom? personalDetailFromData;
   DatumPartnerFrom? basicDetail;
@@ -29,6 +30,7 @@ class PartnerFromDataProvider extends ChangeNotifier{
     },context,header: true,he: "").then((response) {
       if (response!=null) {
         data.addAll(partnerFromModalFromJson(response.body).data);
+        homeScreenProducts.addAll(partnerFromModalFromJson(response.body).products);
         setData();
       }
     });

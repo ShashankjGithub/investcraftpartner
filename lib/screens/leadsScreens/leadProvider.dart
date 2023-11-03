@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../config/appConfig.dart';
 import '../../modals/leadmodal.dart';
+import '../../services/filePicker.dart';
 
 class LeadProvider extends ChangeNotifier {
   List titles = [
@@ -119,6 +120,38 @@ class LeadProvider extends ChangeNotifier {
   FilePickerResult? income_proof;
   FilePickerResult? bank_statement;
 
+  choosePanFile()async{
+    panCardFile = await pickFile();
+    notifyListeners();
+  }
+  chooseaadharFrontFile()async{
+    aadhar_front_file = await pickFile();
+    notifyListeners();
+  }
+  chooseaadharBackFile()async{
+    aadhar_front_file = await pickFile();
+    notifyListeners();
+  }
+  chooseCurrentAddress()async{
+    current_address_proof = await pickFile();
+    notifyListeners();
+  }
+  chooseIncomeProofe()async{
+    current_address_proof = await pickFile();
+    notifyListeners();
+  }
+  choosebankStatement()async{
+    bank_statement = await pickFile();
+    notifyListeners();
+  }
+
+
+
+
+
+
+
+
   String isYourCurrentAddress = "Yes";
 
   changeIsYourCurrentAddressType(value) {
@@ -182,8 +215,15 @@ class LeadProvider extends ChangeNotifier {
     notifyListeners();
   }
   String leadId = "";
+
+
+
+
+
+
   createLead(BuildContext context) {
     final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    changeLoading(true);
     ApiServices().postData(save_lead,
         {
               "first_name": nameClt.text,
@@ -195,11 +235,12 @@ class LeadProvider extends ChangeNotifier {
               "dob": dobClt.text,
               "mother_name": motherNameClt.text,
               "employment_type": employeeType,
-              "company_name": "",
-              "company_type": "",
+              "company_name": companyName.text,
+              "company_type": companyType.text,
               "state": selectedState.value,
               "city": selectedCity.value,
               "pincode": pinCodeClt.text,
+               "monthly_income":monthlyIncomeClt.text,
               "residence_type": residentType,
               "loan_amount": requiredLoanAmountClt.text,
               "product_type": selectedLoanType.value,
@@ -214,73 +255,79 @@ class LeadProvider extends ChangeNotifier {
       if (response != null) {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
         leadId = "${json.decode(response.body)["lead_id"]}";
+        changeLoading(false);
         changeDocumentUploadSumbiterd();
-      } else {}
+      } else {
+        changeLoading(false);
+      }
     });
   }
 
-  uploadLeadDocument(BuildContext context, leadId) async {
-    try {
-      var request = http.MultipartRequest(
-          'POST', Uri.parse(baseUrl + save_lead_docs)); // your server url
-      request.headers.addAll({
-        //"Authorization": "Bearer "+up.userData.token,
-      });
-      request.fields.addAll({"lead_id": leadId.toString()});
-      if (panCardFile != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'pan_file', panCardFile!.paths[0]!));
-      } else {
-        request.files.add(await http.MultipartFile.fromString('pan_file', ""));
-      }
-      if (aadhar_front_file != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'aadhar_front_file', aadhar_front_file!.paths[0]!));
-      } else {
-        request.files
-            .add(await http.MultipartFile.fromString('aadhar_front_file', ""));
-      }
-      if (aadhar_back_file != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'aadhar_back_file', aadhar_back_file!.paths[0]!));
-      } else {
-        request.files
-            .add(await http.MultipartFile.fromString('aadhar_back_file', ""));
-      }
-      if (current_address_proof != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'current_address_proof', current_address_proof!.paths[0]!));
-      } else {
-        request.files.add(
-            await http.MultipartFile.fromString('current_address_proof', ""));
-      }
-      if (income_proof != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'income_proof', income_proof!.paths[0]!));
-      } else {
-        request.files
-            .add(await http.MultipartFile.fromString('income_proof', ""));
-      }
-      if (bank_statement != null) {
-        request.files.add(await http.MultipartFile.fromPath(
-            'bank_statement', bank_statement!.paths[0]!));
-      } else {
-        request.files
-            .add(await http.MultipartFile.fromString('bank_statement', ""));
-      }
+  uploadLeadDocument(BuildContext context) async {
+    if(panCardFile==null){
+      Fluttertoast.showToast(msg: "Please select pancard");
+    }else if(aadhar_front_file==null){
+      Fluttertoast.showToast(msg: "Please select aadhar front file");
+    }else if(aadhar_back_file==null){
+      Fluttertoast.showToast(msg: "Please select aadhar back file");
+    }else if(current_address_proof==null){
+      Fluttertoast.showToast(msg: "Please select current address file");
+    }else if(income_proof==null){
+      Fluttertoast.showToast(msg: "Please select income proof");
+    }else{
+      try {
+        changeLoading(true);
+        var request = http.MultipartRequest(
+            'POST', Uri.parse(baseUrl + save_lead_docs)); // your server url
+        request.headers.addAll({
+          //"Authorization": "Bearer "+up.userData.token,
+        });
+        request.fields.addAll({"lead_id": leadId.toString()});
 
-      http.StreamedResponse response = await request.send();
-      print(response.statusCode);
-      final res = await http.Response.fromStream(response);
-      print(res.body);
-      if (response.statusCode == 200) {
-        Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
-        return "${json.decode(res.body)["Message"]}";
-      } else {
-        Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
+          request.files.add(await http.MultipartFile.fromPath(
+              'pan_file', panCardFile!.paths[0]!));
+
+
+          request.files.add(await http.MultipartFile.fromPath(
+              'aadhar_front_file', aadhar_front_file!.paths[0]!));
+
+
+          request.files.add(await http.MultipartFile.fromPath(
+              'aadhar_back_file', aadhar_back_file!.paths[0]!));
+
+          request.files.add(await http.MultipartFile.fromPath(
+              'current_address_proof', current_address_proof!.paths[0]!));
+
+
+          request.files.add(await http.MultipartFile.fromPath(
+              'income_proof', income_proof!.paths[0]!));
+
+
+          request.files.add(await http.MultipartFile.fromPath(
+              'bank_statement', bank_statement!.paths[0]!));
+
+
+        http.StreamedResponse response = await request.send();
+        print(response.statusCode);
+        final res = await http.Response.fromStream(response);
+        print(res.body);
+        if (response.statusCode == 200) {
+          Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
+          changeLoading(false);
+          return "${json.decode(res.body)["Message"]}";
+        } else {
+          changeLoading(false);
+          Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
+        }
+      } catch (e) {
+        changeLoading(false);
+        print("error in partnerOnBoardFile  uploade kyc ${e.toString()}");
       }
-    } catch (e) {
-      print("error in partnerOnBoardFile  uploade kyc ${e.toString()}");
     }
+
+
+
+
+
   }
 }

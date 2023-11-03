@@ -11,20 +11,25 @@ String partnerFromModalToJson(PartnerFromModal data) => json.encode(data.toJson(
 class PartnerFromModal {
   String status;
   List<DatumPartnerFrom> data;
+  List<Product> products;
 
   PartnerFromModal({
     required this.status,
+    required this.products,
     required this.data,
   });
 
   factory PartnerFromModal.fromJson(Map<String, dynamic> json) => PartnerFromModal(
     status: json["status"],
     data: List<DatumPartnerFrom>.from(json["data"].map((x) => DatumPartnerFrom.fromJson(x))),
+    products: json["products"]==null?[]:List<Product>.from(json["products"].map((x) => Product.fromJson(x))),
+
   );
 
   Map<String, dynamic> toJson() => {
     "status": status,
     "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "products": List<dynamic>.from(products.map((x) => x.toJson())),
   };
 }
 
@@ -148,4 +153,27 @@ class EnumValues<T> {
     reverseMap = map.map((k, v) => MapEntry(v, k));
     return reverseMap;
   }
+}
+class Product {
+  String key;
+  String name;
+  String image;
+
+  Product({
+    required this.key,
+    required this.name,
+    required this.image,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+    key: json["key"],
+    name: json["name"],
+    image: json["image"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "key": key,
+    "name": name,
+    "image": image,
+  };
 }

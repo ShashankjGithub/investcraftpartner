@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dotted_border/dotted_border.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:file_picker/file_picker.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/services/getLabels.dart';
+import 'package:investcraftpartner/widgets/lodingWidget.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/themeConfig.dart';
@@ -48,136 +51,142 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
            padding: EdgeInsets.only(top: 40,bottom: 10),
            height: size.height,
            width: size.width,
-           child: Column(
-             crossAxisAlignment: CrossAxisAlignment.start,
+           child: Stack(
              children: [
-               Padding(
-                 padding: const EdgeInsets.only(left: 20,right: 20),
-                 child: Text(
-                   'Create Lead',
-                   style: TextStyle(
-                     color: Colors.black,
-                     fontSize: 24,
-                     fontWeight: FontWeight.w700,
+               Column(
+                 crossAxisAlignment: CrossAxisAlignment.start,
+                 children: [
+                   Padding(
+                     padding: const EdgeInsets.only(left: 20,right: 20),
+                     child: Text(
+                       'Create Lead',
+                       style: TextStyle(
+                         color: Colors.black,
+                         fontSize: 24,
+                         fontWeight: FontWeight.w700,
+                       ),
+                     ),
                    ),
-                 ),
-               ),
-               Gap(25),
-               Container(
-                 padding: EdgeInsets.only(left: 15,right: 15),
-                 height: 70.h,
-                 child: Stack(
-                   alignment: Alignment.bottomCenter,
-                   children: [
-                     Container(
-                       height: 54.h,
-                       width: size.width,
-                       decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),border: Border.all(color: bordercolor)),
-                       child: Row(
-                         children: [
-                           Expanded(
-                             child: Container(
-                               height: 70.h,
-                               child: Stack(
-                                 alignment: Alignment.bottomCenter,
-                                 children: [
-                                   Container(
-                                     alignment: Alignment.center,
-                                     decoration: BoxDecoration(border:
-                                     lp.submittedPersonalDetail==true?
-                                     Border.all(color: mainColor):null,borderRadius: BorderRadius.circular(100)),
-                                      child: Text("Personal\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inPersonalDetail==true? mainColor:Colors.black),),
+                   Gap(25),
+                   Container(
+                     padding: EdgeInsets.only(left: 15,right: 15),
+                     height: 70.h,
+                     child: Stack(
+                       alignment: Alignment.bottomCenter,
+                       children: [
+                         Container(
+                           height: 54.h,
+                           width: size.width,
+                           decoration: BoxDecoration(borderRadius: BorderRadius.circular(100),border: Border.all(color: bordercolor)),
+                           child: Row(
+                             children: [
+                               Expanded(
+                                 child: Container(
+                                   height: 70.h,
+                                   child: Stack(
+                                     alignment: Alignment.bottomCenter,
+                                     children: [
+                                       Container(
+                                         alignment: Alignment.center,
+                                         decoration: BoxDecoration(border:
+                                         lp.submittedPersonalDetail==true?
+                                         Border.all(color: mainColor):null,borderRadius: BorderRadius.circular(100)),
+                                          child: Text("Personal\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inPersonalDetail==true? mainColor:Colors.black),),
+                                       ),
+
+                                     ],
                                    ),
-
-                                 ],
+                                 ),
                                ),
-                             ),
-                           ),
-                           Expanded(
-                             child: Container(
-                               alignment: Alignment.center,
-                               decoration: BoxDecoration(
-                                   border:
-                                   lp.submittedEmployeeDetail==true?
+                               Expanded(
+                                 child: Container(
+                                   alignment: Alignment.center,
+                                   decoration: BoxDecoration(
+                                       border:
+                                       lp.submittedEmployeeDetail==true?
+                                       Border.all(color: mainColor):null,borderRadius: BorderRadius.circular(100)),
+                                   child: Text("Employment\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inEmployeeDetail==true? mainColor:Colors.black),),
+                                 ),
+                               ),
+                               Expanded(
+                                 child: Container(
+                                   alignment: Alignment.center,
+                                   height: 60.h,
+                                   decoration: BoxDecoration(border:
+                                   lp.submittedDocumentsUpload==true?
                                    Border.all(color: mainColor):null,borderRadius: BorderRadius.circular(100)),
-                               child: Text("Employment\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inEmployeeDetail==true? mainColor:Colors.black),),
-                             ),
+                                   child: Text("Documents\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inDocumentsUpload==true? mainColor:Colors.black),),
+                                 ),
+                               ),
+
+                             ],
                            ),
-                           Expanded(
-                             child: Container(
-                               alignment: Alignment.center,
-                               height: 60.h,
-                               decoration: BoxDecoration(border:
-                               lp.submittedDocumentsUpload==true?
-                               Border.all(color: mainColor):null,borderRadius: BorderRadius.circular(100)),
-                               child: Text("Documents\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inDocumentsUpload==true? mainColor:Colors.black),),
-                             ),
-                           ),
-
-                         ],
-                       ),
-                     ),
-                     Positioned(
-                       top: 0,
-                       child: Container(
-                         padding: EdgeInsets.only(left: 12,right: 15),
-                         height: 25.h,
-                         width: size.width,
-                         child: Row(
-                           children: [
-                             Expanded(
-                               child: Container(
-                                 alignment: Alignment.center,
-                                 height: 25.h,
-                                 width: 25.w,
-                                 decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inPersonalDetail==true?mainColor:dotGrayColor),
-                                 child:  Text("01",style: TextStyle(color: lp.inPersonalDetail==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
-                               ),
-                             ),
-                             Expanded(
-                               child: Container(
-                                 alignment: Alignment.center,
-                                 height: 25.h,
-                                 width: 25.w,
-                                 decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inEmployeeDetail==true?mainColor:dotGrayColor),
-                                 child:  Text("02",style: TextStyle(color: lp.inEmployeeDetail==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
-
-
-                               ),
-                             ),
-                             Expanded(
-                               child: Container(
-                                 alignment: Alignment.center,
-                                 height: 25.h,
-                                 width: 25.w,
-                                 decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inDocumentsUpload==true?mainColor:dotGrayColor),
-                                 child:  Text("03",style: TextStyle(color: lp.inDocumentsUpload==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
-
-                               ),
-                             ),
-
-
-
-
-                           ],
                          ),
-                       ),
+                         Positioned(
+                           top: 0,
+                           child: Container(
+                             padding: EdgeInsets.only(left: 12,right: 15),
+                             height: 25.h,
+                             width: size.width,
+                             child: Row(
+                               children: [
+                                 Expanded(
+                                   child: Container(
+                                     alignment: Alignment.center,
+                                     height: 25.h,
+                                     width: 25.w,
+                                     decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inPersonalDetail==true?mainColor:dotGrayColor),
+                                     child:  Text("01",style: TextStyle(color: lp.inPersonalDetail==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
+                                   ),
+                                 ),
+                                 Expanded(
+                                   child: Container(
+                                     alignment: Alignment.center,
+                                     height: 25.h,
+                                     width: 25.w,
+                                     decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inEmployeeDetail==true?mainColor:dotGrayColor),
+                                     child:  Text("02",style: TextStyle(color: lp.inEmployeeDetail==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
+
+
+                                   ),
+                                 ),
+                                 Expanded(
+                                   child: Container(
+                                     alignment: Alignment.center,
+                                     height: 25.h,
+                                     width: 25.w,
+                                     decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inDocumentsUpload==true?mainColor:dotGrayColor),
+                                     child:  Text("03",style: TextStyle(color: lp.inDocumentsUpload==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
+
+                                   ),
+                                 ),
+
+
+
+
+                               ],
+                             ),
+                           ),
+                         ),
+                       ],
                      ),
-                   ],
-                 ),
+                   ),
+                   Gap(30),
+                   Flexible(
+                     child: PageView(
+                       controller: lp.pageController,
+                       physics: NeverScrollableScrollPhysics(),
+                       children: [
+                         PersonalDetailWidget(lp),
+                         EmployeeDetailWidget(lp,size),
+                         DocumentUploadeWidget(lp,size),
+                       ],
+                     ),
+                   )
+                 ],
                ),
-               Gap(30),
-               Flexible(
-                 child: PageView(
-                   controller: lp.pageController,
-                   physics: NeverScrollableScrollPhysics(),
-                   children: [
-                     PersonalDetailWidget(lp),
-                     EmployeeDetailWidget(lp,size),
-                     DocumentUploadeWidget(lp,size),
-                   ],
-                 ),
-               )
+               if(lp.loading==true)
+                 LoadingWidget(),
              ],
            ),
          ),
@@ -331,19 +340,31 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
               padding: const EdgeInsets.only(left: 15,right: 15),
               child: Column(
                 children: [
-                  Gap(25.h),
+
                   TextFieldCustom(
                     hint: "",clt: lp.companyName,
-                    title: "Company Name",
+                    title: getLabel(label: "COMPANY_NAME_LABEL", form: fp.leadFormEmployement!),
                     textCapitalization: TextCapitalization.characters,
                     validator: (v){
                       if (v!.isEmpty) {
-                        return getLabel(label: "EMAIL_LABEL", form: fp.leadFormPersonal!);
+                        return getLabel(label: "COMPANY_NAME_LABEL", form: fp.leadFormPersonal!);
                       }
                     },
                   ),
 
+                  Gap(25.h),
+                  TextFieldCustom(
+                    hint: "",clt: lp.companyType,
+                    title: getLabel(label: "COMPANY_TYPE_LABEL", form: fp.leadFormEmployement!),
+                    textCapitalization: TextCapitalization.characters,
+                    validator: (v){
+                      if (v!.isEmpty) {
+                        return getLabel(label: "COMPANY_TYPE_LABEL", form: fp.leadFormPersonal!);
+                      }
+                    },
+                  ),
 
+                  Gap(25.h),
 
 
                   Row(
@@ -730,6 +751,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
     );
   }
   Widget DocumentUploadeWidget(LeadProvider lp,Size size){
+    final PartnerFromDataProvider fp = Provider.of<PartnerFromDataProvider>(context,listen: false);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -738,13 +760,22 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
             child: Column(
               children: [
                 Gap(15),
-                DoteddedContainer2(label: 'Upload PAN Card', placeholder: 'Choose File',onTap: (){},fotter: "",),
+                DoteddedContainer2(label:
+                lp.panCardFile!=null?lp.panCardFile!.files[0].name:
+                getLabel(label: "UPLOAD_PAN_FILE", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "PANFILE_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
 
-                DoteddedContainer2(label: 'Upload Aadhaar Card', placeholder: 'Choose File',onTap: (){},fotter: "",),
+                DoteddedContainer2(label:
+                lp.aadhar_front_file!=null?lp.aadhar_front_file!.files[0].name:
+                getLabel(label: "UPLOAD_AADHAR_FILE", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
+
+                DoteddedContainer2(label:
+                lp.aadhar_back_file!=null?lp.aadhar_back_file!.files[0].name:
+                getLabel(label: "UPLOAD_AADHAR_FILE", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
+
                 Row(
                   children: [
                     Text(
-                      'Is this your current address?',
+                      getLabel(label: "IS_CURRENT_ADDRESS_LABEL", form: fp.leadFormDocumentUpload!),
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -757,26 +788,30 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                 Gap(20),
                 Row(
                   children: [
-                    CustomRadioButton(title: "Yes",color: lp.gender=="Yes"?mainColor:grayColor2,onTap: (){
+                    CustomRadioButton(title: "Yes",color: lp.isYourCurrentAddress=="Yes"?mainColor:grayColor2,onTap: (){
                       lp.changeGender("Yes");
                     },
-                      textColor: lp.gender=="Yes"?mainColor:textgrayColor,
+                      textColor: lp.isYourCurrentAddress=="Yes"?mainColor:textgrayColor,
                     ),
-                    CustomRadioButton(title: "No",color: lp.gender=="No"?mainColor:grayColor2,
+                    CustomRadioButton(title: "No",color: lp.isYourCurrentAddress=="No"?mainColor:grayColor2,
                       onTap: (){
                         lp.changeGender("No");
                       },
-                      textColor: lp.gender=="No"?mainColor:textgrayColor,),
+                      textColor: lp.isYourCurrentAddress=="No"?mainColor:textgrayColor,),
 
                   ],
                 ),
 
                 Gap(25.h),
 
-                DoteddedContainer2(label: 'Income Proof', placeholder: 'Choose File',onTap: (){},fotter: "Last 2 yrs ITR or 3 Months Payslip",),
+                DoteddedContainer2(label:
+                lp.income_proof!=null?lp.income_proof!.files[0].name:
+                getLabel(label: "INCOME_PROFF_LABEL", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "INCOME_PROFF_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
 
                 Gap(25.h),
-                DoteddedContainer2(label: 'Bank Statement', placeholder: 'Choose File',onTap: (){},fotter: "1 year Statement or 6 Months Statement",),
+                DoteddedContainer2(label:
+                lp.bank_statement!=null?lp.bank_statement!.files[0].name:
+                getLabel(label: "BANK_STATEMENT_LABEL", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "BANK_STATEMENT_LABEL", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: getLabel(label: "LAST_YEAR_INCOME_PROFF_LABEL", form: fp.leadFormDocumentUpload!),),
 
 
                 Gap(25.h),
@@ -785,7 +820,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                 Row(
                   children: [
                     Text(
-                      'Business Registration Proof',
+                      getLabel(label: "BUSSINESS_RAGISTRATION_LABEL", form: fp.leadFormDocumentUpload!),
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -799,16 +834,16 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomRadioButton(title: "GST Certificate",color: lp.gender=="GST Certificate"?mainColor:grayColor2,onTap: (){
+                    CustomRadioButton(title: "GST Certificate",color: lp.bRP=="GST Certificate"?mainColor:grayColor2,onTap: (){
                       lp.changeBRPType("GST Certificate");
                     },
-                      textColor: lp.gender=="GST Certificate"?mainColor:textgrayColor,
+                      textColor: lp.bRP=="GST Certificate"?mainColor:textgrayColor,
                     ),
-                    CustomRadioButton(title: "Sales and income tax returns",color: lp.gender=="Sales and income tax returns"?mainColor:grayColor2,
+                    CustomRadioButton(title: "Sales and income tax returns",color: lp.bRP=="Sales and income tax returns"?mainColor:grayColor2,
                       onTap: (){
                         lp.changeBRPType("Sales and income tax returns");
                       },
-                      textColor: lp.gender=="Sales and income tax returns"?mainColor:textgrayColor,),
+                      textColor: lp.bRP=="Sales and income tax returns"?mainColor:textgrayColor,),
 
                   ],
                 ),
@@ -817,6 +852,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
           ),
           CustomNextButton(
             onTap: (){
+              log(lp.leadId);
              // lp.changeDocumentUploadSumbiterd();
             },
           )

@@ -8,6 +8,7 @@ import 'package:investcraftpartner/generated/assets.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/leadDataProvider.dart';
+import '../../providers/partnerFromDataProvider.dart';
 import '../leadsScreens/createLeadScreen.dart';
 import '../partnerOnBoardingScreen/basicDetailOnboardingScreen.dart';
 
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final LeadDataProvider ldp = context.watch<LeadDataProvider>();
+    final PartnerFromDataProvider fp = context.watch<PartnerFromDataProvider>();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: mainColor,
     ));
@@ -295,15 +297,21 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           ),
                           Gap(15.h),
-                          Row(
-                            children: [
-                              OurProductContainer(showOffer: false,title: "Personal\nLoan",imageUrl: Assets.assetsPersonaLoan,),
-                              OurProductContainer(showOffer: true,title: "Insurance\nProduct",imageUrl: Assets.assetsInsuranceProduct,),
-                              OurProductContainer(showOffer: false,title: "Credit\nCard",imageUrl: Assets.assetsCreditCard,),
-                              OurProductContainer(showOffer: false,title: "View\nMore",imageUrl: Assets.assetsViewAll,),
-
-                            ],
+                          Container(
+                            height: 100,
+                            width: size.width,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              children: List.generate(fp.homeScreenProducts.length , (index) {
+                                return  Padding(
+                                  padding: const EdgeInsets.only(right: 45),
+                                  child: OurProductContainer(showOffer: false,title: "${fp.homeScreenProducts[index].name}",imageUrl: "${fp.homeScreenProducts[index].image}",),
+                                );
+                              }),
+                            ),
                           ),
+
 
                         ],
                       ),
@@ -330,39 +338,37 @@ class OurProductContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Column(
-        children: [
-          showOffer==false?SizedBox():
-          Container(
-            width: 42.w,
-            alignment: Alignment.center,
-            padding: EdgeInsets.only(top: 2,bottom: 2,left: 5,right: 5),
-            decoration: BoxDecoration(color: Color(0xFFFABF4C),borderRadius: BorderRadius.circular(100)),
-            child: Text(
-              'Offers',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 8.h,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Gap(8),
-          SvgPicture.asset(imageUrl),
-          Gap(8),
-          Text(
-            '$title',
+    return Column(
+      children: [
+        showOffer==false?SizedBox():
+        Container(
+          width: 42.w,
+          alignment: Alignment.center,
+          padding: EdgeInsets.only(top: 2,bottom: 2,left: 5,right: 5),
+          decoration: BoxDecoration(color: Color(0xFFFABF4C),borderRadius: BorderRadius.circular(100)),
+          child: Text(
+            'Offers',
             textAlign: TextAlign.center,
             style: TextStyle(
               color: Colors.black,
-              fontSize: 13,
-              fontWeight: FontWeight.w400,
+              fontSize: 8.h,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        ],
-      ),
+        ),
+        Gap(8),
+        SvgPicture.network(imageUrl,height: 35,width: 35,),
+        Gap(8),
+        Text(
+          '$title',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 13,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      ],
     );
   }
 }
