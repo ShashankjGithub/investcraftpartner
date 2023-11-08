@@ -118,6 +118,7 @@ class LeadProvider extends ChangeNotifier {
   FilePickerResult? aadhar_back_file;
   FilePickerResult? current_address_proof;
   FilePickerResult? income_proof;
+  FilePickerResult? business_registration_proof;
   FilePickerResult? bank_statement;
 
   choosePanFile()async{
@@ -274,7 +275,11 @@ class LeadProvider extends ChangeNotifier {
       Fluttertoast.showToast(msg: "Please select current address file");
     }else if(income_proof==null){
       Fluttertoast.showToast(msg: "Please select income proof");
-    }else{
+    }else if(business_registration_proof==null){
+      Fluttertoast.showToast(msg: "Please select business registration proof proof");
+    }
+
+    else{
       try {
         changeLoading(true);
         var request = http.MultipartRequest(
@@ -305,6 +310,9 @@ class LeadProvider extends ChangeNotifier {
 
           request.files.add(await http.MultipartFile.fromPath(
               'bank_statement', bank_statement!.paths[0]!));
+
+        request.files.add(await http.MultipartFile.fromPath(
+            'business_registration_proof', business_registration_proof!.paths[0]!));
 
 
         http.StreamedResponse response = await request.send();

@@ -816,6 +816,11 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                 Gap(25.h),
 
+                Gap(25.h),
+                DoteddedContainer2(label:
+                lp.business_registration_proof!=null?lp.bank_statement!.files[0].name:
+                "Business registration proof", placeholder: getPlaceHolder(label: "Upload Business registration proof", form: fp.leadFormDocumentUpload!),onTap: (){}, fotter: '',),
+
 
                 Row(
                   children: [
