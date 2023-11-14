@@ -761,16 +761,29 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
               children: [
                 Gap(15),
                 DoteddedContainer2(label:
-                lp.panCardFile!=null?lp.panCardFile!.files[0].name:
-                getLabel(label: "UPLOAD_PAN_FILE", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "PANFILE_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
+                getLabel(label: "UPLOAD_PAN_FILE", form: fp.leadFormDocumentUpload!),
+                  placeholder:
+                  lp.panCardFile!=null?lp.panCardFile!.files[0].name:
+                  getPlaceHolder(label: "PANFILE_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){
+                  lp.choosePanFile();
+                },fotter: "",),
 
                 DoteddedContainer2(label:
-                lp.aadhar_front_file!=null?lp.aadhar_front_file!.files[0].name:
-                getLabel(label: "UPLOAD_AADHAR_FILE", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
+
+                getLabel(label: "UPLOAD_AADHAR_FILE", form: fp.leadFormDocumentUpload!),
+                  placeholder:
+                  lp.aadhar_front_file!=null?lp.aadhar_front_file!.files[0].name:
+                  getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){
+                  lp.chooseaadharFrontFile();
+                },fotter: "",),
 
                 DoteddedContainer2(label:
+
+                getLabel(label: "UPLOAD_AADHAR_FILE", form: fp.leadFormDocumentUpload!), placeholder:
                 lp.aadhar_back_file!=null?lp.aadhar_back_file!.files[0].name:
-                getLabel(label: "UPLOAD_AADHAR_FILE", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
+                getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){
+                  lp.chooseaadharBackFile();
+                },fotter: "",),
 
                 Row(
                   children: [
@@ -805,21 +818,33 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                 Gap(25.h),
 
                 DoteddedContainer2(label:
+
+                getLabel(label: "INCOME_PROFF_LABEL", form: fp.leadFormDocumentUpload!), placeholder:
                 lp.income_proof!=null?lp.income_proof!.files[0].name:
-                getLabel(label: "INCOME_PROFF_LABEL", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "INCOME_PROFF_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: "",),
+                getPlaceHolder(label: "INCOME_PROFF_PLACEHOLDER", form: fp.leadFormDocumentUpload!),onTap: (){
+                  lp.chooseIncomeProofe();
+                },fotter: "",),
 
                 Gap(25.h),
                 DoteddedContainer2(label:
                 lp.bank_statement!=null?lp.bank_statement!.files[0].name:
-                getLabel(label: "BANK_STATEMENT_LABEL", form: fp.leadFormDocumentUpload!), placeholder: getPlaceHolder(label: "BANK_STATEMENT_LABEL", form: fp.leadFormDocumentUpload!),onTap: (){},fotter: getLabel(label: "LAST_YEAR_INCOME_PROFF_LABEL", form: fp.leadFormDocumentUpload!),),
+                getLabel(label: "BANK_STATEMENT_LABEL", form: fp.leadFormDocumentUpload!), placeholder:
+                lp.bank_statement!=null?lp.bank_statement!.files[0].name:
+                getPlaceHolder(label: "BANK_STATEMENT_LABEL", form: fp.leadFormDocumentUpload!),onTap: (){
+                  lp.choosebankStatement();
+                },fotter: getLabel(label: "LAST_YEAR_INCOME_PROFF_LABEL", form: fp.leadFormDocumentUpload!),),
 
 
                 Gap(25.h),
 
                 Gap(25.h),
                 DoteddedContainer2(label:
+
+                "Business registration proof", placeholder:
                 lp.business_registration_proof!=null?lp.bank_statement!.files[0].name:
-                "Business registration proof", placeholder: getPlaceHolder(label: "Upload Business registration proof", form: fp.leadFormDocumentUpload!),onTap: (){}, fotter: '',),
+                "Upload Business registration proof",onTap: (){
+                  lp.choosebusinessRegistationProof();
+                }, fotter: '',),
 
 
                 Row(
@@ -856,8 +881,10 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
             ),
           ),
           CustomNextButton(
+            title: getLabel(label: "SUBMIT_BUTTON_LABEL", form: fp.leadFormDocumentUpload!),
             onTap: (){
               log(lp.leadId);
+              lp.uploadLeadDocument(context);
              // lp.changeDocumentUploadSumbiterd();
             },
           )

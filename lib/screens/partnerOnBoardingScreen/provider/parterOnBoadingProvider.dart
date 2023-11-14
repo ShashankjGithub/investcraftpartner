@@ -13,6 +13,14 @@ import '../../../config/appConfig.dart';
 import '../../../services/apiServices.dart';
 
 class PartnerOnBoardingProvider extends ChangeNotifier{
+
+
+  PartnerOnBoardingProvider(){
+    pageController = PageController();
+  }
+
+
+
   int persent = 10;
   var w =10;
   dynamic currentStep = 1;
@@ -33,25 +41,30 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
     pageController.animateToPage(currentstep-1, duration: Duration(milliseconds: 500), curve: Curves.linear);
     notifyListeners();
   }
-
+  String status = "";
+  changeStatus(value){
+    status = value;
+    nextButtonPressed();
+    notifyListeners();
+  }
   nextButtonPressed(){
-    switch(currentStep){
-      case 1:
+    switch(status){
+      case PERSONAL:
         changeForm(currentstep: 2, perse: 20, formName: "Personal Detail");
         break;
-      case 2:
+      case BUSINESS:
         changeForm(currentstep: 3, perse: 30, formName: "Business Detail");
         break;
-      case 3:
+      case BANK:
         changeForm(currentstep: 4, perse: 40, formName: "Bank Account Detail");
         break;
-      case 4:
+      case KYC_DOC:
         changeForm(currentstep: 5, perse: 50, formName: "KYC Detail");
         break;
-      case 5:
+      case AGREEMENT_SEND:
         changeForm(currentstep: 6, perse: 60, formName: "Agreement");
         break;
-      case 6:
+      case APPROVED:
         changeForm(currentstep: 7, perse: 70, formName: "Congratulation");
         break;
       default:
@@ -59,19 +72,19 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
     }
   }
   previousButtonPressed(){
-    switch(currentStep){
-      case 3:
+    switch(status){
+      case PERSONAL:
         changeForm(currentstep: 2, perse: 20, formName: "Personal Detail");
-      case 4:
+      case BUSINESS:
         changeForm(currentstep: 3, perse: 30, formName: "Business Detail");
         break;
-      case 5:
+      case BANK:
         changeForm(currentstep: 4, perse: 40, formName: "Bank Account Detail");
         break;
-      case 6:
+      case KYC_DOC:
         changeForm(currentstep: 5, perse: 50, formName: "KYC Detail");
         break;
-      case 7:
+      case AGREEMENT_SEND:
         changeForm(currentstep: 6, perse: 60, formName: "Agreement");
         break;
         default:
@@ -228,7 +241,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
       if (response!=null) {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
         changeLoading(false);
-        nextButtonPressed();
+        changeStatus("${json.decode(response.body)["next"]}");
       }else{
         changeLoading(false);
       }
@@ -253,7 +266,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
         if (response!=null) {
           Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
           changeLoading(false);
-          nextButtonPressed();
+          changeStatus("${json.decode(response.body)["next"]}");
         }else{
           changeLoading(false);
         }
@@ -289,7 +302,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
         },context,he: ap.tokenn,header: true).then((response) {
           if (response!=null) {
             Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
-            nextButtonPressed();
+            changeStatus("${json.decode(response.body)["next"]}");
             changeLoading(false);
           }else{
             changeLoading(false);
@@ -311,7 +324,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
       },context,he: ap.tokenn,header: true).then((response) {
         if (response!=null) {
           Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
-          nextButtonPressed();
+          changeStatus("${json.decode(response.body)["next"]}");
           changeLoading(false);
         }else{
           changeLoading(false);
@@ -370,7 +383,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
       if (response.statusCode == 200) {
         Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
         changeLoading(false);
-        nextButtonPressed();
+        changeStatus("${json.decode(res.body)["next"]}");
       }else{
         Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
         changeLoading(false);

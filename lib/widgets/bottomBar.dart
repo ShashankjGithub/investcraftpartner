@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:investcraftpartner/providers/teamProvider.dart';
 import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:investcraftpartner/widgets/tabNavigator.dart';
 
@@ -67,6 +68,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   getLead(){
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<LeadProvider>().getLead(context);
+      context.read<TeamProvider>().getTeamMembers(context);
       context.read<LeadDataProvider>().getLeadData(context);
       context.read<MyQrProvider>().getQrData(context);
     });
@@ -163,7 +165,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                           width: 18.w,
                           child: SvgPicture.asset(
                               Assets.bottomInactiveprofile)),
-                      label: ('Terms')),
+                      label: ('Teams')),
                   BottomNavigationBarItem(
                       activeIcon: Container(
                           height: 22.h,

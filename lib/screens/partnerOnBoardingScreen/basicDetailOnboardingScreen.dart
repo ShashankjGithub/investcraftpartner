@@ -21,13 +21,27 @@ import 'congratulationsScreen.dart';
 import 'kycDetailsScreen.dart';
 
 class PartnerOnboardingScreen extends StatefulWidget {
-  const PartnerOnboardingScreen({super.key});
+  final String status;
+  const PartnerOnboardingScreen({super.key, required this.status});
 
   @override
   State<PartnerOnboardingScreen> createState() => _PartnerOnboardingScreenState();
 }
 
 class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
+
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      context.read<PartnerOnBoardingProvider>().changeStatus(widget.status);
+
+    });
+    super.initState();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

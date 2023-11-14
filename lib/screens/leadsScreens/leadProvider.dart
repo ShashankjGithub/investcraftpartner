@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
 import 'package:investcraftpartner/services/apiServices.dart';
+import 'package:investcraftpartner/widgets/bottomBar.dart';
 import 'package:provider/provider.dart';
 
 import '../../config/appConfig.dart';
@@ -25,6 +27,8 @@ class LeadProvider extends ChangeNotifier {
   bool submittedPersonalDetail = true;
   bool submittedEmployeeDetail = false;
   bool submittedDocumentsUpload = false;
+
+
 
 
   bool loading = false;
@@ -130,7 +134,7 @@ class LeadProvider extends ChangeNotifier {
     notifyListeners();
   }
   chooseaadharBackFile()async{
-    aadhar_front_file = await pickFile();
+    aadhar_back_file = await pickFile();
     notifyListeners();
   }
   chooseCurrentAddress()async{
@@ -138,11 +142,15 @@ class LeadProvider extends ChangeNotifier {
     notifyListeners();
   }
   chooseIncomeProofe()async{
-    current_address_proof = await pickFile();
+    income_proof = await pickFile();
     notifyListeners();
   }
   choosebankStatement()async{
     bank_statement = await pickFile();
+    notifyListeners();
+  }
+  choosebusinessRegistationProof()async{
+    business_registration_proof = await pickFile();
     notifyListeners();
   }
 
@@ -280,12 +288,13 @@ class LeadProvider extends ChangeNotifier {
     }
 
     else{
+      final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
       try {
         changeLoading(true);
         var request = http.MultipartRequest(
             'POST', Uri.parse(baseUrl + save_lead_docs)); // your server url
         request.headers.addAll({
-          //"Authorization": "Bearer "+up.userData.token,
+          "Authorization": "Bearer "+ap.tokenn.toString(),
         });
         request.fields.addAll({"lead_id": leadId.toString()});
 
@@ -322,6 +331,7 @@ class LeadProvider extends ChangeNotifier {
         if (response.statusCode == 200) {
           Fluttertoast.showToast(msg: json.decode(res.body)["message"]);
           changeLoading(false);
+          Get.offAll(()=>BottomBarScreen());
           return "${json.decode(res.body)["Message"]}";
         } else {
           changeLoading(false);

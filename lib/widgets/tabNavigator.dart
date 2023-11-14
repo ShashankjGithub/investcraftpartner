@@ -30,7 +30,7 @@ class TabNavigator extends StatelessWidget {
     else if(tabItem == "Page2")
       child = ViewLeadScreen();
     else if(tabItem == "Page3")
-      child = TermScreens();
+      child = LeadScreen();
     else if(tabItem == "Page4")
       child = MoreScreen();
     return Navigator(

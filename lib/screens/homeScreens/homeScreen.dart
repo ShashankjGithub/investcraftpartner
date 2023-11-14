@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../providers/leadDataProvider.dart';
 import '../../providers/partnerFromDataProvider.dart';
+import '../leadsScreens/addTeamMemberScreen.dart';
 import '../leadsScreens/createLeadScreen.dart';
 import '../partnerOnBoardingScreen/basicDetailOnboardingScreen.dart';
 
@@ -169,26 +170,34 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         Gap(15),
                         Expanded(
-                          child: Container(
-                            padding: EdgeInsets.only(left: 10, right: 10),
-                            height: 51.h,
-                            decoration: BoxDecoration(
-                              color: Color(0xffFFE4AE),
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  'Add Team',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
+                          child: GestureDetector(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context){
+                                return AddTeamMemberScreen();
+                              }));
+
+                            },
+                            child: Container(
+                              padding: EdgeInsets.only(left: 10, right: 10),
+                              height: 51.h,
+                              decoration: BoxDecoration(
+                                color: Color(0xffFFE4AE),
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    'Add Team',
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                                ),
-                                SvgPicture.asset(Assets.assetsPluseIcon)
-                              ],
+                                  SvgPicture.asset(Assets.assetsPluseIcon)
+                                ],
+                              ),
                             ),
                           ),
                         ),

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-
+import 'package:investcraftpartner/providers/teamProvider.dart';
+import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import '../../config/themeConfig.dart';
 
 class LeadScreen extends StatefulWidget {
@@ -26,6 +28,7 @@ class _LeadScreenState extends State<LeadScreen> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: mainColor,
     ));
+    final TeamProvider tp = context.watch<TeamProvider>();
     return  Scaffold(
       body: SafeArea(
         child: Column(
@@ -49,224 +52,243 @@ class _LeadScreenState extends State<LeadScreen> {
               child: ValueListenableBuilder(
                   valueListenable: currentIndex,
                   builder: (context,value,_) {
-                    return Container(
-                        padding: EdgeInsets.only(top: 20,),
-                        decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(30)),
-                        child: Column(
-                          children: List.generate(4, (index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 15),
-                              child: Container(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 20,right: 20,bottom: 10),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                    return
+                      tp.noTeamMember==true?Center(child: Text("No Team Member Found"),):
+                          tp.dataTeam.isEmpty?Center(child: CircularProgressIndicator(),):
+                      RefreshIndicator(
+                        onRefresh: ()async{
+                          tp.getTeamMembers(context);
+                        },
+                        child: Container(
+                          padding: EdgeInsets.only(top: 20,),
+                          decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(30)),
+                          child: SingleChildScrollView(
+                            physics: AlwaysScrollableScrollPhysics(),
+                            child: Column(
+                              children: List.generate(tp.dataTeam.length, (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 15),
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                                          child: Column(
                                             children: [
-                                              Column(
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Text(
-                                                    'Partner ID',
-                                                    style: TextStyle(
-                                                      color: Color(0xFF66707F),
-                                                      fontSize: 15,
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Partner ID',
+                                                        style: TextStyle(
+                                                          color: Color(0xFF66707F),
+                                                          fontSize: 15,
 
-                                                      fontWeight: FontWeight.w400,
+                                                          fontWeight: FontWeight.w400,
 
+                                                        ),
+                                                      ),
+                                                      Gap(8),
+                                                      Text(
+                                                        '${tp.dataTeam[index].partnerId}',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 14.sp,
+
+                                                          fontWeight: FontWeight.w600,
+
+                                                        ),
+                                                      ),
+                                                    ],),
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(
+                                                        'Name',
+                                                        style: TextStyle(
+                                                          color: Color(0xFF66707F),
+                                                          fontSize: 15,
+
+                                                          fontWeight: FontWeight.w400,
+
+                                                        ),
+                                                      ),
+                                                      Gap(8),
+                                                      Text(
+                                                        '${tp.dataTeam[index].name}',
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 12.sp,
+                                                          fontWeight: FontWeight.w600,
+
+                                                        ),
+                                                      ),
+                                                    ],),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      if(value==index){
+                                                        changeCurrentIndex(-1);
+                                                      }else{
+                                                        changeCurrentIndex(index);
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      alignment: Alignment.center,
+                                                      height: 25.h,
+                                                      width: 25.w,
+                                                      decoration: BoxDecoration(shape: BoxShape.circle,color: value==index?mainColor:Colors.black),
+                                                      child:
+                                                      value==index?
+                                                      Icon(Icons.remove,size: 18,color: Colors.white,):Icon(Icons.add,size: 18,color: Colors.white,),
                                                     ),
                                                   ),
-                                                  Gap(8),
-                                                  Text(
-                                                    'IVK001',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 14.sp,
 
-                                                      fontWeight: FontWeight.w600,
-
-                                                    ),
-                                                  ),
-                                                ],),
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Name',
-                                                    style: TextStyle(
-                                                      color: Color(0xFF66707F),
-                                                      fontSize: 15,
-
-                                                      fontWeight: FontWeight.w400,
-
-                                                    ),
-                                                  ),
-                                                  Gap(8),
-                                                  Text(
-                                                    'Jogindra Rai Das',
-                                                    style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 12.sp,
-                                                      fontWeight: FontWeight.w600,
-
-                                                    ),
-                                                  ),
-                                                ],),
-                                              InkWell(
-                                                onTap: (){
-                                                  if(value==index){
-                                                    changeCurrentIndex(-1);
-                                                  }else{
-                                                    changeCurrentIndex(index);
-                                                  }
-                                                },
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  height: 25.h,
-                                                  width: 25.w,
-                                                  decoration: BoxDecoration(shape: BoxShape.circle,color: value==index?mainColor:Colors.black),
-                                                  child:
-                                                  value==index?
-                                                  Icon(Icons.remove,size: 18,color: Colors.white,):Icon(Icons.add,size: 18,color: Colors.white,),
-                                                ),
+                                                ],
                                               ),
-
-                                            ],
-                                          ),
-                                          if (value==index)
-                                            Column(
-                                              children: [
-                                                Gap(25.h),
-                                                Row(
+                                              if (value==index)
+                                                Column(
                                                   children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                    Gap(25.h),
+                                                    Row(
                                                       children: [
-                                                        Text(
-                                                          'Phone',
-                                                          style: TextStyle(
-                                                            color: Color(0xFF66707F),
-                                                            fontSize: 15,
-                                                            fontWeight: FontWeight.w400,
-
-                                                          ),
-                                                        ),
-                                                        Gap(8),
-                                                        Text(
-                                                          '+91-8802815340',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12.sp,
-                                                            fontWeight: FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                      ],),
-                                                    Gap(30.w),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          'Business',
-                                                          style: TextStyle(
-                                                            color: Color(0xFF66707F),
-                                                            fontSize: 15,
-                                                            fontWeight: FontWeight.w400,
-
-                                                          ),
-                                                        ),
-                                                        Gap(8),
-                                                        Text(
-                                                          'Solo Proprietorship',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12.sp,
-                                                            fontWeight: FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                      ],),
-
-                                                  ],
-                                                ),
-                                                Gap(20.h),
-                                                Row(
-                                                  children: [
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          'Date',
-                                                          style: TextStyle(
-                                                            color: Color(0xFF66707F),
-                                                            fontSize: 15,
-                                                            fontWeight: FontWeight.w400,
-
-                                                          ),
-                                                        ),
-                                                        Gap(8),
-                                                        Text(
-                                                          '05 Sep 2023',
-                                                          style: TextStyle(
-                                                            color: Colors.black,
-                                                            fontSize: 12.sp,
-                                                            fontWeight: FontWeight.w600,
-                                                          ),
-                                                        ),
-                                                      ],),
-                                                    Gap(60.w),
-                                                    Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                                      children: [
-                                                        Text(
-                                                          'Action',
-                                                          style: TextStyle(
-                                                            color: Color(0xFF66707F),
-                                                            fontSize: 15,
-                                                            fontWeight: FontWeight.w400,
-
-                                                          ),
-                                                        ),
-                                                        Gap(8),
-                                                        InkWell(
-                                                          onTap:(){
-
-                                                          },
-                                                          child: Row(
+                                                        Expanded(
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               Text(
-                                                                'View Detail',
+                                                                'Phone',
                                                                 style: TextStyle(
-                                                                  color: mainColor,
-                                                                  fontSize: 14.sp,
-                                                                  fontWeight: FontWeight.w500,
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
                                                                 ),
                                                               ),
-                                                              Gap(3),
-                                                              Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 15,)
-                                                            ],
-                                                          ),
+                                                              Gap(8),
+                                                              Text(
+                                                                '${tp.dataTeam[index].mobile}',
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                              ),
+                                                            ],),
                                                         ),
-                                                      ],),
 
+                                                        Expanded(
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                'Business',
+                                                                style: TextStyle(
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
+                                                                ),
+                                                              ),
+                                                              Gap(8),
+                                                              Text(
+                                                                'Solo Proprietorship',
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                              ),
+                                                            ],),
+                                                        ),
+
+                                                      ],
+                                                    ),
+                                                    Gap(20.h),
+                                                    Row(
+                                                      children: [
+                                                        Expanded(
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                'Date',
+                                                                style: TextStyle(
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
+                                                                ),
+                                                              ),
+                                                              Gap(8),
+                                                              Text(
+                                                                "${DateFormat("dd-MM-yyyy").format(tp.dataTeam[index].createdAt)}",
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                              ),
+                                                            ],),
+                                                        ),
+
+                                                        Expanded(
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                'Action',
+                                                                style: TextStyle(
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
+                                                                ),
+                                                              ),
+                                                              Gap(8),
+                                                              InkWell(
+                                                                onTap:(){
+
+                                                                },
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      'View Detail',
+                                                                      style: TextStyle(
+                                                                        color: mainColor,
+                                                                        fontSize: 14.sp,
+                                                                        fontWeight: FontWeight.w500,
+                                                                      ),
+                                                                    ),
+                                                                    Gap(3),
+                                                                    Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 15,)
+                                                                  ],
+                                                                ),
+                                                              ),
+                                                            ],),
+                                                        ),
+
+                                                      ],
+                                                    ),
                                                   ],
-                                                ),
-                                              ],
-                                            )
-                                        ],
-                                      ),
+                                                )
+                                            ],
+                                          ),
+                                        ),
+                                        if(index != 3)
+                                          Divider(thickness: 1,)
+                                      ],
                                     ),
-                                    if(index != 3)
-                                      Divider(thickness: 1,)
-                                  ],
-                                ),
-                              ),
-                            );
-                          }),
-                        )
-                    );
+                                  ),
+                                );
+                              }),
+                            ),
+                          )
+                    ),
+                      );
                   }
               ),),
           ],

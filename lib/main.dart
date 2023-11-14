@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:investcraftpartner/providers/leadDataProvider.dart';
 import 'package:investcraftpartner/providers/myQrProvider.dart';
 import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
+import 'package:investcraftpartner/providers/teamProvider.dart';
 import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
 import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
@@ -35,6 +36,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<LeadProvider>(create: (context) => LeadProvider()),
         ChangeNotifierProvider<LeadDataProvider>(create: (context) => LeadDataProvider()),
         ChangeNotifierProvider<MyQrProvider>(create: (context) => MyQrProvider()),
+        ChangeNotifierProvider<TeamProvider>(create: (context) => TeamProvider()),
         ChangeNotifierProvider<PartnerFromDataProvider>(create: (context) => PartnerFromDataProvider()),
       ],
       child: ScreenUtilInit(

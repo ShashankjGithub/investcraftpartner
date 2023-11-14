@@ -5,10 +5,13 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:investcraftpartner/config/appConfig.dart';
 import 'package:investcraftpartner/screens/authScreens/loginScreen.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../services/apiServices.dart';
 import '../../widgets/bottomBar.dart';
+import '../partnerOnBoardingScreen/basicDetailOnboardingScreen.dart';
+import '../partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 
 class AuthProvider extends ChangeNotifier{
 
@@ -23,6 +26,7 @@ class AuthProvider extends ChangeNotifier{
 
 
   String? tokenn;
+  String? status;
   var alreadyLogin = false;
 
   bool loading = false;
@@ -52,6 +56,8 @@ class AuthProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+
+
   logine(BuildContext context){
     if(loginKey.currentState!.validate()){
       changeLoading(true);
@@ -61,9 +67,8 @@ class AuthProvider extends ChangeNotifier{
       },context,he: "").then((response) {
         if (response!=null) {
           if (json.decode(response.body)["token"]!=null) {
-            saveUserData(json.decode(response.body)["token"]);
-            changeLoading(false);
-
+              saveUserData(json.decode(response.body)["token"],json.decode(response.body)["message"]);
+              changeLoading(false);
           }  else{
             Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
             changeLoading(false);
@@ -74,6 +79,32 @@ class AuthProvider extends ChangeNotifier{
       });
     }
   }
+
+  
+  checkStatus()async{
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    changeLoading(true);
+      ApiServices().getData(check_status,tocken: tokenn).then((response) {
+        if (response!=null) {
+          if (json.decode(response.body)["status"]=="success") {
+            status = json.decode(response.body)["next"];
+            sp.setString("status", json.decode(response.body)["next"]);
+            notifyListeners();
+            Get.offAll(PartnerOnboardingScreen(status: status!,));
+            changeLoading(false);
+          }  else{
+            Fluttertoast.showToast(msg: "${json.decode(response.body)["status"]}");
+            changeLoading(false);
+          }
+        }else{
+          changeLoading(false);
+        }
+      });
+
+  }
+
+
+
   register(BuildContext context){
     if(signUpKey.currentState!.validate()){
       changeLoading(true);
@@ -97,18 +128,25 @@ class AuthProvider extends ChangeNotifier{
   }
 
 
-  saveUserData(token)async{
+  saveUserData(token,next)async{
     final SharedPreferences sp = await SharedPreferences.getInstance();
     tokenn = token;
     await sp.setString("token", token);
     await sp.setBool("isLogin", true);
-    Get.offAll(()=>BottomBarScreen());
+    if(next=="go to onboard"){
+      checkStatus();
+    }else{
+      Get.offAll(()=>BottomBarScreen());
+    }
+
+
     notifyListeners();
   }
 
   getUserData()async{
     final SharedPreferences sp = await SharedPreferences.getInstance();
     tokenn = sp.getString("token");
+    status = sp.getString("status");
     alreadyLogin = sp.getBool("isLogin")??false;
     notifyListeners();
   }
@@ -133,6 +171,9 @@ class AuthProvider extends ChangeNotifier{
      confirmPasswordClt.clear();
      notifyListeners();
   }
+
+
+
 
 
 }

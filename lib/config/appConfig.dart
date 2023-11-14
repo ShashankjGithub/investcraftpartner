@@ -14,6 +14,9 @@ const String save_kyc_detail = "save-kyc-detail";
 const String leads_view = "leads-view";
 const String get_lead_data = "get-lead-data";
 const String myqr = "myqr";
+const String check_status = "check-status";
+const String team_member_list = "team-member-list";
+const String save_team_member = "save-team-member";
 
 
 
@@ -30,18 +33,17 @@ const String partner = "partner";
 
 /////////////////////////////////////////////////////////////////////////////////
 
-//////// KYC STATUS/////////////////////////////////////////
-const String PAN_DETAIL = "PAN_CARD";
-const String BANK_DETAILS = "BANK_DETAILS";
-const String PERSONAL_DETAIL = "PERSONAL_DETAILS";
-const String BACKGROUND_DETAILS = "BACKGROUND_DETAILS";
-const String KYC_DETAILS = "KYC_DETAILS";
-const String VEDIO_KYC = "VEDIO_KYC";
-const String UPLOAD_AADHAAR_CARD = "UPLOAD_AADHAAR_CARD";
-const String UPLOAD_SIGNATURE = "UPLOAD_SIGNATURE";
-const String UPLOAD_PAN_CARD = "UPLOAD_PAN_CARD";
-const String ADDRESSCONFIRM = "ADDRESSCONFIRM";
-const String CONGRATULATION = "CONGRATULATIONS";
+//////// OnboardStatus STATUS/////////////////////////////////////////
+const String BASIC = "BASIC";
+const String PERSONAL = "PERSONAL";
+const String BUSINESS = "BUSINESS";
+const String BANK = "BANK";
+const String KYC_DOC = "KYC_DOC";
+const String AGREEMENT_SEND = "AGREEMENT_SEND";
+const String AGREEMENT_SIGN = "AGREEMENT_SIGN";
+const String APPROVED = "APPROVED";
+const String REJECTED = "REJECTED";
+
 
 //////////////////////////////////////////////////////////////
 const String CalculatorUrl = "https://test.investkraft.com/financial-tools-calculators";
