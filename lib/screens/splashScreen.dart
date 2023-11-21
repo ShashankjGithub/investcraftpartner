@@ -36,17 +36,25 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _afterSplash(){
     final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
-    Future.delayed(Duration(seconds: 3)).then((value) {
-      if(ap.alreadyLogin&&ap.status==null){
-        Get.offAll(BottomBarScreen());
-      }else if(ap.alreadyLogin&&ap.status!=null){
-        Get.offAll(PartnerOnboardingScreen(status: ap.status!));
-      }else{
-        Get.offAll(LoginScreen());
-      }
-
-
-    });
+    print(ap.alreadyLogin);
+     Future.delayed(Duration(seconds: 3)).then((value) {
+       if (ap.alreadyLogin) {
+         ap.checkStatus();
+       }  else{
+         Get.offAll(LoginScreen());
+       }
+     });
+    // Future.delayed(Duration(seconds: 3)).then((value) {
+    //   if(ap.alreadyLogin&&ap.status==null){
+    //     Get.offAll(BottomBarScreen());
+    //   }else if(ap.alreadyLogin&&ap.status!=null){
+    //     Get.offAll(PartnerOnboardingScreen(status: ap.status!));
+    //   }else{
+    //     Get.offAll(LoginScreen());
+    //   }
+    //
+    //
+    // });
   }
 
 

@@ -51,39 +51,7 @@ class _AgreementScreenState extends State<AgreementScreen> {
             ),
           ),
           Gap(10),
-          GestureDetector(
-            onTap: (){},
-            child: Container(
-              height: 60.h,
-              width: size.width,
-              child: DottedBorder(
-                  color: Colors.black,
-                  dashPattern: [10,3],
-                  borderType: BorderType.RRect,
-                  radius: Radius.circular(100),
-                  padding: EdgeInsets.all(6),
-                  child: Padding(
-                    padding:  EdgeInsets.only(left: 10,right: 10),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              getPlaceHolder(label: "VIEW_AGGREMENT_PLACEHOLDER", form: pf.agreement!),
-                              maxLines: 2,
-                              style: TextStyle(color: Colors.black,fontSize: 16.sp),
-                            ),
-                          ),
-                          SvgPicture.asset(Assets.assetsEye,height: 30.h,width: 30.w,),
 
-                        ],
-                      ),
-                    ),
-                  )
-              ),
-            ),
-          ),
           Gap(20.h),
           GestureDetector(
             onTap: (){},
@@ -104,12 +72,12 @@ class _AgreementScreenState extends State<AgreementScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              getPlaceHolder(label: "DOWNLOAD_AGGREMENT_PLACEHOLDER", form: pf.agreement!),
+                              getPlaceHolder(label: "VIEW_AGGREMENT_PLACEHOLDER", form: pf.agreement!),
                               maxLines: 2,
                               style: TextStyle(color: mainColor,fontSize: 16.sp),
                             ),
                           ),
-                          SvgPicture.asset(Assets.assetsUploadIcon,height: 30.h,width: 30.w,),
+                          SvgPicture.asset(Assets.assetsEve,height: 30.h,width: 30.w,),
 
                         ],
                       ),
@@ -120,8 +88,16 @@ class _AgreementScreenState extends State<AgreementScreen> {
           ),
           Gap(20.h),
           Divider(thickness: 2,),
-          Gap(20.h),
-          DoteddedContainer(label: getLabel(label: "UPLOAD_SIGNED_AGGREMENT_LABEL", form: pf.agreement!), placeholder: getLabel(label: "UPLOAD_SIGNED_AGGREMENT_LABEL", form: pf.agreement!),onTap: (){},),
+          Text(
+            'View the sign agreement and click on the button to get the e-sign link.',
+            style: TextStyle(
+              color: Color(0xFF8E8E8E),
+              fontSize: 13,
+              height: 1.5,
+              fontWeight: FontWeight.w400,
+
+            ),
+          ),
         ],
       ),
     );

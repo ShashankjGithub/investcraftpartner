@@ -90,7 +90,13 @@ class AuthProvider extends ChangeNotifier{
             status = json.decode(response.body)["next"];
             sp.setString("status", json.decode(response.body)["next"]);
             notifyListeners();
-            Get.offAll(PartnerOnboardingScreen(status: status!,));
+
+            if(status==HOME_PAGE){
+              Get.offAll(BottomBarScreen());
+            }else{
+              Get.offAll(PartnerOnboardingScreen(status: status!,));
+            }
+
             changeLoading(false);
           }  else{
             Fluttertoast.showToast(msg: "${json.decode(response.body)["status"]}");

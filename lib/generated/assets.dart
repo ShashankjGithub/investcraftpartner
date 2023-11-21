@@ -26,6 +26,7 @@ class Assets {
   static const String assetsDropdownicon = 'assets/dropdownicon.svg';
   static const String assetsDropdownthik = 'assets/dropdownthik.svg';
   static const String assetsEdit = 'assets/edit.svg';
+  static const String assetsEve = 'assets/eve.svg';
   static const String assetsEye = 'assets/eye.svg';
   static const String assetsFacebook = 'assets/facebook.png';
   static const String assetsFilter = 'assets/filter.svg';

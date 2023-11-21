@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/personalDetailScreen.dart';
+import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/agreementScreen2.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/nextButton.dart';
 import 'package:investcraftpartner/services/getLabels.dart';
 import 'package:investcraftpartner/widgets/backgroundwidget.dart';
@@ -343,8 +344,9 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                                     AgreementScreen(),
                                     Gap(15),
                                     CustomNextButton(
+                                      title: "Send Agreement E-sign Link",
                                       onTap: (){
-                                        pp.nextButtonPressed();
+                                        pp.saveAgreement(context);
                                       },
                                     )
                                   ],
@@ -354,9 +356,8 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    CongratulationsScreen(),
-                                    Gap(15),
-                                    CustomNextButton(title: getLabel(label: "BUTTON_LABEL", form: pf.congratulation!),showArrow: false,)
+                                    Agreement2Screen(),
+
                                   ],
                                 ),
                               ),

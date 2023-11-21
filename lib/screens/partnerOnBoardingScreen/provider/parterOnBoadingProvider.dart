@@ -64,8 +64,8 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
       case AGREEMENT_SEND:
         changeForm(currentstep: 6, perse: 60, formName: "Agreement");
         break;
-      case APPROVED:
-        changeForm(currentstep: 7, perse: 70, formName: "Congratulation");
+      case Go_Final_Page_Agreement:
+        changeForm(currentstep: 7, perse: 70, formName: "Agreement");
         break;
       default:
         changeForm(currentstep: 1, perse: 10, formName: "Basic Detail");
@@ -396,4 +396,18 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
 
   }
 
+
+  saveAgreement(BuildContext context){
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    changeLoading(true);
+    ApiServices().postData(save_aggreement,{},context,he: ap.tokenn,header: true).then((response) {
+      if (response!=null) {
+        Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+        changeLoading(false);
+        changeStatus("${json.decode(response.body)["next"]}");
+      }else{
+        changeLoading(false);
+      }
+    });
+  }
 }
