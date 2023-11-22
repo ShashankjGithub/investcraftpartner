@@ -38,7 +38,7 @@ class _LeadScreenState extends State<LeadScreen> {
             Padding(
               padding: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 10),
               child: Text(
-                'Sub Channel Parterns',
+                'Sub Channel Patterns',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24.sp,
@@ -204,6 +204,7 @@ class _LeadScreenState extends State<LeadScreen> {
                                                               ),
                                                             ],),
                                                         ),
+                                                        Gap(20.h),
 
                                                       ],
                                                     ),
@@ -239,40 +240,41 @@ class _LeadScreenState extends State<LeadScreen> {
                                                           child: Column(
                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
-                                                              Text(
-                                                                'Action',
-                                                                style: TextStyle(
-                                                                  color: Color(0xFF66707F),
-                                                                  fontSize: 15,
-                                                                  fontWeight: FontWeight.w400,
-
-                                                                ),
-                                                              ),
-                                                              Gap(8),
-                                                              InkWell(
-                                                                onTap:(){
-
-                                                                },
-                                                                child: Row(
-                                                                  children: [
-                                                                    Text(
-                                                                      'View Detail',
-                                                                      style: TextStyle(
-                                                                        color: mainColor,
-                                                                        fontSize: 14.sp,
-                                                                        fontWeight: FontWeight.w500,
-                                                                      ),
-                                                                    ),
-                                                                    Gap(3),
-                                                                    Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 15,)
-                                                                  ],
-                                                                ),
-                                                              ),
+                                                              // Text(
+                                                              //   'Action',
+                                                              //   style: TextStyle(
+                                                              //     color: Color(0xFF66707F),
+                                                              //     fontSize: 15,
+                                                              //     fontWeight: FontWeight.w400,
+                                                              //
+                                                              //   ),
+                                                              // ),
+                                                              // Gap(8),
+                                                              // InkWell(
+                                                              //   onTap:(){
+                                                              //
+                                                              //   },
+                                                              //   child: Row(
+                                                              //     children: [
+                                                              //       Text(
+                                                              //         'View Detail',
+                                                              //         style: TextStyle(
+                                                              //           color: mainColor,
+                                                              //           fontSize: 14.sp,
+                                                              //           fontWeight: FontWeight.w500,
+                                                              //         ),
+                                                              //       ),
+                                                              //       Gap(3),
+                                                              //       Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 15,)
+                                                              //     ],
+                                                              //   ),
+                                                              // ),
                                                             ],),
                                                         ),
 
                                                       ],
                                                     ),
+
                                                   ],
                                                 )
                                             ],

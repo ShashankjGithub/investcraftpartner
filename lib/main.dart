@@ -10,6 +10,7 @@ import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
 import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/splashScreen.dart';
+import 'package:investcraftpartner/services/downloadeScrvice.dart';
 import 'package:provider/provider.dart';
 
 import 'config/themeConfig.dart';
@@ -37,6 +38,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<LeadDataProvider>(create: (context) => LeadDataProvider()),
         ChangeNotifierProvider<MyQrProvider>(create: (context) => MyQrProvider()),
         ChangeNotifierProvider<TeamProvider>(create: (context) => TeamProvider()),
+        ChangeNotifierProvider<DownloadeProvider>(create: (context) => DownloadeProvider()),
         ChangeNotifierProvider<PartnerFromDataProvider>(create: (context) => PartnerFromDataProvider()),
       ],
       child: ScreenUtilInit(

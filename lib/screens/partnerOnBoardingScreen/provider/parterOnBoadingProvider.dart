@@ -5,12 +5,15 @@ import 'dart:convert';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as  http;
 import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
+import 'package:investcraftpartner/services/downloadeScrvice.dart';
 import 'package:investcraftpartner/services/filePicker.dart';
 import 'package:provider/provider.dart';
 import '../../../config/appConfig.dart';
 import '../../../services/apiServices.dart';
+import '../../../widgets/pdfViewScreen.dart';
 
 class PartnerOnBoardingProvider extends ChangeNotifier{
 
@@ -405,6 +408,20 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
         changeLoading(false);
         changeStatus("${json.decode(response.body)["next"]}");
+      }else{
+        changeLoading(false);
+      }
+    });
+  }
+  downloadeAggreement(BuildContext context){
+    final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
+    final DownloadeProvider dp = Provider.of<DownloadeProvider>(context,listen: false);
+    changeLoading(true);
+    ApiServices().getData(aggreement_link,tocken: ap.tokenn).then((response) {
+      if (response!=null) {
+        Fluttertoast.showToast(msg: "${json.decode(response.body)["status"]}");
+        Get.to(()=>PdfViewScreen(url: "${json.decode(response.body)["url"]}",));
+        changeLoading(false);
       }else{
         changeLoading(false);
       }

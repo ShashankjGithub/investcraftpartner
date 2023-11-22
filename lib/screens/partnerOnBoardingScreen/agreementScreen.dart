@@ -54,7 +54,9 @@ class _AgreementScreenState extends State<AgreementScreen> {
 
           Gap(20.h),
           GestureDetector(
-            onTap: (){},
+            onTap: (){
+              pp.downloadeAggreement(context);
+            },
             child: Container(
               height: 60.h,
               width: size.width,
