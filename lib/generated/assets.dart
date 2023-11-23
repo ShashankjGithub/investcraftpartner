@@ -81,6 +81,7 @@ class Assets {
   static const String bottomInactiveproduct = 'assets/bottom/inactiveproduct.svg';
   static const String bottomInactiveprofile = 'assets/bottom/inactiveprofile.svg';
   static const String investcraftpartnerAssetsArrow = 'assets/arrow.svg';
+  static const String investcraftpartnerAssetsQr = 'assets/qr.svg';
   static const String profileAdd = 'assets/profile/add.svg';
   static const String profileFacebook = 'assets/profile/facebook.svg';
   static const String profileLinkind = 'assets/profile/linkind.svg';
@@ -92,6 +93,7 @@ class Assets {
   static const String profileProfileknolagecenter = 'assets/profile/profileknolagecenter.svg';
   static const String profileProfilenotification = 'assets/profile/profilenotification.svg';
   static const String profileProfileshare = 'assets/profile/profileshare.svg';
+  static const String profileQr = 'assets/profile/qr.png';
   static const String profileRemove = 'assets/profile/remove.svg';
   static const String profileTwitter = 'assets/profile/twitter.svg';
   static const String profileWhatapp = 'assets/profile/whatapp.png';

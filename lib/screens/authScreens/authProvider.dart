@@ -134,6 +134,25 @@ class AuthProvider extends ChangeNotifier{
   }
 
 
+  logoutUser()async{
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    changeLoading(true);
+    ApiServices().getData(logoutApi,tocken: tokenn).then((response) {
+      if (response!=null) {
+        if (json.decode(response.body)["status"]=="success") {
+
+        }  else{
+          Fluttertoast.showToast(msg: "${json.decode(response.body)["status"]}");
+          changeLoading(false);
+        }
+      }else{
+        changeLoading(false);
+      }
+    });
+
+  }
+
+
   saveUserData(token,next)async{
     final SharedPreferences sp = await SharedPreferences.getInstance();
     tokenn = token;

@@ -1,4 +1,5 @@
 const String baseUrl = "https://www.testpartner.investkraft.com/api/";
+const String baseUrlImage = "https://www.testpartner.investkraft.com/";
 
 const String partner_from = "partner-form";
 const String login = "login";
@@ -19,6 +20,7 @@ const String check_status = "check-onboarding";
 const String team_member_list = "team-member-list";
 const String save_team_member = "save-team-member";
 const String aggreement_link = "aggreement-link";
+const String verify_partners = "verify-partners";
 
 
 

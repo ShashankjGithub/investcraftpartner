@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/config/themeConfig.dart';
 import 'package:investcraftpartner/generated/assets.dart';
+import 'package:investcraftpartner/providers/myQrProvider.dart';
 import 'package:provider/provider.dart';
 
+import '../../config/appConfig.dart';
 import '../../providers/leadDataProvider.dart';
 import '../../providers/partnerFromDataProvider.dart';
 import '../leadsScreens/addTeamMemberScreen.dart';
@@ -25,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     final LeadDataProvider ldp = context.watch<LeadDataProvider>();
+    final MyQrProvider mq = context.watch<MyQrProvider>();
     final PartnerFromDataProvider fp = context.watch<PartnerFromDataProvider>();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: mainColor,
@@ -66,18 +69,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      CircleAvatar(
-                                        radius: 23.r,
-                                        backgroundColor: Colors.grey[200],
-                                        child: Image.asset(Assets.assetsKapil),
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(200),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle
+                                          ),
+                                          height: 50.h,
+                                          width: 50.w,
+                                          child:
+                                          mq.qrData!=null?Image.network(
+                                            baseUrlImage+mq.qrData!.personalDetail.photoUrl,fit: BoxFit.cover,
+                                            errorBuilder: (context,_,__){
+                                              return SvgPicture.asset(Assets.assetsProfile);
+                                            },
+                                          ):
+                                          SvgPicture.asset(Assets.assetsProfile),
+                                        ),
                                       ),
-                                      Gap(17),
+                                      Gap(15),
                                       Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
                                           Text(
-                                            'Hi, Kapil',
+                                            'Hi, ${mq.qrData!=null?mq.qrData!.userData.name:"User"}',
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                               color: Colors.white,
@@ -87,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           Gap(10),
                                           Text(
-                                            '55 Total Cases',
+                                            '0 Total Cases',
                                             style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 14.sp,
@@ -113,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     Gap(5),
                                     Text(
-                                      '₹ 1,25,000',
+                                      '₹ 0',
                                       style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 24.sp,

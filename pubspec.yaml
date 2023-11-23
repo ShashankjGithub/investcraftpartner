@@ -66,6 +66,7 @@ dependencies:
   dio: ^5.3.4
   flutter_local_notifications: ^9.6.1
   syncfusion_flutter_pdfviewer: ^23.2.4
+  pdf_image_renderer: ^0.7.0
 
 
 dev_dependencies:

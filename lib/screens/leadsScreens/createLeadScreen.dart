@@ -785,6 +785,11 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   lp.chooseaadharBackFile();
                 },fotter: "",),
 
+                DoteddedContainer2(label:"Current Address proof", placeholder:
+                lp.current_address_proof!=null?lp.current_address_proof!.files[0].name:
+                "Upload file",onTap: (){
+                  lp.chooseCurrentAddress();
+                },fotter: "",),
                 Row(
                   children: [
                     Text(
