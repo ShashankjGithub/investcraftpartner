@@ -38,7 +38,7 @@ class _LeadScreenState extends State<LeadScreen> {
             Padding(
               padding: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 10),
               child: Text(
-                'Sub Channel Patterns',
+                'My Team',
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 24.sp,

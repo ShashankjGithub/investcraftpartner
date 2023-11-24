@@ -126,13 +126,20 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                             ),
                           ),
                           Gap(15),
+                          qq.imageFile.isEmpty?Container(
+                            width: 286,
+                            height: 262,
+                            child: Center(child: CircularProgressIndicator(color: mainColor,),),
+                          ):
                           Container(
                             width: 286,
                             height: 262,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
-                              image: DecorationImage(image: FileImage(File(qq.imageFile[0])))
+                              image: DecorationImage(
+                                fit: BoxFit.cover,
+                                  image: FileImage(File(qq.imageFile[0])))
                             ),
                           ),
                           Gap(15),

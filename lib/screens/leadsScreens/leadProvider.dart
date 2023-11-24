@@ -265,7 +265,7 @@ class LeadProvider extends ChangeNotifier {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
         leadId = "${json.decode(response.body)["lead_id"]}";
         changeLoading(false);
-        changeDocumentUploadSumbiterd();
+        Get.offAll(()=>BottomBarScreen());
       } else {
         changeLoading(false);
       }

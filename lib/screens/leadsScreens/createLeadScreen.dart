@@ -108,16 +108,16 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                    child: Text("Employment\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inEmployeeDetail==true? mainColor:Colors.black),),
                                  ),
                                ),
-                               Expanded(
-                                 child: Container(
-                                   alignment: Alignment.center,
-                                   height: 60.h,
-                                   decoration: BoxDecoration(border:
-                                   lp.submittedDocumentsUpload==true?
-                                   Border.all(color: mainColor):null,borderRadius: BorderRadius.circular(100)),
-                                   child: Text("Documents\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inDocumentsUpload==true? mainColor:Colors.black),),
-                                 ),
-                               ),
+                               // Expanded(
+                               //   child: Container(
+                               //     alignment: Alignment.center,
+                               //     height: 60.h,
+                               //     decoration: BoxDecoration(border:
+                               //     lp.submittedDocumentsUpload==true?
+                               //     Border.all(color: mainColor):null,borderRadius: BorderRadius.circular(100)),
+                               //     child: Text("Documents\nDetails",textAlign: TextAlign.center,style: TextStyle(height: 1.2,color:lp.inDocumentsUpload==true? mainColor:Colors.black),),
+                               //   ),
+                               // ),
 
                              ],
                            ),
@@ -150,16 +150,16 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                                    ),
                                  ),
-                                 Expanded(
-                                   child: Container(
-                                     alignment: Alignment.center,
-                                     height: 25.h,
-                                     width: 25.w,
-                                     decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inDocumentsUpload==true?mainColor:dotGrayColor),
-                                     child:  Text("03",style: TextStyle(color: lp.inDocumentsUpload==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
-
-                                   ),
-                                 ),
+                                 // Expanded(
+                                 //   child: Container(
+                                 //     alignment: Alignment.center,
+                                 //     height: 25.h,
+                                 //     width: 25.w,
+                                 //     decoration: BoxDecoration(shape: BoxShape.circle,color: lp.inDocumentsUpload==true?mainColor:dotGrayColor),
+                                 //     child:  Text("03",style: TextStyle(color: lp.inDocumentsUpload==true?Colors.white:Colors.black,fontWeight: FontWeight.bold),),
+                                 //
+                                 //   ),
+                                 // ),
 
 
 
