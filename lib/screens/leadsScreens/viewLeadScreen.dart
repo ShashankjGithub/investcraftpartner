@@ -202,51 +202,55 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                                                   Gap(25.h),
                                                   Row(
                                                     children: [
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            'Name',
-                                                            style: TextStyle(
-                                                              color: Color(0xFF66707F),
-                                                              fontSize: 15,
-                                                              fontWeight: FontWeight.w400,
+                                                      Expanded(
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              'Name',
+                                                              style: TextStyle(
+                                                                color: Color(0xFF66707F),
+                                                                fontSize: 15,
+                                                                fontWeight: FontWeight.w400,
 
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Gap(8),
-                                                          Text(
-                                                            '${lp.leadsList[index].firstName}',
-                                                            style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontSize: 12.sp,
-                                                              fontWeight: FontWeight.w600,
+                                                            Gap(8),
+                                                            Text(
+                                                              '${lp.leadsList[index].firstName}',
+                                                              style: TextStyle(
+                                                                color: Colors.black,
+                                                                fontSize: 12.sp,
+                                                                fontWeight: FontWeight.w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],),
-                                                      Gap(58.w),
-                                                      Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: [
-                                                          Text(
-                                                            'Request Date',
-                                                            style: TextStyle(
-                                                              color: Color(0xFF66707F),
-                                                              fontSize: 15,
-                                                              fontWeight: FontWeight.w400,
+                                                          ],),
+                                                      ),
 
+                                                      Expanded(
+                                                        child: Column(
+                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          children: [
+                                                            Text(
+                                                              'Request Date',
+                                                              style: TextStyle(
+                                                                color: Color(0xFF66707F),
+                                                                fontSize: 15,
+                                                                fontWeight: FontWeight.w400,
+
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Gap(8),
-                                                          Text(
-                                                            '${DateFormat("dd MMM yy").format(lp.leadsList[index].createdAt)}',
-                                                            style: TextStyle(
-                                                              color: Colors.black,
-                                                              fontSize: 12.sp,
-                                                              fontWeight: FontWeight.w600,
+                                                            Gap(8),
+                                                            Text(
+                                                              '${DateFormat("dd MMM yy").format(lp.leadsList[index].createdAt)}',
+                                                              style: TextStyle(
+                                                                color: Colors.black,
+                                                                fontSize: 12.sp,
+                                                                fontWeight: FontWeight.w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],),
+                                                          ],),
+                                                      ),
 
                                                     ],
                                                   ),

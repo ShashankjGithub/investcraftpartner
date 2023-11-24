@@ -12,7 +12,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 class DownloadeProvider extends ChangeNotifier{
-
+ bool loading = false;
+ changeLoading(value){
+   loading = value;
+   notifyListeners();
+ }
   DownloadeProvider(){
     notificationService = NotificationService();
     // listenToNotificationStream();
@@ -35,6 +39,7 @@ class DownloadeProvider extends ChangeNotifier{
   Future<bool> saveFile(String url, String fileName) async {
     try {
       if (await _requestPermission(Permission.storage)) {
+        changeLoading(true);
         Random random = new Random();
         int randomNumber = random.nextInt(100000);
         print("pppppppppp");
@@ -51,9 +56,8 @@ class DownloadeProvider extends ChangeNotifier{
             break;
           }
         }
-        newPath = Platform.isAndroid?newPath + "/InvestCraftPartner/${fileName}":newPath + "/${fileName}";
-        directory = Directory(newPath);
-
+        // newPath = newPath + "/${fileName}";
+        // directory = Directory(newPath);
         File saveFile = File(directory.path + "/$fileName""${randomNumber}.pdf");
         if (kDebugMode) {
           print(saveFile.path);
@@ -72,9 +76,10 @@ class DownloadeProvider extends ChangeNotifier{
 
         Fluttertoast.showToast(msg: "Pdf Downloaded to Tip Top Directory",toastLength: Toast.LENGTH_LONG);
       }
+      changeLoading(false);
       return true;
     } catch (e) {
-
+      changeLoading(false);
       return false;
     }
   }

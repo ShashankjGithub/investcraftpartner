@@ -47,25 +47,25 @@ class _BasicDetailScreenState extends State<BasicDetailScreen> {
           TextFieldCustom(
             hint: "",clt: pp.nameClt,
             title: getLabel(label: "NAME_LABEL", form: pf.basicDetail!),
-            textCapitalization: TextCapitalization.characters,
+
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.emailIDClt,
             title: getLabel(label: "EMAIL_LABEL", form: pf.basicDetail!),
-            textCapitalization: TextCapitalization.characters,
+
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.phoneNumberClt,
             title:  getLabel(label: "PHONE_NUMBER_LABEL", form: pf.basicDetail!),
-            textCapitalization: TextCapitalization.characters,
+
           ),
           Gap(20),
           TextFieldCustom(
             hint: "",clt: pp.businessTypeClt,
             title: getLabel(label: "BUSSINESS_TYPE_LABEL", form: pf.basicDetail!),
-            textCapitalization: TextCapitalization.characters,
+
           ),
         ],
       ),

@@ -210,7 +210,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   TextFieldCustom(
                     hint: "",clt: lp.nameClt,
                     title: getLabel(label: "NAME_LABEL", form: fp.leadFormPersonal!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (v){
                       if (v!.isEmpty) {
                         return getLabel(label: "NAME_LABEL", form: fp.leadFormPersonal!);
@@ -218,20 +218,20 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     },
                   ),
                   Gap(25.h),
-                  TextFieldCustom(
-                    showRequried: false,
-                    hint: "",clt: lp.lastnameClt,
-                    title: "Last Name",
-
-                    textCapitalization: TextCapitalization.characters,
-
-                  ),
-                  Gap(25.h),
+                  // TextFieldCustom(
+                  //   showRequried: false,
+                  //   hint: "",clt: lp.lastnameClt,
+                  //   title: "Last Name",
+                  //
+                  //   textCapitalization: TextCapitalization.characters,
+                  //
+                  // ),
+                  // Gap(25.h),
                   TextFieldCustom(
                     hint: "",clt: lp.mobileClt,
                     title: getLabel(label: "MOBILE_NUMBER_LABEL", form: fp.leadFormPersonal!),
                     type: TextInputType.number,
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (v){
                       if (v!.isEmpty) {
                         return getLabel(label: "MOBILE_NUMBER_LABEL", form: fp.leadFormPersonal!);
@@ -242,7 +242,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   TextFieldCustom(
                     hint: "",clt: lp.emailClt,
                     title: getLabel(label: "EMAIL_LABEL", form: fp.leadFormPersonal!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (v){
                       if (v!.isEmpty) {
                         return getLabel(label: "EMAIL_LABEL", form: fp.leadFormPersonal!);
@@ -305,7 +305,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   TextFieldCustom(
                     hint: "",clt: lp.motherNameClt,
                     title:  getLabel(label: "MOTHER_NAME_LABEL", form: fp.leadFormPersonal!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (v){
                       if (v!.isEmpty) {
                         return getLabel(label: "MOTHER_NAME_LABEL", form: fp.leadFormPersonal!);
@@ -344,7 +344,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   TextFieldCustom(
                     hint: "",clt: lp.companyName,
                     title: getLabel(label: "COMPANY_NAME_LABEL", form: fp.leadFormEmployement!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (v){
                       if (v!.isEmpty) {
                         return getLabel(label: "COMPANY_NAME_LABEL", form: fp.leadFormPersonal!);
@@ -356,7 +356,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   TextFieldCustom(
                     hint: "",clt: lp.companyType,
                     title: getLabel(label: "COMPANY_TYPE_LABEL", form: fp.leadFormEmployement!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (v){
                       if (v!.isEmpty) {
                         return getLabel(label: "COMPANY_TYPE_LABEL", form: fp.leadFormPersonal!);
@@ -385,13 +385,13 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Row(
                     children: [
                       CustomRadioButton(title: "Salaried",color: lp.employeeType=="Salaried"?mainColor:grayColor2,onTap: (){
-                        lp.changeGender("Salaried");
+                        lp.changeEmployeeType("Salaried");
                       },
                         textColor: lp.employeeType=="Salaried"?mainColor:textgrayColor,
                       ),
                       CustomRadioButton(title: "Self-employed",color: lp.employeeType=="Self-employed"?mainColor:grayColor2,
                         onTap: (){
-                          lp.changeGender("Self-employed");
+                          lp.changeEmployeeType("Self-employed");
                         },
                         textColor: lp.employeeType=="Self-employed"?mainColor:textgrayColor,),
 
@@ -560,7 +560,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     hint: "",clt: lp.pinCodeClt,
                     title: getLabel(label: "PIN_CODE_LABEL", form: fp.leadFormEmployement!),
                     type: TextInputType.number,
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (vv){
                       if(vv!.isEmpty){
                         return getLabel(label: "PIN_CODE_LABEL", form: fp.leadFormEmployement!);
@@ -586,13 +586,13 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                   Row(
                     children: [
                       CustomRadioButton(title: "Owned",color: lp.residentType=="Owned"?mainColor:grayColor2,onTap: (){
-                        lp.changeGender("Owned");
+                        lp.changeResidentType("Owned");
                       },
                         textColor: lp.residentType=="Owned"?mainColor:textgrayColor,
                       ),
                       CustomRadioButton(title: "Rented",color: lp.residentType=="Rented"?mainColor:grayColor2,
                         onTap: (){
-                          lp.changeGender("Rented");
+                          lp.changeResidentType("Rented");
                         },
                         textColor: lp.residentType=="Rented"?mainColor:textgrayColor,),
 
@@ -605,7 +605,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     hint: "",clt: lp.requiredLoanAmountClt,
                     type: TextInputType.number,
                     title:   getLabel(label: "REQUIRED_LOAN_AMOUNT_LABEL", form: fp.leadFormEmployement!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (vv){
                       if(vv!.isEmpty){
                         return getLabel(label: "REQUIRED_LOAN_AMOUNT_LABEL", form: fp.leadFormEmployement!);
@@ -617,7 +617,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     hint: "",clt: lp.monthlyIncomeClt,
                     type: TextInputType.number,
                     title: getLabel(label: "MONTHLY_INCOME_LABEL", form: fp.leadFormEmployement!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (vv){
                       if(vv!.isEmpty){
                         return getLabel(label: "MONTHLY_INCOME_LABEL", form: fp.leadFormEmployement!);
@@ -712,7 +712,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     hint: "",clt: lp.completeResidenceAddressClt,
                     showRequried: false,
                     title: getLabel(label: "COMPLETE_RESIDENCE_ADDRESS_LABEL", form: fp.leadFormEmployement!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (vv){
                       if(vv!.isEmpty){
                         return getLabel(label: "COMPLETE_RESIDENCE_ADDRESS_LABEL", form: fp.leadFormEmployement!);
@@ -725,7 +725,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     hint: "",clt: lp.completeOfficeAddressClt,
                     showRequried: false,
                     title: getLabel(label: "COMPLETE_OFFICE_ADDRESS_LABEL", form: fp.leadFormEmployement!),
-                    textCapitalization: TextCapitalization.characters,
+
                     validator: (vv){
                       if(vv!.isEmpty){
                         return getLabel(label: "COMPLETE_OFFICE_ADDRESS_LABEL", form: fp.leadFormEmployement!);

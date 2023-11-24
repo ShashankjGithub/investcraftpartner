@@ -88,8 +88,11 @@ class BusinessDetailScreen extends StatelessWidget {
                         }
                       },
                       decoration: InputDecoration(
+
+
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15)
+                          contentPadding:
+                          EdgeInsets.only(top: 15,left: 15)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -102,7 +105,7 @@ class BusinessDetailScreen extends StatelessWidget {
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
-                          item.key!,
+                          item.value!,
                           style: TextStyle(color: Color(0xff5B6469)),
                         ),
                       ))
@@ -130,7 +133,7 @@ class BusinessDetailScreen extends StatelessWidget {
             TextFieldCustom(
               hint: "",clt: pp.businessNameClt,
               title: getLabel(label: "BUSINESS_NAME_LABEL", form: pf.businessDetails!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if(val!.isEmpty){
                   return getLabel(label: "BUSINESS_NAME_LABEL", form: pf.businessDetails!);
@@ -141,31 +144,20 @@ class BusinessDetailScreen extends StatelessWidget {
             TextFieldCustom(
               hint: "",clt: pp.businessEmailClt,
               title: getLabel(label: "BUSINESS_EMAIL_LABEL", form: pf.businessDetails!),
-              textCapitalization: TextCapitalization.characters,
-              validator: (val){
-                if(val!.isEmpty){
-                  return getLabel(label: "BUSINESS_EMAIL_LABEL", form: pf.businessDetails!);
-                }
-              },
+              showRequried: false,
             ),
             Gap(20),
             TextFieldCustom(
               hint: "",clt: pp.businessWebsiteUrlClt,
               title: getLabel(label: "WEBSITE_URL_LABEL", form: pf.businessDetails!),
-              textCapitalization: TextCapitalization.characters,
-
-              validator: (val){
-                if(val!.isEmpty){
-                  return getLabel(label: "WEBSITE_URL_LABEL", form: pf.businessDetails!);
-                }
-              },
+              showRequried: false,
             ),
             Gap(25),
 
             TextFieldCustom(
               hint: "",clt: pp.businessPhoneNumberClt,
               title: getLabel(label: "BUSINESS_NUMBER_LABEL", form: pf.businessDetails!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if(val!.isEmpty){
                   return getLabel(label: "BUSINESS_NUMBER_LABEL", form: pf.businessDetails!);
@@ -420,7 +412,7 @@ class BusinessDetailScreen extends StatelessWidget {
             TextFieldCustom(
               hint: "",clt: pp.businessAddressClt,
               title: getLabel(label: "BUSSINESS_ADDRESS_LABEL", form: pf.businessDetails!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if(val!.isEmpty){
                   return getLabel(label: "BUSSINESS_ADDRESS_LABEL", form: pf.businessDetails!);
@@ -470,7 +462,7 @@ class BusinessDetailScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15)
+                          contentPadding:    EdgeInsets.only(top: 15,left: 15)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -549,7 +541,7 @@ class BusinessDetailScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15)
+                          contentPadding: EdgeInsets.only(top: 15,left: 15)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -590,7 +582,12 @@ class BusinessDetailScreen extends StatelessWidget {
             TextFieldCustom(
               hint: "",clt: pp.businessPinCodeClt,
               title: getLabel(label: "PIN_CODE", form: pf.businessDetails!),
-              textCapitalization: TextCapitalization.characters,
+              validator: (val){
+                if (val!.isEmpty) {
+                  return "${getLabel(label: "PIN_CODE", form: pf.businessDetails!)}";
+                }
+              },
+
               type: TextInputType.number ,
             ),
 

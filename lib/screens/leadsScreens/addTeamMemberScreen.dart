@@ -62,7 +62,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                           TextFieldCustom(
                             hint: "",clt: pp.nameteamClt,
                             title: getLabel(label: "NAME_LABEL", form: pf.basicDetail!),
-                            textCapitalization: TextCapitalization.characters,
+
                             validator: (val){
                               if (val!.isEmpty) {
                                 return getLabel(label: "NAME_LABEL", form: pf.basicDetail!);
@@ -73,7 +73,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                           TextFieldCustom(
                             hint: "",clt: pp.emailIDClt,
                             title: getLabel(label: "EMAIL_LABEL", form: pf.basicDetail!),
-                            textCapitalization: TextCapitalization.characters,
+
                             validator: (val){
                               if (val!.isEmpty) {
                                 return getLabel(label: "EMAIL_LABEL", form: pf.basicDetail!);
@@ -84,7 +84,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                           TextFieldCustom(
                             hint: "",clt: pp.phoneNumberClt,
                             title:  getLabel(label: "PHONE_NUMBER_LABEL", form: pf.basicDetail!),
-                            textCapitalization: TextCapitalization.characters,
+
                             validator: (val){
                               if (val!.isEmpty) {
                                 return getLabel(label: "PHONE_NUMBER_LABEL", form: pf.basicDetail!);
@@ -95,7 +95,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                           TextFieldCustom(
                             hint: "",clt: pp.businessTypeClt,
                             title: getLabel(label: "BUSSINESS_TYPE_LABEL", form: pf.basicDetail!),
-                            textCapitalization: TextCapitalization.characters,
+
                             validator: (val){
                               if (val!.isEmpty) {
                                 return getLabel(label: "BUSSINESS_TYPE_LABEL", form: pf.basicDetail!);

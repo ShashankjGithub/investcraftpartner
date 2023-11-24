@@ -236,7 +236,7 @@ class LeadProvider extends ChangeNotifier {
     ApiServices().postData(save_lead,
         {
               "first_name": nameClt.text,
-              "last_name": lastnameClt.text,
+              // "last_name": lastnameClt.text,
               "mobile": mobileClt.text,
               "email": emailClt.text,
               "gender": gender,
@@ -265,6 +265,7 @@ class LeadProvider extends ChangeNotifier {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
         leadId = "${json.decode(response.body)["lead_id"]}";
         changeLoading(false);
+
         Get.offAll(()=>BottomBarScreen());
       } else {
         changeLoading(false);

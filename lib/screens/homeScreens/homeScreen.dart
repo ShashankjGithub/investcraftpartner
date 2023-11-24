@@ -92,14 +92,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text(
-                                            'Hi, ${mq.qrData!=null?mq.qrData!.userData.name:"User"}',
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 20.sp,
-                                              fontWeight: FontWeight.w600,
+                                          Container(
+                                            child: Text(
+                                              'Hi, ${mq.qrData!=null?mq.qrData!.userData.name:"User"}',
+                                              textAlign: TextAlign.start,
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20.sp,
+                                                fontWeight: FontWeight.w600,
+                                                overflow: TextOverflow.ellipsis
+
+                                              ),
+
                                             ),
+                                            width: 180,
                                           ),
                                           Gap(10),
                                           Text(

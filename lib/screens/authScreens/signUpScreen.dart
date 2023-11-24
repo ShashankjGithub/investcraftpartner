@@ -70,7 +70,7 @@ class SignUpScreen extends StatelessWidget {
                       TextFieldCustom(
                         hint: "",clt: ap.nameClt,
                         title: getLabel(label: "NAME_LABEL", form: pf.signupForm!),
-                        textCapitalization: TextCapitalization.characters,
+
                         validator: (val){
                           if (val!.isEmpty) {
                             return "Please enter name";
@@ -81,7 +81,7 @@ class SignUpScreen extends StatelessWidget {
                       TextFieldCustom(
                         hint: "",clt: ap.emailIdClt,
                         title: getLabel(label: "EMAIL_LABEL", form: pf.signupForm!),
-                        textCapitalization: TextCapitalization.characters,
+
                         validator: (val){
                           if (val!.isEmpty) {
                             return "Please enter email";
@@ -92,7 +92,7 @@ class SignUpScreen extends StatelessWidget {
                       TextFieldCustom(
                         hint: "",clt: ap.phoneNumberClt,
                         title: getLabel(label: "PHONE_LABEL", form: pf.signupForm!),
-                        textCapitalization: TextCapitalization.characters,
+
                         type: TextInputType.number,
                         validator: (val){
                           if (val!.isEmpty) {
@@ -185,7 +185,7 @@ class SignUpScreen extends StatelessWidget {
                       TextFieldCustom(
                         hint: "",clt: ap.passwordSignClt,
                         title: getLabel(label: "PASSWORD_LABEL", form: pf.signupForm!),
-                        textCapitalization: TextCapitalization.characters,
+
                         type: TextInputType.number,
                         validator: (val){
                           if (val!.isEmpty) {
@@ -197,7 +197,7 @@ class SignUpScreen extends StatelessWidget {
                       TextFieldCustom(
                         hint: "",clt: ap.confirmPasswordClt,
                         title: getLabel(label: "CONFIRM_PASSWORD_LABEL", form: pf.signupForm!),
-                        textCapitalization: TextCapitalization.characters,
+
                         type: TextInputType.number,
                         validator: (val){
                           if (val!.isEmpty) {

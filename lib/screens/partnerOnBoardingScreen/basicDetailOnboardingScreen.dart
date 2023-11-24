@@ -2,6 +2,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
@@ -331,7 +332,18 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                                     Gap(15),
                                     CustomNextButton(
                                       onTap: (){
-                                        pp.saveKycDetails(context);
+                                        if(pp.panCardFile==null){
+                                          Fluttertoast.showToast(msg: "Choose Pan Card");
+                                        }else if (pp.aadhaarCardFile==null) {
+                                          Fluttertoast.showToast(msg: "Choose Aadhar Card");
+                                        }  else if (pp.passportCardFile==null) {
+                                          Fluttertoast.showToast(msg: "Choose Passport Card");
+                                        }else if (pp.businessCardFile==null) {
+                                          Fluttertoast.showToast(msg: "Choose Business photo");
+                                        }else{
+                                          pp.saveKycDetails(context);
+                                        }
+
                                       },
                                       title:  getLabel(label: "NEXT", form: pf.kycDetail!),
                                     )

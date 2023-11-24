@@ -54,7 +54,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
             TextFieldCustom(
               hint: "",clt: pp.bankAccountNumberClt,
               title: getLabel(label: "ACCOUNT_NUMBER_LABEL", form: pf.bankDetails!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if (val!.isEmpty) {
                   return getLabel(label: "ACCOUNT_NUMBER_LABEL", form: pf.bankDetails!);
@@ -65,7 +65,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
             TextFieldCustom(
               hint: "",clt: pp.bankIFSCClt,
               title: getLabel(label: "IFSC_CODE_LABEL", form: pf.bankDetails!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if (val!.isEmpty) {
                   return getLabel(label: "IFSC_CODE_LABEL", form: pf.bankDetails!);

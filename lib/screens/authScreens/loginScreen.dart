@@ -68,7 +68,7 @@ class LoginScreen extends StatelessWidget {
                       TextFieldCustom(
                         hint: "",clt: ap.emailClt,
                         title: getLabel(label: "EMAIL_LABEL", form: pf.loginForm!),
-                        textCapitalization: TextCapitalization.characters,
+
                         validator: (val){
                           if (val!.isEmpty) {
                             return "Please enter email";
@@ -79,7 +79,7 @@ class LoginScreen extends StatelessWidget {
                       TextFieldCustom(
                         hint: "",clt: ap.passwordClt,
                         title: getLabel(label: "PASSWORD_LABEL", form: pf.loginForm!),
-                        textCapitalization: TextCapitalization.characters,
+
                         obscureText: true,
                         validator: (val){
                           if (val!.isEmpty) {

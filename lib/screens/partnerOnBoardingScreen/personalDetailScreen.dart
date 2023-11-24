@@ -61,7 +61,7 @@ class PersonalDetailScreen extends StatelessWidget {
             TextFieldCustom(
               hint: "",clt: pp.aadhaarCardNumberClt,
               title: getLabel(label: "AADHAR_CARD_LABEL", form: pf.personalDetailFromData!),
-              textCapitalization: TextCapitalization.characters,
+
               type: TextInputType.number,
               validator: (val){
                 if(val!.isEmpty){
@@ -118,7 +118,7 @@ class PersonalDetailScreen extends StatelessWidget {
             TextFieldCustom(
               hint: "",clt: pp.permanentHomeAddressClt,
               title: getLabel(label: "PERMANENT_HOME_ADDRESS_LABEL", form: pf.personalDetailFromData!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if(val!.isEmpty){
                   return getLabel(label: "PERMANENT_HOME_ADDRESS_LABEL", form: pf.personalDetailFromData!);
@@ -161,7 +161,7 @@ class PersonalDetailScreen extends StatelessWidget {
             TextFieldCustom(
               hint: "",clt: pp.presentAddressClt,
               title:getLabel(label: "PERSENT_ADDRESS_LABEL", form: pf.personalDetailFromData!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if(val!.isEmpty){
                   return getLabel(label: "PERSENT_ADDRESS_LABEL", form: pf.personalDetailFromData!);
@@ -331,7 +331,7 @@ class PersonalDetailScreen extends StatelessWidget {
               hint: "",clt: pp.pinCodeClt,
               type: TextInputType.number,
               title: getLabel(label: "PIN_CODE", form: pf.personalDetailFromData!),
-              textCapitalization: TextCapitalization.characters,
+
               validator: (val){
                 if(val!.isEmpty){
                   return getLabel(label: "PIN_CODE", form: pf.personalDetailFromData!);
