@@ -4,6 +4,7 @@ const String baseUrlImage = "https://www.testpartner.investkraft.com/";
 const String partner_from = "partner-form";
 const String login = "login";
 const String sign_up = "sign-up";
+const String forgot_password = "forgot-password";
 const String logoutApi = "logout";
 const String save_lead = "save-lead";
 const String save_lead_docs = "save-lead-docs";

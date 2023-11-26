@@ -40,8 +40,10 @@ class AuthProvider extends ChangeNotifier{
   TextEditingController phoneNumberClt = TextEditingController();
   TextEditingController passwordSignClt = TextEditingController();
   TextEditingController confirmPasswordClt = TextEditingController();
+  TextEditingController forgotPasswordEmailClt = TextEditingController();
   final signUpKey = GlobalKey<FormState>();
   final loginKey = GlobalKey<FormState>();
+  final forgotPasswordKey = GlobalKey<FormState>();
 
   List businessType = [
     "Individual",
@@ -79,6 +81,24 @@ class AuthProvider extends ChangeNotifier{
       });
     }
   }
+  forgotPassword(BuildContext context){
+      if(forgotPasswordKey.currentState!.validate()){
+        changeLoading(true);
+        ApiServices().postData(forgot_password,{
+          "email":forgotPasswordEmailClt.text,
+        },context,he: "").then((response) {
+          if (response!=null) {
+            Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
+            changeLoading(false);
+            forgotPasswordEmailClt.clear();
+            Get.back();
+          }else{
+            changeLoading(false);
+          }
+        });
+      }
+
+  }
 
   
   checkStatus()async{
@@ -90,7 +110,7 @@ class AuthProvider extends ChangeNotifier{
             status = json.decode(response.body)["next"];
             sp.setString("status", json.decode(response.body)["next"]);
             notifyListeners();
-            // status = BUSINESS;
+             //status = BUSINESS;
             if(status==HOME_PAGE){
               Get.offAll(BottomBarScreen());
             }else{
@@ -179,7 +199,8 @@ class AuthProvider extends ChangeNotifier{
 
   deleteUserData(BuildContext context)async{
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    ApiServices().postData(logoutApi, "", context,header: true,he: tokenn).then((value) async{
+    ApiServices().getData(logoutApi,tocken: tokenn).then((value) async{
+      Fluttertoast.showToast(msg: "${json.decode(value!.body)["message"]}");
       sp.clear();
       tokenn = null;
       alreadyLogin = false;
