@@ -116,7 +116,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15)
+                          contentPadding: EdgeInsets.only(top: 15,left: 15)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -130,7 +130,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                         value: item,
                         child: Text(
                           item.key!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontSize: 15),
                         ),
                       ))
                           .toList(),
@@ -139,14 +139,15 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                         pp.changeSelectBank(value);
                       },
                       buttonStyleData: ButtonStyleData(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        padding: EdgeInsets.symmetric(horizontal: 12,vertical: 5),
                         height: 40,
-                        width: 200,
+
                       ),
                       menuItemStyleData: MenuItemStyleData(
                         height: 40,
+
                       ),
-                      dropdownStyleData: DropdownStyleData(width: 200),
+                      dropdownStyleData: DropdownStyleData(width: 300,padding: EdgeInsets.symmetric(vertical: 10)),
                     ),
                   ),
                 ),

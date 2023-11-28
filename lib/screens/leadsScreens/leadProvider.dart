@@ -17,7 +17,7 @@ class LeadProvider extends ChangeNotifier {
   List titles = [
     "Personal Details",
     "Employment Details",
-    "Upload Loan Documents",
+    //"Upload Loan Documents",
   ];
 
   bool inPersonalDetail = true;

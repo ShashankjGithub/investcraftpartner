@@ -476,7 +476,7 @@ class BusinessDetailScreen extends StatelessWidget {
                         value: item,
                         child: Text(
                           item.key!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontSize: 13),
                         ),
                       ))
                           .toList(),
@@ -555,7 +555,7 @@ class BusinessDetailScreen extends StatelessWidget {
                         value: item,
                         child: Text(
                           item.key!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontSize: 13),
                         ),
                       ))
                           .toList(),
@@ -566,7 +566,7 @@ class BusinessDetailScreen extends StatelessWidget {
                       buttonStyleData: ButtonStyleData(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         height: 40,
-                        width: 200,
+                        width: 400,
                       ),
                       menuItemStyleData: MenuItemStyleData(
                         height: 40,

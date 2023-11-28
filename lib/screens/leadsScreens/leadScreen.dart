@@ -79,55 +79,62 @@ class _LeadScreenState extends State<LeadScreen> {
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Partner ID',
-                                                        style: TextStyle(
-                                                          color: Color(0xFF66707F),
-                                                          fontSize: 15,
+                                                  Container(
 
-                                                          fontWeight: FontWeight.w400,
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Partner ID',
+                                                          style: TextStyle(
+                                                            color: Color(0xFF66707F),
+                                                            fontSize: 15,
 
+                                                            fontWeight: FontWeight.w400,
+
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Gap(8),
-                                                      Text(
-                                                        '${tp.dataTeam[index].partnerId}',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 14.sp,
+                                                        Gap(8),
+                                                        Text(
+                                                          '${tp.dataTeam[index].partnerId}',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 14.sp,
 
-                                                          fontWeight: FontWeight.w600,
+                                                            fontWeight: FontWeight.w600,
 
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],),
-                                                  Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'Name',
-                                                        style: TextStyle(
-                                                          color: Color(0xFF66707F),
-                                                          fontSize: 15,
+                                                      ],),
+                                                    width: size.width/5,
+                                                  ),
+                                                  Container(
+                                                    width: size.width/5,
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'Name',
+                                                          style: TextStyle(
+                                                            color: Color(0xFF66707F),
+                                                            fontSize: 15,
 
-                                                          fontWeight: FontWeight.w400,
+                                                            fontWeight: FontWeight.w400,
 
+                                                          ),
                                                         ),
-                                                      ),
-                                                      Gap(8),
-                                                      Text(
-                                                        '${tp.dataTeam[index].name}',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 12.sp,
-                                                          fontWeight: FontWeight.w600,
+                                                        Gap(8),
+                                                        Text(
+                                                          '${tp.dataTeam[index].name}',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 12.sp,
+                                                            fontWeight: FontWeight.w600,
 
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ],),
+                                                      ],),
+                                                  ),
                                                   InkWell(
                                                     onTap: (){
                                                       if(value==index){
@@ -154,8 +161,11 @@ class _LeadScreenState extends State<LeadScreen> {
                                                   children: [
                                                     Gap(25.h),
                                                     Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
                                                       children: [
-                                                        Expanded(
+                                                        Container(
+                                                          width: size.width/5,
                                                           child: Column(
                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
@@ -179,8 +189,8 @@ class _LeadScreenState extends State<LeadScreen> {
                                                               ),
                                                             ],),
                                                         ),
-
-                                                        Expanded(
+                                                        Container(
+                                                          width: size.width/5,
                                                           child: Column(
                                                             crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
@@ -204,7 +214,16 @@ class _LeadScreenState extends State<LeadScreen> {
                                                               ),
                                                             ],),
                                                         ),
-                                                        Gap(20.h),
+                                                        InkWell(
+
+                                                          child: Container(
+                                                            alignment: Alignment.center,
+                                                            height: 25.h,
+                                                            width: 25.w,
+
+                                                          ),
+                                                        ),
+
 
                                                       ],
                                                     ),

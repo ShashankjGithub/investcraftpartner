@@ -21,7 +21,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
   late TabController controller;
   @override
   void initState() {
-    controller = TabController(length: 3, vsync: this);
+    controller = TabController(length: 2, vsync: this);
     super.initState();
   }
 
@@ -165,7 +165,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
                   child:Column(
                     children: [
                       TabBar(
-                        isScrollable: true,
+                        isScrollable: false,
                         labelColor: mainColor,
                         unselectedLabelColor: Colors.black,
                         indicatorColor: mainColor,
@@ -181,7 +181,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
                             children: [
                               PersonalDetailWidget(),
                               EmployeeDetailWidget(),
-                              UploadeDocumentDetailWidget(),
+                              //UploadeDocumentDetailWidget(),
                         ]),
                       ),
                     ],
