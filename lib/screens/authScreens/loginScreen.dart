@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import '../../config/themeConfig.dart';
 import '../../widgets/lodingWidget.dart';
 import '../partnerOnBoardingScreen/widgets/customtextField.dart';
+import 'forgotPasswordScreen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -91,13 +92,18 @@ class LoginScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text(
-                            getLabel(label: "FORGET_PASSWORD_LABEL", form: pf.loginForm!),
-                            style: TextStyle(
-                              color: mainColor,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
+                          InkWell(
+                            onTap: (){
+                              Get.to(()=>ForgotPasswordScreen());
+                            },
+                            child: Text(
+                              getLabel(label: "FORGET_PASSWORD_LABEL", form: pf.loginForm!),
+                              style: TextStyle(
+                                color: mainColor,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
 
+                              ),
                             ),
                           ),
                         ],

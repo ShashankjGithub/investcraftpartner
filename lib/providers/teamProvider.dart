@@ -42,6 +42,11 @@ class TeamProvider extends ChangeNotifier{
   notifyListeners();
   }
   final teamCreateKey = GlobalKey<FormState>();
+  var selectedBusinessType;
+  changeSelectedBusinessType(val){
+    selectedBusinessType = val;
+    notifyListeners();
+  }
 
   saveBasicDetail(BuildContext context){
     final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
@@ -51,7 +56,7 @@ class TeamProvider extends ChangeNotifier{
         "name":nameteamClt.text,
         "email":emailIDClt.text,
         "mobile":phoneNumberClt.text,
-        "business_type":businessTypeClt.text,
+        "business_type":selectedBusinessType.value,
       },context,he: ap.tokenn,header: true).then((response) {
         if (response!=null) {
           Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");

@@ -9,6 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/themeConfig.dart';
 import '../../generated/assets.dart';
+import '../../providers/myQrProvider.dart';
 import '../../widgets/lodingWidget.dart';
 import '../partnerOnBoardingScreen/congratulationsScreen.dart';
 
@@ -28,6 +29,7 @@ class _MoreScreenState extends State<MoreScreen> {
   @override
   Widget build(BuildContext context) {
    final AuthProvider ap = context.watch<AuthProvider>();
+   final MyQrProvider mq = context.watch<MyQrProvider>();
     return  Scaffold(
       backgroundColor: Color(0xfff7f9f9),
       body: SafeArea(
@@ -62,9 +64,9 @@ class _MoreScreenState extends State<MoreScreen> {
                               children: [
                                 Container(
                                     width: 130.w,
-                                    child: Text("${"User"}",style: TextStyle(fontSize: 17.sp,color: mainColor),overflow: TextOverflow.ellipsis,)),
+                                    child: Text("${mq.qrData!=null?mq.qrData!.userData.name:"User"}",style: TextStyle(fontSize: 17.sp,color: mainColor),overflow: TextOverflow.ellipsis,)),
                                 Gap(10.h),
-                                Text("${"User"}",style: TextStyle(fontSize: 13.sp),)
+
                               ],
                             ),
 

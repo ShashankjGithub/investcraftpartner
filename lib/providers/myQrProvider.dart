@@ -14,6 +14,7 @@ class MyQrProvider extends ChangeNotifier{
   bool loading = false;
 
   String qrpdf = "";
+  String qr_image_path = "";
 
   changeLoading(val){
     loading = val;
@@ -47,6 +48,7 @@ class MyQrProvider extends ChangeNotifier{
     },context,header: true,he: ap.tokenn).then((response) {
       if(response!=null){
         qrpdf = json.decode(response.body)["qr_pdf"];
+        qr_image_path = json.decode(response.body)["qr_image_path"];
         qp.splitPDF(qrpdf);
         changeLoading(false);
       }else{
