@@ -156,7 +156,7 @@ class SignUpScreen extends StatelessWidget {
                                     .map((item) => DropdownMenuItem(
                                   value: item,
                                   child: Text(
-                                    item.key??"",
+                                    item.value??"",
                                     style: TextStyle(color: Color(0xff5B6469)),
                                   ),
                                 ))

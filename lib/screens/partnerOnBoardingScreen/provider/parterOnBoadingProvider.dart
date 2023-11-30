@@ -149,10 +149,14 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   TextEditingController businessPinCodeClt = TextEditingController();
   TextEditingController businessGstNoClt = TextEditingController();
 
+  var selecteBasicdBusinessType;
   var selectedBusinessType;
   var selectedBusinessStateType;
   var selectedBusinessCityType;
-
+  changeBAnsiBusinessType(value){
+    selectedBusinessType = value;
+    notifyListeners();
+  }
   changeBusinessType(value){
     selectedBusinessType = value;
     notifyListeners();
@@ -234,12 +238,13 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
 
 
   ////////////////////////////////////////
+  final basicDetailKey = GlobalKey<FormState>();
   saveBasicDetail(BuildContext context){
     final AuthProvider ap = Provider.of<AuthProvider>(context,listen: false);
     changeLoading(true);
     ApiServices().postData(save_basic_details,{
       "name":nameClt.text,
-      "business_type":businessTypeClt.text,
+      "business_type":selecteBasicdBusinessType.value,
     },context,he: ap.tokenn,header: true).then((response) {
       if (response!=null) {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");

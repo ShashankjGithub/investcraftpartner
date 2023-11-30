@@ -84,7 +84,7 @@ class BusinessDetailScreen extends StatelessWidget {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (vv){
                         if (vv==null) {
-                          return getPlaceHolder(label: "BUSSINESS_TYPE_PLACEHOLDER", form: pf.businessDetails!);
+                          return "Please select business type";
                         }
                       },
                       decoration: InputDecoration(
@@ -136,7 +136,7 @@ class BusinessDetailScreen extends StatelessWidget {
 
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "BUSINESS_NAME_LABEL", form: pf.businessDetails!);
+                  return "Please enter business name";
                 }
               },
             ),
@@ -160,7 +160,7 @@ class BusinessDetailScreen extends StatelessWidget {
 
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "BUSINESS_NUMBER_LABEL", form: pf.businessDetails!);
+                  return "Please enter business phone number";
                 }
               },
             ),
@@ -415,7 +415,7 @@ class BusinessDetailScreen extends StatelessWidget {
 
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "BUSSINESS_ADDRESS_LABEL", form: pf.businessDetails!);
+                  return "Please enter business address";
                 }
               },
             ),
@@ -457,7 +457,7 @@ class BusinessDetailScreen extends StatelessWidget {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (vv){
                         if (vv==null) {
-                          return getPlaceHolder(label: "STATE_PLACEHOLDER", form: pf.businessDetails!);
+                          return "Please select state";
                         }
                       },
                       decoration: InputDecoration(
@@ -475,7 +475,7 @@ class BusinessDetailScreen extends StatelessWidget {
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
-                          item.key!,
+                          item.value!,
                           style: TextStyle(color: Color(0xff5B6469),fontSize: 13),
                         ),
                       ))
@@ -536,7 +536,7 @@ class BusinessDetailScreen extends StatelessWidget {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (vv){
                         if (vv==null) {
-                          return getPlaceHolder(label: "CITY_PLACEHOLDER", form: pf.businessDetails!);
+                          return "Please select city";
                         }
                       },
                       decoration: InputDecoration(
@@ -554,7 +554,7 @@ class BusinessDetailScreen extends StatelessWidget {
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
-                          item.key!,
+                          item.value!,
                           style: TextStyle(color: Color(0xff5B6469),fontSize: 13),
                         ),
                       ))
@@ -584,7 +584,7 @@ class BusinessDetailScreen extends StatelessWidget {
               title: getLabel(label: "PIN_CODE", form: pf.businessDetails!),
               validator: (val){
                 if (val!.isEmpty) {
-                  return "${getLabel(label: "PIN_CODE", form: pf.businessDetails!)}";
+                  return "Please enter pin code";
                 }
               },
 

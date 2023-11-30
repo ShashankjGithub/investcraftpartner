@@ -213,7 +213,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (v){
                       if (v!.isEmpty) {
-                        return getLabel(label: "NAME_LABEL", form: fp.leadFormPersonal!);
+                        return "Please enter name";
                       }
                     },
                   ),
@@ -234,7 +234,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (v){
                       if (v!.isEmpty) {
-                        return getLabel(label: "MOBILE_NUMBER_LABEL", form: fp.leadFormPersonal!);
+                        return "Please enter mobile number";
                       }
                     },
                   ),
@@ -245,7 +245,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (v){
                       if (v!.isEmpty) {
-                        return getLabel(label: "EMAIL_LABEL", form: fp.leadFormPersonal!);
+                        return "Please enter email address";
                       }
                     },
                   ),
@@ -291,14 +291,14 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     textCapitalization: TextCapitalization.characters,
                     validator: (v){
                       if (v!.isEmpty) {
-                        return "Pan Number";
+                        return "Please enter pan number";
                       }
                     },
                   ),
                   Gap(25.h),
                   CustomizeDatePicker(clt: lp.dobClt,text: getLabel(label: "DATE_OF_BIRTH", form: fp.leadFormPersonal!), validator: (v){
                     if (v!.isEmpty) {
-                      return  getLabel(label: "DATE_OF_BIRTH", form: fp.leadFormPersonal!);
+                      return  "Please enter DOB";
                     }
                   },),
                   Gap(25.h),
@@ -308,7 +308,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (v){
                       if (v!.isEmpty) {
-                        return getLabel(label: "MOTHER_NAME_LABEL", form: fp.leadFormPersonal!);
+                        return "Please enter mother name";
                       }
                     },
                   ),
@@ -347,7 +347,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (v){
                       if (v!.isEmpty) {
-                        return getLabel(label: "COMPANY_NAME_LABEL", form: fp.leadFormPersonal!);
+                        return "Please enter company name";
                       }
                     },
                   ),
@@ -359,7 +359,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (v){
                       if (v!.isEmpty) {
-                        return getLabel(label: "COMPANY_TYPE_LABEL", form: fp.leadFormPersonal!);
+                        return "Please enter company type";
                       }
                     },
                   ),
@@ -435,12 +435,12 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (vv){
                               if(vv==null){
-                              return  getLabel(label: "STATE_LABEL", form: fp.leadFormEmployement!);
+                              return  "Please select state";
                               }
                             },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 15)
+                                contentPadding: EdgeInsets.only(top: 15,left: 10)
                             ),
                             iconStyleData: IconStyleData(
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -453,7 +453,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
-                                item.key!,
+                                item.value!,
                                 style: TextStyle(color: Color(0xff5B6469)),
                               ),
                             ))
@@ -514,12 +514,12 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (vv){
                               if(vv==null){
-                                return getPlaceHolder(label: "CITY_PLACEHOLDER", form: fp.leadFormEmployement!);
+                                return "Please select city";
                               }
                             },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 15)
+                                contentPadding: EdgeInsets.only(top: 15,left: 10)
                             ),
                             iconStyleData: IconStyleData(
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -532,7 +532,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
-                                item.key!,
+                                item.value!,
                                 style: TextStyle(color: Color(0xff5B6469)),
                               ),
                             ))
@@ -563,7 +563,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (vv){
                       if(vv!.isEmpty){
-                        return getLabel(label: "PIN_CODE_LABEL", form: fp.leadFormEmployement!);
+                        return "Please enter pin code";
                       }
                     },
                   ),
@@ -608,7 +608,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (vv){
                       if(vv!.isEmpty){
-                        return getLabel(label: "REQUIRED_LOAN_AMOUNT_LABEL", form: fp.leadFormEmployement!);
+                        return "Please enter loan amount";
                       }
                     },
                   ),
@@ -620,7 +620,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (vv){
                       if(vv!.isEmpty){
-                        return getLabel(label: "MONTHLY_INCOME_LABEL", form: fp.leadFormEmployement!);
+                        return "Please enter monthly income";
                       }
                     },
                   ),
@@ -663,12 +663,12 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             autovalidateMode: AutovalidateMode.onUserInteraction,
                             validator: (vv){
                               if(vv==null){
-                                return getPlaceHolder(label: "LOAN_TYPE_PLACEHOLDER", form: fp.leadFormEmployement!);
+                                return "Please select loan type";
                               }
                             },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 15)
+                                contentPadding: EdgeInsets.only(top: 15,left: 10)
                             ),
                             iconStyleData: IconStyleData(
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -681,7 +681,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
-                                item.key??"",
+                                item.value??"",
                                 style: TextStyle(color: Color(0xff5B6469)),
                               ),
                             ))
@@ -715,7 +715,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (vv){
                       if(vv!.isEmpty){
-                        return getLabel(label: "COMPLETE_RESIDENCE_ADDRESS_LABEL", form: fp.leadFormEmployement!);
+                        return "Please enter complete address";
                       }
                     },
                   ),
@@ -728,7 +728,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                     validator: (vv){
                       if(vv!.isEmpty){
-                        return getLabel(label: "COMPLETE_OFFICE_ADDRESS_LABEL", form: fp.leadFormEmployement!);
+                        return "Please enter office address";
                       }
                     },
                   ),

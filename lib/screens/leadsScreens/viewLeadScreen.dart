@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/generated/assets.dart';
+import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
 import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -32,6 +35,7 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
       statusBarColor: mainColor,
     ));
     final LeadProvider lp = context.watch<LeadProvider>();
+    final AuthProvider ap = context.watch<AuthProvider>();
     return  Scaffold(
       body: SafeArea(
         child: Column(
@@ -43,14 +47,19 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'View Leads',
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 24.sp,
+                  GestureDetector(
+                    onTap:(){
+                      log(ap.tokenn!);
+                    },
+                    child : Text(
+                      'View Leads',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 24.sp,
 
-                      fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w700,
 
+                      ),
                     ),
                   ),
                   Row(

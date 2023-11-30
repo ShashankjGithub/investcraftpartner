@@ -142,7 +142,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
                                 ),
                                 Gap(8),
                                 Text(
-                                  '${widget.data.assignedAgentId}',
+                                  '${widget.data.assignedAgentId??""}',
                                   style: TextStyle(
                                     color: mainColor,
                                     fontSize: 15,
@@ -244,7 +244,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Full Name",data: "${widget.data.firstName}",)),
+                child: LeadDetailContainer(title: "Company",data: "${widget.data.firstName}",)),
             Gap(15),
             Expanded(
                 child: LeadDetailContainer(title: "Mother's Name",data: "${widget.data.motherName}",)),

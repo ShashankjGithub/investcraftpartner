@@ -57,7 +57,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
 
               validator: (val){
                 if (val!.isEmpty) {
-                  return getLabel(label: "ACCOUNT_NUMBER_LABEL", form: pf.bankDetails!);
+                  return "Please enter account number";
                 }
               },
             ),
@@ -68,7 +68,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
 
               validator: (val){
                 if (val!.isEmpty) {
-                  return getLabel(label: "IFSC_CODE_LABEL", form: pf.bankDetails!);
+                  return "Please enter IFSC code";
                 }
               },
             ),
@@ -111,7 +111,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (vv){
                         if (vv==null) {
-                          return   getPlaceHolder(label: "SELECT_BANK", form: pf.bankDetails!);
+                          return  "Please select bank";
                         }
                       },
                       decoration: InputDecoration(
@@ -129,7 +129,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
-                          item.key!,
+                          item.value!,
                           style: TextStyle(color: Color(0xff5B6469),fontSize: 15),
                         ),
                       ))

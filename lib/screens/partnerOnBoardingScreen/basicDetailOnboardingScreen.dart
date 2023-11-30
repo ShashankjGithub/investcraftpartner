@@ -276,7 +276,10 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                                     Gap(15),
                                     CustomNextButton(
                                       onTap: (){
-                                        pp.saveBasicDetail(context);
+                                        if (pp.basicDetailKey.currentState!.validate()) {
+                                          pp.saveBasicDetail(context);
+                                        }
+
                                       },
                                       title: getLabel(label: "NEXT", form: pf.basicDetail!),
                                     )

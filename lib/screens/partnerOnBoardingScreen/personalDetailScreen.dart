@@ -53,7 +53,7 @@ class PersonalDetailScreen extends StatelessWidget {
               textCapitalization: TextCapitalization.characters,
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "PAN_CARD_LABEL", form: pf.personalDetailFromData!);
+                  return "Please enter pan card number";
                 }
               },
             ),
@@ -65,7 +65,7 @@ class PersonalDetailScreen extends StatelessWidget {
               type: TextInputType.number,
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "AADHAR_CARD_LABEL", form: pf.personalDetailFromData!);
+                  return "Please enter addhar card number";
                 }
               },
             ),
@@ -110,7 +110,7 @@ class PersonalDetailScreen extends StatelessWidget {
               clt: pp.dobClt,text: getLabel(label: "DATE_OF_BIRTH", form: pf.personalDetailFromData!),
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "DATE_OF_BIRTH", form: pf.personalDetailFromData!);
+                  return "Please enter DOB";
                 }
               },
             ),
@@ -121,7 +121,7 @@ class PersonalDetailScreen extends StatelessWidget {
 
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "PERMANENT_HOME_ADDRESS_LABEL", form: pf.personalDetailFromData!);
+                  return "Please enter permanent address";
                 }
               },
             ),
@@ -164,7 +164,7 @@ class PersonalDetailScreen extends StatelessWidget {
 
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "PERSENT_ADDRESS_LABEL", form: pf.personalDetailFromData!);
+                  return "Please enter present address";
                 }
               },
             ),
@@ -206,12 +206,12 @@ class PersonalDetailScreen extends StatelessWidget {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (val){
                         if(val==null){
-                          return "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").elementType}";
+                          return "Please select state";
                         }
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15)
+                          contentPadding: EdgeInsets.only(top: 15,left: 10)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -224,7 +224,7 @@ class PersonalDetailScreen extends StatelessWidget {
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
-                          item.key!,
+                          item.value!,
                           style: TextStyle(color: Color(0xff5B6469)),
                         ),
                       ))
@@ -285,12 +285,12 @@ class PersonalDetailScreen extends StatelessWidget {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (val){
                         if(val==null){
-                          return "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").elementType}";
+                          return "Please select city";
                         }
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15)
+                          contentPadding: EdgeInsets.only(top: 15,left: 10)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -303,7 +303,7 @@ class PersonalDetailScreen extends StatelessWidget {
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
-                          item.key!,
+                          item.value!,
                           style: TextStyle(color: Color(0xff5B6469)),
                         ),
                       ))
@@ -334,7 +334,7 @@ class PersonalDetailScreen extends StatelessWidget {
 
               validator: (val){
                 if(val!.isEmpty){
-                  return getLabel(label: "PIN_CODE", form: pf.personalDetailFromData!);
+                  return "Please enter pin code";
                 }
               },
             ),
@@ -376,12 +376,12 @@ class PersonalDetailScreen extends StatelessWidget {
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (val){
                         if(val==null){
-                          return "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "EDUCATION_QUALIFICATION_SELECT").elementType}";
+                          return "Please select eduction qualification";
                         }
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15)
+                          contentPadding: EdgeInsets.only(top: 15,left: 10)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -394,7 +394,7 @@ class PersonalDetailScreen extends StatelessWidget {
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
-                          item.key!,
+                          item.value!,
                           style: TextStyle(color: Color(0xff5B6469)),
                         ),
                       ))

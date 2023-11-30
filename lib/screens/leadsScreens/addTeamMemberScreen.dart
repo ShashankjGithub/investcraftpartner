@@ -69,7 +69,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
 
                             validator: (val){
                               if (val!.isEmpty) {
-                                return getLabel(label: "NAME_LABEL", form: pf.basicDetail!);
+                                return "Please enter name";
                               }
                             },
                           ),
@@ -80,7 +80,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
 
                             validator: (val){
                               if (val!.isEmpty) {
-                                return getLabel(label: "EMAIL_LABEL", form: pf.basicDetail!);
+                                return "Please enter email address";
                               }
                             },
                           ),
@@ -91,7 +91,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
 
                             validator: (val){
                               if (val!.isEmpty) {
-                                return getLabel(label: "PHONE_NUMBER_LABEL", form: pf.basicDetail!);
+                                return "Please enter phone number";
                               }
                             },
                           ),
@@ -139,7 +139,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                                     },
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        contentPadding: EdgeInsets.only(top: 15)
+                                        contentPadding: EdgeInsets.only(top: 15,left: 10)
                                     ),
                                     iconStyleData: IconStyleData(
                                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -152,7 +152,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                                         .map((item) => DropdownMenuItem(
                                       value: item,
                                       child: Text(
-                                        item.key??"",
+                                        item.value??"",
                                         style: TextStyle(color: Color(0xff5B6469)),
                                       ),
                                     ))
