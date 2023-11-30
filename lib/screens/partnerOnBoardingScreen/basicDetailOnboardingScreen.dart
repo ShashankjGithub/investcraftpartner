@@ -80,36 +80,36 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                         ):
                         InkWell(
                           onTap: (){
-                            pp.previousButtonPressed();
+                           // pp.previousButtonPressed();
                           },
                           child: Container(
                             padding: EdgeInsets.only(left: 5,right: 5),
                             alignment: Alignment.center,
                             height: 22.h,
                             width: 75.w,
-                            decoration: BoxDecoration(
-                                color: Color(0xFFAE0E4F),
-                                borderRadius: BorderRadius.circular(100)
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.arrow_back_ios,size: 10,color: Colors.white,),
-                                Gap(10),
-                                Text(
-                                  'Previous',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontFamily: 'Open Sans',
-                                    fontWeight: FontWeight.w600,
-                                    height: 0,
-                                  ),
-                                ),
-
-
-                              ],
-                            ),
+                            // decoration: BoxDecoration(
+                            //     color: Color(0xFFAE0E4F),
+                            //     borderRadius: BorderRadius.circular(100)
+                            // ),
+                            // child: Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     Icon(Icons.arrow_back_ios,size: 10,color: Colors.white,),
+                            //     Gap(10),
+                            //     Text(
+                            //       'Previous',
+                            //       style: TextStyle(
+                            //         color: Colors.white,
+                            //         fontSize: 12,
+                            //         fontFamily: 'Open Sans',
+                            //         fontWeight: FontWeight.w600,
+                            //         height: 0,
+                            //       ),
+                            //     ),
+                            //
+                            //
+                            //   ],
+                            // ),
                           ),
                         ),
                         Column(
