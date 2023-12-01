@@ -244,40 +244,40 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Company",data: "${widget.data.firstName}",)),
+                child: LeadDetailContainer(title: "Company",data: "${widget.data.companyName}",)),
             Gap(15),
             Expanded(
-                child: LeadDetailContainer(title: "Mother's Name",data: "${widget.data.motherName}",)),
+                child: LeadDetailContainer(title: "Company type",data: "${widget.data.companyType}",)),
           ],
         ),
         Gap(30),
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Phone",data: "(+91) ${widget.data.mobile}",)),
+                child: LeadDetailContainer(title: "PAN",data: "${widget.data.pan}",)),
             Gap(15),
             Expanded(
-                child: LeadDetailContainer(title: "State",data: "${widget.data.state}",),),
+                child: LeadDetailContainer(title: "Employee Type",data: "${widget.data.employmentType}",),),
           ],
         ),
         Gap(30),
         Row(
           children: [
             Expanded(
-                child: LeadDetailContainer(title: "Email",data: "${widget.data.email}",)),
+                child: LeadDetailContainer(title: "Office Address",data: "${widget.data.officeAddress}",)),
             Gap(15),
             Expanded(
                 child: LeadDetailContainer(title: "Pin Code",data: "${widget.data.pincode}",)),
           ],
         ),
-        Gap(30),
-        Row(
-          children: [
-            Expanded(
-                child: LeadDetailContainer(title: "Address",data: "${widget.data.officeAddress}",)),
-
-          ],
-        ),
+        // Gap(30),
+        // Row(
+        //   children: [
+        //     Expanded(
+        //         child: LeadDetailContainer(title: "Address",data: "${widget.data.officeAddress}",)),
+        //
+        //   ],
+        // ),
       ],
     );
   }
