@@ -154,7 +154,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   var selectedBusinessStateType;
   var selectedBusinessCityType;
   changeBAnsiBusinessType(value){
-    selectedBusinessType = value;
+    selecteBasicdBusinessType = value;
     notifyListeners();
   }
   changeBusinessType(value){
@@ -244,7 +244,7 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
     changeLoading(true);
     ApiServices().postData(save_basic_details,{
       "name":nameClt.text,
-      "business_type":selecteBasicdBusinessType.value,
+      "business_type":selecteBasicdBusinessType.value??"",
     },context,he: ap.tokenn,header: true).then((response) {
       if (response!=null) {
         Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
