@@ -118,6 +118,11 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
 
   changePASACA(){
     pasaca = !pasaca;
+    if(pasaca==true){
+      presentAddressClt.text = permanentHomeAddressClt.text;
+    }else{
+      presentAddressClt.clear();
+    }
     notifyListeners();
   }
   var selectedState;

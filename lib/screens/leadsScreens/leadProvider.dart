@@ -201,15 +201,18 @@ class LeadProvider extends ChangeNotifier {
 
   bool noLeadList = false;
   List<Lead> leadsList = [];
+  List<Lead> leadsList2 = [];
 
   getLead(BuildContext context) {
     noLeadList = false;
     leadsList.clear();
+    leadsList2.clear();
     final AuthProvider ap = Provider.of<AuthProvider>(context, listen: false);
     ApiServices().getData(leads_view, tocken: ap.tokenn).then((response) {
       if (response != null) {
         if (response.statusCode == 200) {
           leadsList.addAll(leadModalFromJson(response.body).leads);
+          leadsList2.addAll(leadModalFromJson(response.body).leads);
           if (leadsList.isEmpty) {
             noLeadList = true;
           }
@@ -224,7 +227,17 @@ class LeadProvider extends ChangeNotifier {
     notifyListeners();
   }
   String leadId = "";
-
+  searchLead(val){
+    noLeadList=false;
+    leadsList = leadsList2.where((element) =>
+        element.leadNumber.toString().toLowerCase().contains(val.toString().toLowerCase())
+        || element.firstName.toString().toLowerCase().contains(val.toString().toLowerCase())
+    ).toList();
+    if(leadsList.isEmpty){
+      noLeadList =true;
+    }
+    notifyListeners();
+  }
 
 
 

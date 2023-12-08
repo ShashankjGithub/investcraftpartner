@@ -110,7 +110,7 @@ class AuthProvider extends ChangeNotifier{
             status = json.decode(response.body)["next"];
             sp.setString("status", json.decode(response.body)["next"]);
             notifyListeners();
-              //status = BASIC;
+             // status = KYC_DOC;
             if(status==HOME_PAGE){
               Get.offAll(BottomBarScreen());
             }else{

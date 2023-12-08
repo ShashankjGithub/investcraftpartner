@@ -296,7 +296,8 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                     },
                   ),
                   Gap(25.h),
-                  CustomizeDatePicker(clt: lp.dobClt,text: getLabel(label: "DATE_OF_BIRTH", form: fp.leadFormPersonal!), validator: (v){
+                  CustomizeDatePicker(
+                    clt: lp.dobClt,text: getLabel(label: "DATE_OF_BIRTH", form: fp.leadFormPersonal!), validator: (v){
                     if (v!.isEmpty) {
                       return  "Please enter DOB";
                     }
@@ -710,7 +711,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                   TextFieldCustom(
                     hint: "",clt: lp.completeResidenceAddressClt,
-                    showRequried: false,
+
                     title: getLabel(label: "COMPLETE_RESIDENCE_ADDRESS_LABEL", form: fp.leadFormEmployement!),
 
                     validator: (vv){
@@ -723,7 +724,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
 
                   TextFieldCustom(
                     hint: "",clt: lp.completeOfficeAddressClt,
-                    showRequried: false,
+
                     title: getLabel(label: "COMPLETE_OFFICE_ADDRESS_LABEL", form: fp.leadFormEmployement!),
 
                     validator: (vv){

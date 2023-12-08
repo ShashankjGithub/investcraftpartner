@@ -107,6 +107,7 @@ class PersonalDetailScreen extends StatelessWidget {
             ),
             Gap(30),
             CustomizeDatePicker(
+
               clt: pp.dobClt,text: getLabel(label: "DATE_OF_BIRTH", form: pf.personalDetailFromData!),
               validator: (val){
                 if(val!.isEmpty){
@@ -158,12 +159,13 @@ class PersonalDetailScreen extends StatelessWidget {
               ),
             ),
             Gap(25),
+            pp.pasaca==true?SizedBox():
             TextFieldCustom(
               hint: "",clt: pp.presentAddressClt,
               title:getLabel(label: "PERSENT_ADDRESS_LABEL", form: pf.personalDetailFromData!),
 
               validator: (val){
-                if(val!.isEmpty){
+                if(pp.pasaca==false&&val!.isEmpty){
                   return "Please enter present address";
                 }
               },

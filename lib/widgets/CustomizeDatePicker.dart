@@ -59,6 +59,7 @@ Widget CustomizeDatePicker(
           initialDate: intialDate??DateTime.now(),
           lastDate: DateTime(20000),
           onChanged: (val) {},
+          autovalidate: true,
           validator: validator,
           onSaved: (val) {},
         ),

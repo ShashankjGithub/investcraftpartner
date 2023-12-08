@@ -130,7 +130,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469),fontSize: 15),
+                          style: TextStyle(color: Color(0xff5B6469)),
                         ),
                       ))
                           .toList(),

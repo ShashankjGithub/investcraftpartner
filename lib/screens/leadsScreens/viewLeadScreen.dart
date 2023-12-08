@@ -22,7 +22,7 @@ class ViewLeadScreen extends StatefulWidget {
 
 class _ViewLeadScreenState extends State<ViewLeadScreen> {
   int _currentIndex = 0;
-
+  TextEditingController searchClt = TextEditingController();
 
   ValueNotifier currentIndex = ValueNotifier(-1);
   changeCurrentIndex(value){
@@ -62,21 +62,21 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      SvgPicture.asset(Assets.assetsFilter),
-                      Gap(10),
-                      Text(
-                        'Filter',
-                        style: TextStyle(
-                          color: mainColor,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400,
-
-                        ),
-                      ),
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     SvgPicture.asset(Assets.assetsFilter),
+                  //     Gap(10),
+                  //     Text(
+                  //       'Filter',
+                  //       style: TextStyle(
+                  //         color: mainColor,
+                  //         fontSize: 16,
+                  //         fontWeight: FontWeight.w400,
+                  //
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),
@@ -93,6 +93,10 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                    SvgPicture.asset(Assets.assetsSearchIcon),
                    Gap(10),
                    Expanded(child: TextFormField(
+                     controller: searchClt,
+                     onChanged: (val){
+                       lp.searchLead(val);
+                     },
                      decoration: InputDecoration(
                        hintStyle: TextStyle(
                          fontSize: 15
