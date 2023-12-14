@@ -419,7 +419,7 @@ class DecoractionContainer extends StatelessWidget {
     return Expanded(
       child: Container(
         padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
-        height: 92.h,
+        height: 100.h,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),

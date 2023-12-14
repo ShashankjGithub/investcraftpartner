@@ -22,6 +22,7 @@ const String team_member_list = "team-member-list";
 const String save_team_member = "save-team-member";
 const String aggreement_link = "aggreement-link";
 const String verify_partners = "verify-partners";
+const String basic_detail = "basic-detail";
 
 
 

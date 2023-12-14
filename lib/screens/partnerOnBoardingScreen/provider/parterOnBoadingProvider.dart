@@ -101,6 +101,15 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   TextEditingController emailIDClt = TextEditingController();
   TextEditingController phoneNumberClt = TextEditingController();
   TextEditingController businessTypeClt = TextEditingController();
+
+
+  fillBasicDetail(name,email,phoneNumber){
+    nameClt.text = name;
+    emailIDClt.text = email;
+    phoneNumberClt.text = phoneNumber;
+    notifyListeners();
+  }
+
   ////////////////////// Personal Detail ////////////////////////////////////////////////////
   final personalDetailKey = GlobalKey<FormState>();
   TextEditingController panCardNumberClt = TextEditingController();

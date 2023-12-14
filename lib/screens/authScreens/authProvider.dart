@@ -8,6 +8,7 @@ import 'package:investcraftpartner/screens/authScreens/loginScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../modals/basicDetailModal.dart';
 import '../../services/apiServices.dart';
 import '../../widgets/bottomBar.dart';
 import '../partnerOnBoardingScreen/basicDetailOnboardingScreen.dart';
@@ -109,8 +110,9 @@ class AuthProvider extends ChangeNotifier{
           if (json.decode(response.body)["status"]=="success") {
             status = json.decode(response.body)["next"];
             sp.setString("status", json.decode(response.body)["next"]);
+
             notifyListeners();
-             // status = KYC_DOC;
+              //status = BUSINESS;
             if(status==HOME_PAGE){
               Get.offAll(BottomBarScreen());
             }else{
@@ -129,7 +131,21 @@ class AuthProvider extends ChangeNotifier{
 
   }
 
-
+  getBasicDetail(BuildContext context){
+    final AuthProvider ap = Provider.of(context,listen: false);
+    final PartnerOnBoardingProvider pp = Provider.of(context,listen: false);
+    pp.changeLoading(true);
+    ApiServices().getData(basic_detail,tocken: ap.tokenn).then((response) {
+      if(response!=null){
+         var data = baicDetailModalFromJson(response.body);
+         pp.fillBasicDetail(data.message.first.name, data.message.first.email, data.message.first.mobile);
+        pp.changeLoading(false);
+      }else{
+       pp. changeLoading(false);
+      }
+    });
+    notifyListeners();
+  }
 
   register(BuildContext context){
     if(signUpKey.currentState!.validate()){

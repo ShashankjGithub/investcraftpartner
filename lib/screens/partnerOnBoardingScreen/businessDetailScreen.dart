@@ -88,8 +88,6 @@ class BusinessDetailScreen extends StatelessWidget {
                         }
                       },
                       decoration: InputDecoration(
-
-
                           border: InputBorder.none,
                           contentPadding:
                           EdgeInsets.only(top: 15,left: 15)

@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gap/gap.dart';
 import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
+import 'package:investcraftpartner/screens/authScreens/authProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/personalDetailScreen.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/widgets/agreementScreen2.dart';
@@ -37,6 +38,7 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       context.read<PartnerOnBoardingProvider>().changeStatus(widget.status);
+      context.read<AuthProvider>().getBasicDetail(context);
 
     });
     super.initState();
