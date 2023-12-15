@@ -220,14 +220,14 @@ class PersonalDetailScreen extends StatelessWidget {
                       isExpanded: true,
                       hint: Text(
                         "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").elementType}",
-                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                       ),
                       items: pf.personalDetailFromData!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                         ),
                       ))
                           .toList(),
@@ -299,14 +299,14 @@ class PersonalDetailScreen extends StatelessWidget {
                       isExpanded: true,
                       hint: Text(
                         "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").elementType}",
-                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                       ),
                       items: pf.personalDetailFromData!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                         ),
                       ))
                           .toList(),
@@ -390,14 +390,14 @@ class PersonalDetailScreen extends StatelessWidget {
                       isExpanded: true,
                       hint: Text(
                         "${pf.personalDetailFromData!.element.firstWhere((element) => element.key == "EDUCATION_QUALIFICATION_SELECT").elementType}",
-                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                       ),
                       items: pf.personalDetailFromData!.element.firstWhere((element) => element.key == "EDUCATION_QUALIFICATION_SELECT").list
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                         ),
                       ))
                           .toList(),

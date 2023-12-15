@@ -137,14 +137,14 @@ class _BasicDetailScreenState extends State<BasicDetailScreen> {
                   isExpanded: true,
                   hint: Text(
                     "Select",
-                    style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                    style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                   ),
                   items: pf.signupForm!.element.firstWhere((element) => element.key == "BUSSINESS_TYPE_PLACEHOLDER").list
                       .map((item) => DropdownMenuItem(
                     value: item,
                     child: Text(
                       item.value??"",
-                      style: TextStyle(color: Color(0xff5B6469)),
+                      style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                     ),
                   ))
                       .toList(),

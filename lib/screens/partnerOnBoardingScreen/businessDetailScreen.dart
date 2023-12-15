@@ -97,14 +97,14 @@ class BusinessDetailScreen extends StatelessWidget {
                       isExpanded: true,
                       hint: Text(
                         getPlaceHolder(label: "BUSSINESS_TYPE_PLACEHOLDER", form: pf.businessDetails!),
-                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                       ),
                       items: pf.businessDetails!.element.firstWhere((element) => element.key == "BUSSINESS_TYPE_PLACEHOLDER").list
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                         ),
                       ))
                           .toList(),
@@ -467,14 +467,14 @@ class BusinessDetailScreen extends StatelessWidget {
                       isExpanded: true,
                       hint: Text(
                         getPlaceHolder(label: "STATE_PLACEHOLDER", form: pf.businessDetails!),
-                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                       ),
                       items: pf.businessDetails!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                         ),
                       ))
                           .toList(),
@@ -546,14 +546,14 @@ class BusinessDetailScreen extends StatelessWidget {
                       isExpanded: true,
                       hint: Text(
                         "${getPlaceHolder(label: "CITY_PLACEHOLDER", form: pf.businessDetails!)}",
-                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                       ),
                       items: pf.businessDetails!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                         ),
                       ))
                           .toList(),

@@ -448,14 +448,14 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             isExpanded: true,
                             hint: Text(
                               getPlaceHolder(label: "STATE_PLACEHOLDER", form: fp.leadFormEmployement!),
-                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                             ),
                             items: fp.leadFormEmployement!.element.firstWhere((element) => element.key == "STATE_PLACEHOLDER").list
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
                                 item.value!,
-                                style: TextStyle(color: Color(0xff5B6469)),
+                                style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                               ),
                             ))
                                 .toList(),
@@ -527,14 +527,14 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             isExpanded: true,
                             hint: Text(
                               getPlaceHolder(label: "CITY_PLACEHOLDER", form: fp.leadFormEmployement!),
-                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                             ),
                             items: fp.leadFormEmployement!.element.firstWhere((element) => element.key == "CITY_PLACEHOLDER").list
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
                                 item.value!,
-                                style: TextStyle(color: Color(0xff5B6469)),
+                                style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                               ),
                             ))
                                 .toList(),
@@ -676,14 +676,14 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             isExpanded: true,
                             hint: Text(
                               getPlaceHolder(label: "LOAN_TYPE_PLACEHOLDER", form: fp.leadFormEmployement!),
-                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                              style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                             ),
                             items: fp.leadFormEmployement!.element.firstWhere((element) => element.key == "LOAN_TYPE_PLACEHOLDER").list
                                 .map((item) => DropdownMenuItem(
                               value: item,
                               child: Text(
                                 item.value??"",
-                                style: TextStyle(color: Color(0xff5B6469)),
+                                style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                               ),
                             ))
                                 .toList(),

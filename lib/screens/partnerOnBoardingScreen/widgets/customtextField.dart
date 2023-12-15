@@ -66,6 +66,7 @@ class TextFieldCustom extends StatelessWidget {
               ],
               borderRadius: BorderRadius.circular(100.r)),
           child: TextFormField(
+            style: TextStyle(color: Color(0xff5B6469)),
             obscureText: obscureText??false,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validator,
@@ -77,7 +78,9 @@ class TextFieldCustom extends StatelessWidget {
             maxLines: maxLine==null?1:null,
             readOnly: readonly??false,
             decoration: InputDecoration(
+
               isDense: true,
+
               border: InputBorder.none,
               hintText: hint,
               hintStyle: TextStyle(color: Color(0xff5B6469)),

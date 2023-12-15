@@ -123,14 +123,14 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                       isExpanded: true,
                       hint: Text(
                         getPlaceHolder(label: "SELECT_BANK", form: pf.bankDetails!),
-                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15),
+                        style: TextStyle(color: Color(0xff5B6469), fontSize: 15,fontWeight: FontWeight.w400),
                       ),
                       items: pf.bankDetails!.element.firstWhere((element) => element.key == "SELECT_BANK").list
                           .map((item) => DropdownMenuItem(
                         value: item,
                         child: Text(
                           item.value!,
-                          style: TextStyle(color: Color(0xff5B6469)),
+                          style: TextStyle(color: Color(0xff5B6469),fontWeight: FontWeight.w400),
                         ),
                       ))
                           .toList(),
