@@ -337,17 +337,10 @@ class _PartnerOnboardingScreenState extends State<PartnerOnboardingScreen> {
                                     Gap(15),
                                     CustomNextButton(
                                       onTap: (){
-                                        if(pp.panCardFile==null){
-                                          Fluttertoast.showToast(msg: "Choose Pan Card");
-                                        }else if (pp.aadhaarCardFile==null) {
-                                          Fluttertoast.showToast(msg: "Choose Aadhar Card");
-                                        }  else if (pp.passportCardFile==null) {
-                                          Fluttertoast.showToast(msg: "Choose Passport Card");
-                                        }else if (pp.businessCardFile==null) {
-                                          Fluttertoast.showToast(msg: "Choose Business photo");
-                                        }else{
-                                          pp.saveKycDetails(context);
-                                        }
+                                       bool? noerror = pp.getError();
+                                       if(noerror!=null&&noerror == true){
+                                         pp.saveKycDetails(context);
+                                       }
 
                                       },
                                       title:  getLabel(label: "NEXT", form: pf.kycDetail!),

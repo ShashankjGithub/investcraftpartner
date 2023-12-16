@@ -24,9 +24,11 @@ class _KycDetailsScreenState extends State<KycDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    final PartnerOnBoardingProvider pp = context.watch<PartnerOnBoardingProvider>();
+
     final PartnerFromDataProvider pf = context.watch<PartnerFromDataProvider>();
-    return Padding(
+    return Consumer<PartnerOnBoardingProvider>(
+  builder: (context, pp, child) {
+  return Padding(
       padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,30 +57,45 @@ class _KycDetailsScreenState extends State<KycDetailsScreen> {
             pp.panCardFile!=null?pp.panCardFile!.files[0].name:
             getPlaceHolder(label: "PANFILE_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
             pp.choosePanFile();
-          },),
+          },
+            showError: pp.pancarderror,
+            errorText: "Please choose pan card",
+          ),
+
           Gap(15),
           DoteddedContainer(label: getLabel(label: "UPLOAD_AADHAR_FILE", form: pf.kycDetail!),
             placeholder:
             pp.aadhaarCardFile!=null?pp.aadhaarCardFile!.files[0].name:
             getPlaceHolder(label: "UPLOAD_AADHAR_FIEL_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
               pp.chooseaadharFile();
-            },),
+            },
+            showError: pp.aadharCardError,
+            errorText: "Please choose pan card",
+          ),
           Gap(15),
           DoteddedContainer(label: getLabel(label: "UPLOAD_PASSPORT_SIZE_FILE", form: pf.kycDetail!),
             placeholder:
             pp.passportCardFile!=null?pp.passportCardFile!.files[0].name:
             getPlaceHolder(label: "UPLOAD_PASSPORT_SIZE_PHOTO_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
             pp.choosepassportFile();
-            },),
+            },
+            showError: pp.passportCardError,
+            errorText: "Please choose pan card",
+          ),
           Gap(15),
           DoteddedContainer(label: getLabel(label: "UPLOAD_BUSSINESS_PHOTO_LABEL", form: pf.kycDetail!),
             placeholder:
             pp.businessCardFile!=null?pp.businessCardFile!.files[0].name:
             getPlaceHolder(label: "UPLOAD_BUSSINESS_PHOTO_PLACEHOLDER", form: pf.kycDetail!),onTap: (){
               pp.chooseBusinessFile();
-            },),
+            },
+            showError: pp.businessCardError,
+            errorText: "Please choose pan card",
+          ),
         ],
       ),
     );
+  },
+);
   }
 }

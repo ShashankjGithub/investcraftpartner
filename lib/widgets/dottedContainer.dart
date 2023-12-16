@@ -11,12 +11,14 @@ import '../generated/assets.dart';
 class DoteddedContainer extends StatelessWidget {
   DoteddedContainer({
     super.key, required this.label, required this.placeholder, required this.onTap,
-    this.file
+    this.file,required this.errorText,required this.showError
   });
   String label;
   String placeholder;
   GestureTapCallback onTap;
   FilePickerResult? file;
+  bool showError;
+  String errorText;
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,8 @@ class DoteddedContainer extends StatelessWidget {
             ),
           ),
         ),
+        if(showError)
+        Text(errorText,style: TextStyle(color: Colors.redAccent),),
         Gap(20),
         Text("File must be JPG, GIF or PNG less than 1MB.",style: TextStyle(fontSize: 12.sp,color: Color(0xff8E8E8E)),)
       ],

@@ -228,21 +228,47 @@ class PartnerOnBoardingProvider extends ChangeNotifier{
   FilePickerResult? aadhaarCardFile;
   FilePickerResult? passportCardFile;
   FilePickerResult? businessCardFile;
+  bool pancarderror = false;
+  bool aadharCardError = false;
+  bool passportCardError = false;
+  bool businessCardError = false;
+
 
   choosePanFile()async{
     panCardFile = await pickFile();
+    pancarderror = false;
     notifyListeners();
   }
   chooseaadharFile()async{
     aadhaarCardFile = await pickFile();
+    aadharCardError = false;
     notifyListeners();
   }
   choosepassportFile()async{
     passportCardFile = await pickFile();
+    passportCardError = false;
     notifyListeners();
   }
   chooseBusinessFile()async{
     businessCardFile = await pickFile();
+    businessCardError = false;
+    notifyListeners();
+  }
+
+  bool? getError(){
+    if(panCardFile==null){
+      pancarderror = true;
+    } if(aadhaarCardFile==null){
+      aadharCardError = true;
+    }if(passportCardFile==null){
+      passportCardError = true;
+    }if(businessCardFile==null){
+      businessCardError = true;
+    }
+
+    if(panCardFile!=null&&aadhaarCardFile!=null&&passportCardFile!=null&&businessCardFile!=null){
+      return true;
+    }
     notifyListeners();
   }
 
