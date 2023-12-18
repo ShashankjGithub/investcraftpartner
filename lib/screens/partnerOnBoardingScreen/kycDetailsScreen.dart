@@ -70,7 +70,7 @@ class _KycDetailsScreenState extends State<KycDetailsScreen> {
               pp.chooseaadharFile();
             },
             showError: pp.aadharCardError,
-            errorText: "Please choose pan card",
+            errorText: "Please choose aadhar card",
           ),
           Gap(15),
           DoteddedContainer(label: getLabel(label: "UPLOAD_PASSPORT_SIZE_FILE", form: pf.kycDetail!),
@@ -80,7 +80,7 @@ class _KycDetailsScreenState extends State<KycDetailsScreen> {
             pp.choosepassportFile();
             },
             showError: pp.passportCardError,
-            errorText: "Please choose pan card",
+            errorText: "Please choose passport size photo",
           ),
           Gap(15),
           DoteddedContainer(label: getLabel(label: "UPLOAD_BUSSINESS_PHOTO_LABEL", form: pf.kycDetail!),
@@ -90,7 +90,7 @@ class _KycDetailsScreenState extends State<KycDetailsScreen> {
               pp.chooseBusinessFile();
             },
             showError: pp.businessCardError,
-            errorText: "Please choose pan card",
+            errorText: "Please choose business photo",
           ),
         ],
       ),
