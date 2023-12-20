@@ -77,13 +77,19 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "${pf.congratulation!.title}",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 30.sp,
-                      fontWeight: FontWeight.w700,
-                    ),
+                  Row(
+                    children: [
+                      BackButton(),
+                      Gap(10),
+                      Text(
+                        "${pf.congratulation!.title}",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30.sp,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
                   ),
                   Gap(5),
                   Text(

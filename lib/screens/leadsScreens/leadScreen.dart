@@ -97,7 +97,7 @@ class _LeadScreenState extends State<LeadScreen> {
                                                           ),
                                                           Gap(8),
                                                           Text(
-                                                            '${tp.dataTeam[index].partnerId}',
+                                                            '${tp.dataTeam[index].partnerId??""}',
                                                             style: TextStyle(
                                                               color: Colors.black,
                                                               fontSize: 14.sp,

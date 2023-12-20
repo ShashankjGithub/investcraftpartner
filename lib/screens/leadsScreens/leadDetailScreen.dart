@@ -35,156 +35,170 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
     return  Scaffold(
       body: SafeArea(
         child: Container(
-          padding: EdgeInsets.only(top: 10,left: 20,right: 20,bottom: 20),
+          padding: EdgeInsets.only(top: 10,right: 20,bottom: 20),
           height: size.height,
           width: size.width,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(20),
-              Text(
-                '${widget.data.leadNumber}',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                ),
-              ),
-              Gap(10),
-              Text(
-                'Lead Application Details',
-                style: TextStyle(
-                  color: Color(0xFFD7206A),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-
-                ),
-              ),
-              Gap(20),
               Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 15,left: 10,right: 10,bottom: 15),
-                      height: 101.h,
-                      decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 10.h,
-                            width: 10.w,
-                            decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: mainColor)),
-                          ),
-                          Gap(8),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'App Status',
-                                     style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-
-                                  ),
-                                ),
-                                Gap(8),
-                                Text(
-                                  '${widget.data.leadStatus}',
-                                  style: TextStyle(
-                                    color: mainColor,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Gap(15),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 15,left: 10,right: 10,bottom: 15),
-                      height: 101.h,
-                      decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            height: 10.h,
-                            width: 10.w,
-                            decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: mainColor)),
-                          ),
-                          Gap(8),
-                          Expanded(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Assigned Agent',
-                                     style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400,
-
-                                  ),
-                                ),
-                                Gap(8),
-                                Text(
-                                  '${widget.data.assignedAgentId??""}',
-                                  style: TextStyle(
-                                    color: mainColor,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-
-                                  ),
-                                ),
-
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                  BackButton(),
+                  Text(
+                    '${widget.data.leadNumber}',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
                     ),
                   ),
                 ],
               ),
+              Gap(10),
+              Padding(
+                padding:  EdgeInsets.only(left: 12),
+                child: Text(
+                  'Lead Application Details',
+                  style: TextStyle(
+                    color: Color(0xFFD7206A),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+
+                  ),
+                ),
+              ),
+              Gap(20),
+              Padding(
+                padding:  EdgeInsets.only(left: 12),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 15,left: 10,right: 10,bottom: 15),
+                        height: 101.h,
+                        decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 10.h,
+                              width: 10.w,
+                              decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: mainColor)),
+                            ),
+                            Gap(8),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'App Status',
+                                       style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+
+                                    ),
+                                  ),
+                                  Gap(8),
+                                  Text(
+                                    '${widget.data.leadStatus}',
+                                    style: TextStyle(
+                                      color: mainColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Gap(15),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 15,left: 10,right: 10,bottom: 15),
+                        height: 101.h,
+                        decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              height: 10.h,
+                              width: 10.w,
+                              decoration: BoxDecoration(shape: BoxShape.circle,border: Border.all(color: mainColor)),
+                            ),
+                            Gap(8),
+                            Expanded(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Assigned Agent',
+                                       style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+
+                                    ),
+                                  ),
+                                  Gap(8),
+                                  Text(
+                                    '${widget.data.assignedAgentId??""}',
+                                    style: TextStyle(
+                                      color: mainColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+
+                                    ),
+                                  ),
+
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
               Gap(20),
               Expanded(
-                  child:Column(
-                    children: [
-                      TabBar(
-                        isScrollable: false,
-                        labelColor: mainColor,
-                        unselectedLabelColor: Colors.black,
-                        indicatorColor: mainColor,
-                        controller: controller,
-                        indicatorSize: TabBarIndicatorSize.label,
-                        tabs: List.generate(lp.titles.length, (index) {
-                          return Tab(text: lp.titles[index],);
-                        }),
-                      ),
-                      Expanded(
-                        child: TabBarView(
+                  child:Padding(
+                    padding:  EdgeInsets.only(left: 12),
+                    child: Column(
+                      children: [
+                        TabBar(
+                          isScrollable: false,
+                          labelColor: mainColor,
+                          unselectedLabelColor: Colors.black,
+                          indicatorColor: mainColor,
                           controller: controller,
-                            children: [
-                              PersonalDetailWidget(),
-                              EmployeeDetailWidget(),
-                              //UploadeDocumentDetailWidget(),
-                        ]),
-                      ),
-                    ],
+                          indicatorSize: TabBarIndicatorSize.label,
+                          tabs: List.generate(lp.titles.length, (index) {
+                            return Tab(text: lp.titles[index],);
+                          }),
+                        ),
+                        Expanded(
+                          child: TabBarView(
+                            controller: controller,
+                              children: [
+                                PersonalDetailWidget(),
+                                EmployeeDetailWidget(),
+                                //UploadeDocumentDetailWidget(),
+                          ]),
+                        ),
+                      ],
+                    ),
                   ))
             ],
           ),

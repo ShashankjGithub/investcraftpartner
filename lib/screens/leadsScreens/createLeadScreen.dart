@@ -48,7 +48,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
       child: Scaffold(
        body: SafeArea(
          child: Container(
-           padding: EdgeInsets.only(top: 40,bottom: 10),
+           padding: EdgeInsets.only(top: 20,bottom: 10),
            height: size.height,
            width: size.width,
            child: Stack(
@@ -56,16 +56,21 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                Column(
                  crossAxisAlignment: CrossAxisAlignment.start,
                  children: [
-                   Padding(
-                     padding: const EdgeInsets.only(left: 20,right: 20),
-                     child: Text(
-                       'Create Lead',
-                       style: TextStyle(
-                         color: Colors.black,
-                         fontSize: 24,
-                         fontWeight: FontWeight.w700,
+                   Row(
+                     children: [
+                       BackButton(),
+                       Padding(
+                         padding: const EdgeInsets.only(left: 20,right: 20),
+                         child: Text(
+                           'Create Lead',
+                           style: TextStyle(
+                             color: Colors.black,
+                             fontSize: 24,
+                             fontWeight: FontWeight.w700,
+                           ),
+                         ),
                        ),
-                     ),
+                     ],
                    ),
                    Gap(25),
                    Container(

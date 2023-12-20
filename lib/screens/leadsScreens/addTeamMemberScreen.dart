@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:investcraftpartner/providers/partnerFromDataProvider.dart';
 import 'package:investcraftpartner/providers/teamProvider.dart';
 import 'package:investcraftpartner/screens/partnerOnBoardingScreen/provider/parterOnBoadingProvider.dart';
@@ -40,18 +41,28 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                 child: Column(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 20,left: 15,right: 15),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      padding: const EdgeInsets.only(top: 20),
+                      child: Row(
                         children: [
+                          BackButton(),
+                          Gap(10),
                           Text(
                             "Add Team Member",
                             style: TextStyle(
                               color: Colors.black,
-                              fontSize: 30.sp,
+                              fontSize: 28.sp,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15,left: 15,right: 15),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
                           Gap(5),
                           Text(
                             "Fill basic Detail",
@@ -169,7 +180,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                                       width: 200,
                                     ),
                                     menuItemStyleData: MenuItemStyleData(
-                                      height: 40,
+                                      height: 50,
                                     ),
                                     dropdownStyleData: DropdownStyleData(width: 200),
                                   ),
