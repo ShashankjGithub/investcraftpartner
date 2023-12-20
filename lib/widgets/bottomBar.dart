@@ -6,6 +6,7 @@ import 'package:investcraftpartner/screens/leadsScreens/leadProvider.dart';
 import 'package:investcraftpartner/widgets/tabNavigator.dart';
 
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/themeConfig.dart';
 import '../generated/assets.dart';
@@ -73,6 +74,12 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       context.read<MyQrProvider>().getQrData(context);
     });
   }
+  savePriviousIndexValue()async{
+    SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setInt('previous', cIndex);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -80,16 +87,30 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     final Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
+        SharedPreferences sp = await SharedPreferences.getInstance();
         final isFirstRouteInCurrentTab = !await navigatorKeys[currentPage]!.currentState!
             .maybePop();
+
+
+
         if (isFirstRouteInCurrentTab) {
-          if (currentPage != "Page1") {
-            selectTab("Page1", 1);
+          if (currentPage == "Page4") {
+            selectTab("Page3", 2);
             return false;
+          }else if(currentPage == "Page3"){
+            selectTab("Page2", 1);
+            return false;
+          }else if(currentPage == "Page2"){
+            selectTab("Page1", 0);
+            return false;
+          }else if(currentPage == "Page1"){
+
+            return true;
           }
         }
 
-        return isFirstRouteInCurrentTab;
+       // return isFirstRouteInCurrentTab;
+        return false;
       },
       child: Scaffold(
           bottomNavigationBar: Padding(
@@ -179,7 +200,9 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                       label: ('More')),
                 ],
                 onTap: (int index) {
+                 print(cIndex);
                   selectTab(pageKeys[index], index);
+
                 },
               ),
             ),
