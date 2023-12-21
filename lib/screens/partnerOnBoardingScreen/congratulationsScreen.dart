@@ -146,14 +146,13 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                               Container(
                                 width: 286,
                                 height: 262,
-                                padding: EdgeInsets.all(10),
+                                padding: EdgeInsets.only(top: 20,left: 15,right: 15,bottom: 20),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                      image: NetworkImage(pp.qr_image_path))
+
                                 ),
+                                child: Image.network(pp.qr_image_path),
                               ),
                               Gap(15),
                               Text(
