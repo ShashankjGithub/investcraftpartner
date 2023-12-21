@@ -81,7 +81,6 @@ class _LeadScreenState extends State<LeadScreen> {
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: [
                                                     Container(
-
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: [
@@ -196,46 +195,6 @@ class _LeadScreenState extends State<LeadScreen> {
                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
                                                                 Text(
-                                                                  'Business',
-                                                                  style: TextStyle(
-                                                                    color: Color(0xFF66707F),
-                                                                    fontSize: 15,
-                                                                    fontWeight: FontWeight.w400,
-
-                                                                  ),
-                                                                ),
-                                                                Gap(8),
-                                                                Text(
-                                                                  'Solo Proprietorship',
-                                                                  style: TextStyle(
-                                                                    color: Colors.black,
-                                                                    fontSize: 12.sp,
-                                                                    fontWeight: FontWeight.w600,
-                                                                  ),
-                                                                ),
-                                                              ],),
-                                                          ),
-                                                          InkWell(
-
-                                                            child: Container(
-                                                              alignment: Alignment.center,
-                                                              height: 25.h,
-                                                              width: 25.w,
-
-                                                            ),
-                                                          ),
-
-
-                                                        ],
-                                                      ),
-                                                      Gap(20.h),
-                                                      Row(
-                                                        children: [
-                                                          Expanded(
-                                                            child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              children: [
-                                                                Text(
                                                                   'Date',
                                                                   style: TextStyle(
                                                                     color: Color(0xFF66707F),
@@ -255,45 +214,87 @@ class _LeadScreenState extends State<LeadScreen> {
                                                                 ),
                                                               ],),
                                                           ),
+                                                          // Container(
+                                                          //   width: size.width/5,
+                                                          //   child: Column(
+                                                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                                                          //     children: [
+                                                          //       Text(
+                                                          //         'Business',
+                                                          //         style: TextStyle(
+                                                          //           color: Color(0xFF66707F),
+                                                          //           fontSize: 15,
+                                                          //           fontWeight: FontWeight.w400,
+                                                          //
+                                                          //         ),
+                                                          //       ),
+                                                          //       Gap(8),
+                                                          //       Text(
+                                                          //         'Solo Proprietorship',
+                                                          //         style: TextStyle(
+                                                          //           color: Colors.black,
+                                                          //           fontSize: 12.sp,
+                                                          //           fontWeight: FontWeight.w600,
+                                                          //         ),
+                                                          //       ),
+                                                          //     ],),
+                                                          // ),
+                                                          InkWell(
 
-                                                          Expanded(
-                                                            child: Column(
-                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                              children: [
-                                                                // Text(
-                                                                //   'Action',
-                                                                //   style: TextStyle(
-                                                                //     color: Color(0xFF66707F),
-                                                                //     fontSize: 15,
-                                                                //     fontWeight: FontWeight.w400,
-                                                                //
-                                                                //   ),
-                                                                // ),
-                                                                // Gap(8),
-                                                                // InkWell(
-                                                                //   onTap:(){
-                                                                //
-                                                                //   },
-                                                                //   child: Row(
-                                                                //     children: [
-                                                                //       Text(
-                                                                //         'View Detail',
-                                                                //         style: TextStyle(
-                                                                //           color: mainColor,
-                                                                //           fontSize: 14.sp,
-                                                                //           fontWeight: FontWeight.w500,
-                                                                //         ),
-                                                                //       ),
-                                                                //       Gap(3),
-                                                                //       Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 15,)
-                                                                //     ],
-                                                                //   ),
-                                                                // ),
-                                                              ],),
+                                                            child: Container(
+                                                              alignment: Alignment.center,
+                                                              height: 25.h,
+                                                              width: 25.w,
+
+                                                            ),
                                                           ),
+
 
                                                         ],
                                                       ),
+                                                      Gap(20.h),
+                                                      // Row(
+                                                      //   children: [
+                                                      //
+                                                      //
+                                                      //     Expanded(
+                                                      //       child: Column(
+                                                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                                                      //         children: [
+                                                      //           // Text(
+                                                      //           //   'Action',
+                                                      //           //   style: TextStyle(
+                                                      //           //     color: Color(0xFF66707F),
+                                                      //           //     fontSize: 15,
+                                                      //           //     fontWeight: FontWeight.w400,
+                                                      //           //
+                                                      //           //   ),
+                                                      //           // ),
+                                                      //           // Gap(8),
+                                                      //           // InkWell(
+                                                      //           //   onTap:(){
+                                                      //           //
+                                                      //           //   },
+                                                      //           //   child: Row(
+                                                      //           //     children: [
+                                                      //           //       Text(
+                                                      //           //         'View Detail',
+                                                      //           //         style: TextStyle(
+                                                      //           //           color: mainColor,
+                                                      //           //           fontSize: 14.sp,
+                                                      //           //           fontWeight: FontWeight.w500,
+                                                      //           //         ),
+                                                      //           //       ),
+                                                      //           //       Gap(3),
+                                                      //           //       Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 15,)
+                                                      //           //     ],
+                                                      //           //   ),
+                                                      //           // ),
+                                                      //         ],),
+                                                      //     ),
+                                                      //
+                                                      //   ],
+                                                      // ),
 
                                                     ],
                                                   )

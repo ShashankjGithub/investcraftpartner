@@ -146,6 +146,7 @@ class _CongratulationsScreenState extends State<CongratulationsScreen> {
                               Container(
                                 width: 286,
                                 height: 262,
+                                padding: EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(20),
