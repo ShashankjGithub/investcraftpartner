@@ -423,7 +423,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                       ),
                       Gap(15.h),
                       Container(
-                        padding: EdgeInsets.only(left: 10, right: 8),
+                        padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                         height: 60.h,
                         width: size.width,
                         decoration: BoxDecoration(
@@ -446,7 +446,8 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 15,left: 10)
+                                contentPadding: EdgeInsets.only(top: lp.selectedState!=null?15:16,
+                                    left: lp.selectedState!=null?0:15)
                             ),
                             iconStyleData: IconStyleData(
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -502,7 +503,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                       ),
                       Gap(15.h),
                       Container(
-                        padding: EdgeInsets.only(left: 10, right: 8),
+                        padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                         height: 60.h,
                         width: size.width,
                         decoration: BoxDecoration(
@@ -525,7 +526,8 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 15,left: 10)
+                                contentPadding: EdgeInsets.only(top: lp.selectedCity!=null?15:16,
+                                    left: lp.selectedCity!=null?0:15)
                             ),
                             iconStyleData: IconStyleData(
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -651,7 +653,7 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                       ),
                       Gap(15.h),
                       Container(
-                        padding: EdgeInsets.only(left: 10, right: 8),
+                        padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                         height: 60.h,
                         width: size.width,
                         decoration: BoxDecoration(
@@ -674,7 +676,8 @@ class _CreateLeadScreenState extends State<CreateLeadScreen> {
                             },
                             decoration: InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.only(top: 15,left: 10)
+                                contentPadding: EdgeInsets.only(top: lp.selectedLoanType!=null?15:16,
+                                    left: lp.selectedLoanType!=null?0:15)
                             ),
                             iconStyleData: IconStyleData(
                                 icon: SvgPicture.asset(Assets.assetsDropdownicon)),

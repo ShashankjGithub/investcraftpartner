@@ -301,7 +301,7 @@ class _LeadScreenState extends State<LeadScreen> {
                                               ],
                                             ),
                                           ),
-                                          if(index != 3)
+                                          if(index+1 != tp.dataTeam.length)
                                             Divider(thickness: 1,)
                                         ],
                                       ),

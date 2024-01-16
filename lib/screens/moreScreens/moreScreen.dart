@@ -66,6 +66,9 @@ class _MoreScreenState extends State<MoreScreen> {
                                     width: 130.w,
                                     child: Text("${mq.qrData!=null?mq.qrData!.userData.name:"User"}",style: TextStyle(fontSize: 17.sp,color: mainColor),overflow: TextOverflow.ellipsis,)),
                                 Gap(10.h),
+                                Container(
+                                    width: 130.w,
+                                    child: Text("+91 ${mq.qrData!=null?mq.qrData!.userData.mobile:""}",style: TextStyle(fontSize: 13.sp,color: Colors.black),overflow: TextOverflow.ellipsis,)),
 
                               ],
                             ),

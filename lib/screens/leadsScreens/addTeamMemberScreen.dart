@@ -127,7 +127,7 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                               ),
                               Gap(15.h),
                               Container(
-                                padding: EdgeInsets.only(left: 10, right: 8),
+                                padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                                 height: 60.h,
                                 width: size.width,
                                 decoration: BoxDecoration(
@@ -150,7 +150,8 @@ class _AddTeamMemberScreenState extends State<AddTeamMemberScreen> {
                                     },
                                     decoration: InputDecoration(
                                         border: InputBorder.none,
-                                        contentPadding: EdgeInsets.only(top: 15,left: 10)
+                                        contentPadding: EdgeInsets.only(top: pp.selectedBusinessType!=null?15:16,
+                                            left: pp.selectedBusinessType!=null?0:15)
                                     ),
                                     iconStyleData: IconStyleData(
                                         icon: SvgPicture.asset(Assets.assetsDropdownicon)),

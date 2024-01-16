@@ -120,7 +120,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           Gap(15.h),
                           Container(
-                            padding: EdgeInsets.only(left: 10, right: 8),
+                            padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                             height: 60.h,
                             width: size.width,
                             decoration: BoxDecoration(
@@ -143,7 +143,8 @@ class SignUpScreen extends StatelessWidget {
                                 },
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    contentPadding: EdgeInsets.only(top: 15,left: 15)
+                                    contentPadding: EdgeInsets.only(top: ap.selectedBusinessType!=null?15:16,
+                                        left: ap.selectedBusinessType!=null?0:15)
                                 ),
                                 iconStyleData: IconStyleData(
                                     icon: SvgPicture.asset(Assets.assetsDropdownicon)),

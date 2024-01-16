@@ -93,7 +93,7 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                 ),
                 Gap(15.h),
                 Container(
-                  padding: EdgeInsets.only(left: 10, right: 8),
+                  padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                   height: 60.h,
                   width: size.width,
                   decoration: BoxDecoration(
@@ -116,7 +116,8 @@ class _BankAccountDetailScreenState extends State<BankAccountDetailScreen> {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15,left: 15)
+                          contentPadding: EdgeInsets.only(top: pp.selectedBankName!=null?15:16,
+                              left: pp.selectedBankName!=null?0:15)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),

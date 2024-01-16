@@ -122,267 +122,272 @@ class _ViewLeadScreenState extends State<ViewLeadScreen> {
                       return Container(
                           padding: EdgeInsets.only(top: 20,),
                           decoration: BoxDecoration(border: Border.all(color: bordercolor),borderRadius: BorderRadius.circular(30)),
-                          child: ListView(
-                            children: List.generate(
-                                lp.leadsList.length, (index) {
+                          child: RefreshIndicator(
+                            onRefresh: ()async{
+                              await lp.getLead(context);
+                            },
+                            child: ListView(
+                              children: List.generate(
+                                  lp.leadsList.length, (index) {
 
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 15),
-                                child: Container(
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 20,right: 20,bottom: 10),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  width: size.width/5,
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'App ID',
-                                                        style: TextStyle(
-                                                          color: Color(0xFF66707F),
-                                                          fontSize: 15,
-
-                                                          fontWeight: FontWeight.w400,
-
-                                                        ),
-                                                      ),
-                                                      Gap(8),
-                                                      Text(
-                                                        '${lp.leadsList[index].leadNumber}',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 14.sp,
-
-                                                          fontWeight: FontWeight.w600,
-
-                                                        ),
-                                                      ),
-                                                    ],),
-                                                ),
-                                                Container(
-                                                  width: size.width/5,
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        'App.Status',
-                                                        style: TextStyle(
-                                                          color: Color(0xFF66707F),
-                                                          fontSize: 15,
-
-                                                          fontWeight: FontWeight.w400,
-
-                                                        ),
-                                                      ),
-                                                      Gap(8),
-                                                      Text(
-                                                        '${lp.leadsList[index].leadStatus}',
-                                                        style: TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 12.sp,
-                                                          fontWeight: FontWeight.w600,
-
-                                                        ),
-                                                      ),
-                                                    ],),
-                                                ),
-                                                InkWell(
-                                                  onTap: (){
-                                                    if(value==index){
-                                                      changeCurrentIndex(-1);
-                                                    }else{
-                                                      changeCurrentIndex(index);
-                                                    }
-                                                  },
-                                                  child: Container(
-                                                    alignment: Alignment.center,
-                                                    height: 25.h,
-                                                    width: 25.w,
-                                                    decoration: BoxDecoration(shape: BoxShape.circle,color: value==index?mainColor:Colors.black),
-                                                    child:
-                                                    value==index?
-                                                    Icon(Icons.remove,size: 18,color: Colors.white,):Icon(Icons.add,size: 18,color: Colors.white,),
-                                                  ),
-                                                ),
-
-                                              ],
-                                            ),
-                                            if (value==index)
-                                              Column(
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 15),
+                                  child: Container(
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 20,right: 20,bottom: 10),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Gap(25.h),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        width: size.width/5,
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              'Name',
-                                                              style: TextStyle(
-                                                                color: Color(0xFF66707F),
-                                                                fontSize: 15,
-                                                                fontWeight: FontWeight.w400,
+                                                  Container(
+                                                    width: size.width/5,
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'App ID',
+                                                          style: TextStyle(
+                                                            color: Color(0xFF66707F),
+                                                            fontSize: 15,
 
-                                                              ),
-                                                            ),
-                                                            Gap(8),
-                                                            Text(
-                                                              '${lp.leadsList[index].firstName}',
-                                                              style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontSize: 12.sp,
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                            ),
-                                                          ],),
-                                                      ),
+                                                            fontWeight: FontWeight.w400,
 
-                                                      Container(
-                                                        width: size.width/5,
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              'Request Date',
-                                                              style: TextStyle(
-                                                                color: Color(0xFF66707F),
-                                                                fontSize: 15,
-                                                                fontWeight: FontWeight.w400,
-
-                                                              ),
-                                                            ),
-                                                            Gap(8),
-                                                            Text(
-                                                              '${DateFormat("dd MMM yy").format(lp.leadsList[index].createdAt)}',
-                                                              style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontSize: 12.sp,
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                            ),
-                                                          ],),
-                                                      ),
-                                                      InkWell(
-
-                                                        child: Container(
-                                                          alignment: Alignment.center,
-                                                          height: 25.h,
-                                                          width: 25.w,
-
+                                                          ),
                                                         ),
-                                                      ),
+                                                        Gap(8),
+                                                        Text(
+                                                          '${lp.leadsList[index].leadNumber}',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 14.sp,
 
-                                                    ],
-                                                  ),
-                                                  Gap(20.h),
-                                                  Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Container(
-                                                        width: size.width/5,
-                                                        child : Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              'Loan Amount',
-                                                              style: TextStyle(
-                                                                color: Color(0xFF66707F),
-                                                                fontSize: 15,
-                                                                fontWeight: FontWeight.w400,
+                                                            fontWeight: FontWeight.w600,
 
-                                                              ),
-                                                            ),
-                                                            Gap(8),
-                                                            Text(
-                                                              "${lp.leadsList[index].loanAmount}",
-                                                              style: TextStyle(
-                                                                color: Colors.black,
-                                                                fontSize: 12.sp,
-                                                                fontWeight: FontWeight.w600,
-                                                              ),
-                                                            ),
-                                                          ],),
-                                                      ),
-
-                                                      Container(
-                                                        width: size.width/5,
-                                                        child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                          children: [
-                                                            Text(
-                                                              'Action',
-                                                              style: TextStyle(
-                                                                color: Color(0xFF66707F),
-                                                                fontSize: 15,
-                                                                fontWeight: FontWeight.w400,
-
-                                                              ),
-                                                            ),
-                                                             Gap(8),
-                                                            InkWell(
-                                                              onTap:(){
-                                                                Navigator.push(context, MaterialPageRoute(builder: (context){
-                                                                  return LeadDetailScreen(data: lp.leadsList[index],);
-                                                                }));
-
-                                                              },
-                                                              child: Row(
-                                                                children: [
-                                                                  Text(
-                                                                    'View Detail',
-                                                                    style: TextStyle(
-                                                                      color: mainColor,
-                                                                      fontSize: 11.sp,
-                                                                      fontWeight: FontWeight.w500,
-                                                                    ),
-                                                                  ),
-                                                                  Gap(3),
-                                                                  Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 12,)
-                                                                ],
-                                                              ),
-                                                            ),
-
-                                                          ],),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: (){
-
-                                                        },
-                                                        child: Container(
-                                                          alignment: Alignment.center,
-                                                          height: 25.h,
-                                                          width: 25.w,
-
+                                                          ),
                                                         ),
-                                                      ),
-
-                                                    ],
+                                                      ],),
                                                   ),
+                                                  Container(
+                                                    width: size.width/5,
+                                                    child: Column(
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          'App.Status',
+                                                          style: TextStyle(
+                                                            color: Color(0xFF66707F),
+                                                            fontSize: 15,
+
+                                                            fontWeight: FontWeight.w400,
+
+                                                          ),
+                                                        ),
+                                                        Gap(8),
+                                                        Text(
+                                                          '${lp.leadsList[index].leadStatus}',
+                                                          style: TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 12.sp,
+                                                            fontWeight: FontWeight.w600,
+
+                                                          ),
+                                                        ),
+                                                      ],),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      if(value==index){
+                                                        changeCurrentIndex(-1);
+                                                      }else{
+                                                        changeCurrentIndex(index);
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      alignment: Alignment.center,
+                                                      height: 25.h,
+                                                      width: 25.w,
+                                                      decoration: BoxDecoration(shape: BoxShape.circle,color: value==index?mainColor:Colors.black),
+                                                      child:
+                                                      value==index?
+                                                      Icon(Icons.remove,size: 18,color: Colors.white,):Icon(Icons.add,size: 18,color: Colors.white,),
+                                                    ),
+                                                  ),
+
                                                 ],
-                                              )
-                                          ],
+                                              ),
+                                              if (value==index)
+                                                Column(
+                                                  children: [
+                                                    Gap(25.h),
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Container(
+                                                          width: size.width/5,
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                'Name',
+                                                                style: TextStyle(
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
+                                                                ),
+                                                              ),
+                                                              Gap(8),
+                                                              Text(
+                                                                '${lp.leadsList[index].firstName}',
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                              ),
+                                                            ],),
+                                                        ),
+
+                                                        Container(
+                                                          width: size.width/5,
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                'Request Date',
+                                                                style: TextStyle(
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
+                                                                ),
+                                                              ),
+                                                              Gap(8),
+                                                              Text(
+                                                                '${DateFormat("dd MMM yy").format(lp.leadsList[index].createdAt)}',
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                              ),
+                                                            ],),
+                                                        ),
+                                                        InkWell(
+
+                                                          child: Container(
+                                                            alignment: Alignment.center,
+                                                            height: 25.h,
+                                                            width: 25.w,
+
+                                                          ),
+                                                        ),
+
+                                                      ],
+                                                    ),
+                                                    Gap(20.h),
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Container(
+                                                          width: size.width/5,
+                                                          child : Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                'Loan Amount',
+                                                                style: TextStyle(
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
+                                                                ),
+                                                              ),
+                                                              Gap(8),
+                                                              Text(
+                                                                "${lp.leadsList[index].loanAmount}",
+                                                                style: TextStyle(
+                                                                  color: Colors.black,
+                                                                  fontSize: 12.sp,
+                                                                  fontWeight: FontWeight.w600,
+                                                                ),
+                                                              ),
+                                                            ],),
+                                                        ),
+
+                                                        Container(
+                                                          width: size.width/5,
+                                                          child: Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                                            children: [
+                                                              Text(
+                                                                'Action',
+                                                                style: TextStyle(
+                                                                  color: Color(0xFF66707F),
+                                                                  fontSize: 15,
+                                                                  fontWeight: FontWeight.w400,
+
+                                                                ),
+                                                              ),
+                                                               Gap(8),
+                                                              InkWell(
+                                                                onTap:(){
+                                                                  Navigator.push(context, MaterialPageRoute(builder: (context){
+                                                                    return LeadDetailScreen(data: lp.leadsList[index],);
+                                                                  }));
+
+                                                                },
+                                                                child: Row(
+                                                                  children: [
+                                                                    Text(
+                                                                      'View Detail',
+                                                                      style: TextStyle(
+                                                                        color: mainColor,
+                                                                        fontSize: 11.sp,
+                                                                        fontWeight: FontWeight.w500,
+                                                                      ),
+                                                                    ),
+                                                                    Gap(3),
+                                                                    Icon(Icons.arrow_forward_ios_sharp,color: mainColor,size: 12,)
+                                                                  ],
+                                                                ),
+                                                              ),
+
+                                                            ],),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: (){
+
+                                                          },
+                                                          child: Container(
+                                                            alignment: Alignment.center,
+                                                            height: 25.h,
+                                                            width: 25.w,
+
+                                                          ),
+                                                        ),
+
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                      if(index != 3)
-                                        Divider(thickness: 1,)
-                                    ],
+                                        if(index != 3)
+                                          Divider(thickness: 1,)
+                                      ],
+                                    ),
                                   ),
-                                ),
-                              );
-                            }),
+                                );
+                              }),
+                            ),
                           )
                       );
                     }

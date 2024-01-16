@@ -209,7 +209,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
   
   Widget PersonalDetailWidget(){
     return ListView(
-      padding: EdgeInsets.only(left: 20,top: 20,right: 10,bottom: 15),
+      padding: EdgeInsets.only(left: 20,top: 33,right: 10,bottom: 15),
       children: [
         Row(
           children: [
@@ -253,7 +253,7 @@ class _LeadDetailScreenState extends State<LeadDetailScreen> with SingleTickerPr
   }
   Widget EmployeeDetailWidget(){
     return ListView(
-      padding: EdgeInsets.only(left: 20,top: 20,right: 10,bottom: 15),
+      padding: EdgeInsets.only(left: 20,top: 33,right: 10,bottom: 15),
       children: [
         Row(
           children: [

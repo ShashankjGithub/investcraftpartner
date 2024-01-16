@@ -190,7 +190,7 @@ class PersonalDetailScreen extends StatelessWidget {
                 ),
                 Gap(15.h),
                 Container(
-                  padding: EdgeInsets.only(left: 10, right: 8),
+                  padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                   height: 60.h,
                   width: size.width,
                   decoration: BoxDecoration(
@@ -212,8 +212,10 @@ class PersonalDetailScreen extends StatelessWidget {
                         }
                       },
                       decoration: InputDecoration(
+
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15,left: 10)
+                          contentPadding: EdgeInsets.only(top: pp.selectedState!=null?15:16,
+                              left: pp.selectedState!=null?0:15)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -269,7 +271,7 @@ class PersonalDetailScreen extends StatelessWidget {
                 ),
                 Gap(15.h),
                 Container(
-                  padding: EdgeInsets.only(left: 10, right: 8),
+                  padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                   height: 60.h,
                   width: size.width,
                   decoration: BoxDecoration(
@@ -292,7 +294,8 @@ class PersonalDetailScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15,left: 10)
+                          contentPadding: EdgeInsets.only(top: pp.selectedCity!=null?15:16,
+                              left: pp.selectedCity!=null?0:15)
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
@@ -360,7 +363,7 @@ class PersonalDetailScreen extends StatelessWidget {
                 ),
                 Gap(15.h),
                 Container(
-                  padding: EdgeInsets.only(left: 10, right: 8),
+                  padding: EdgeInsets.only(left: 10, right: 8,bottom: 10),
                   height: 60.h,
                   width: size.width,
                   decoration: BoxDecoration(
@@ -383,7 +386,9 @@ class PersonalDetailScreen extends StatelessWidget {
                       },
                       decoration: InputDecoration(
                           border: InputBorder.none,
-                          contentPadding: EdgeInsets.only(top: 15,left: 10)
+                          contentPadding: EdgeInsets.only(top: pp.selectedQualificaion!=null?15:16,
+                              left: pp.selectedQualificaion!=null?0:15)
+
                       ),
                       iconStyleData: IconStyleData(
                           icon: SvgPicture.asset(Assets.assetsDropdownicon)),
