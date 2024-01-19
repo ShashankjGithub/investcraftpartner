@@ -87,30 +87,20 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     final Size size = MediaQuery.of(context).size;
     return WillPopScope(
       onWillPop: () async {
-        SharedPreferences sp = await SharedPreferences.getInstance();
-        final isFirstRouteInCurrentTab = !await navigatorKeys[currentPage]!.currentState!
-            .maybePop();
 
-
-
+        final isFirstRouteInCurrentTab = !await navigatorKeys[currentPage]!.currentState!.maybePop();
         if (isFirstRouteInCurrentTab) {
-          if (currentPage == "Page4") {
-            selectTab("Page3", 2);
-            return false;
-          }else if(currentPage == "Page3"){
-            selectTab("Page2", 1);
-            return false;
-          }else if(currentPage == "Page2"){
-            selectTab("Page1", 0);
-            return false;
-          }else if(currentPage == "Page1"){
+          if (currentPage != "Page1") {
+            selectTab("Page1", 1);
 
-            return true;
+            return false;
           }
         }
+        // let system handle back button if we're on the first route
+        return isFirstRouteInCurrentTab;
 
-       // return isFirstRouteInCurrentTab;
-        return false;
+
+
       },
       child: Scaffold(
           bottomNavigationBar: Padding(

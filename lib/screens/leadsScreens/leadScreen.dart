@@ -31,24 +31,24 @@ class _LeadScreenState extends State<LeadScreen> {
     final TeamProvider tp = context.watch<TeamProvider>();
     return  Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Gap(25.h),
-              Padding(
-                padding: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 10),
-                child: Text(
-                  'My Team',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 24.sp,
-                    fontWeight: FontWeight.w700,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Gap(25.h),
+            Padding(
+              padding: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 10),
+              child: Text(
+                'My Team',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w700,
 
-                  ),
                 ),
               ),
-              Padding(
+            ),
+            Expanded(
+              child: Padding(
                 padding: EdgeInsets.only(left: 15,right: 15,top: 20,bottom: 20),
                 child: ValueListenableBuilder(
                     valueListenable: currentIndex,
@@ -195,7 +195,7 @@ class _LeadScreenState extends State<LeadScreen> {
                                                               crossAxisAlignment: CrossAxisAlignment.start,
                                                               children: [
                                                                 Text(
-                                                                  'Date',
+                                                                  'Email',
                                                                   style: TextStyle(
                                                                     color: Color(0xFF66707F),
                                                                     fontSize: 15,
@@ -205,7 +205,7 @@ class _LeadScreenState extends State<LeadScreen> {
                                                                 ),
                                                                 Gap(8),
                                                                 Text(
-                                                                  "${DateFormat("dd-MM-yyyy").format(tp.dataTeam[index].createdAt)}",
+                                                                  "${tp.dataTeam[index].email}",
                                                                   style: TextStyle(
                                                                     color: Colors.black,
                                                                     fontSize: 12.sp,
@@ -314,8 +314,8 @@ class _LeadScreenState extends State<LeadScreen> {
                         );
                     }
                 ),),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

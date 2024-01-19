@@ -331,15 +331,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           Container(
                             height: 100,
                             width: size.width,
-                            child: ListView(
+                            child: SingleChildScrollView(
                               scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              children: List.generate(fp.homeScreenProducts.length , (index) {
-                                return  Padding(
-                                  padding: const EdgeInsets.only(right: 45),
-                                  child: OurProductContainer(showOffer: false,title: "${fp.homeScreenProducts[index].name}",imageUrl: "${fp.homeScreenProducts[index].image}",),
-                                );
-                              }),
+                              child: Row(
+                                children: [
+                                  ListView(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    children: List.generate(fp.homeScreenProducts.length , (index) {
+                                      return  Padding(
+                                        padding: const EdgeInsets.only(right: 30),
+                                        child: OurProductContainer(showOffer: false,title: "${fp.homeScreenProducts[index].name}",imageUrl: "${fp.homeScreenProducts[index].image}",isAssets: false,),
+                                      );
+                                    }),
+                                  ),
+                                  OurProductContainer(showOffer: false,title: "View More",imageUrl: Assets.assetsViewAll,isAssets: true,),
+
+                                ],
+                              ),
                             ),
                           ),
 
@@ -361,11 +371,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
 class OurProductContainer extends StatelessWidget {
   const OurProductContainer({
-    super.key, required this.showOffer, required this.title, required this.imageUrl,
+    super.key, required this.showOffer, required this.title, required this.imageUrl, required this.isAssets,
   });
   final bool showOffer;
   final String title;
   final String imageUrl;
+  final bool isAssets;
 
   @override
   Widget build(BuildContext context) {
@@ -388,6 +399,7 @@ class OurProductContainer extends StatelessWidget {
           ),
         ),
         Gap(8),
+        isAssets?SvgPicture.asset(imageUrl,height: 35,width: 35,):
         SvgPicture.network(imageUrl,height: 35,width: 35,),
         Gap(8),
         Text(
