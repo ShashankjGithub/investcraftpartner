@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../config/appConfig.dart';
 import '../modals/teamMemberListModal.dart';
 import '../services/apiServices.dart';
+import '../widgets/bottomBar.dart';
 
 class TeamProvider extends ChangeNotifier{
   List<DatumTeam> dataTeam =[];
@@ -62,12 +63,22 @@ class TeamProvider extends ChangeNotifier{
           Fluttertoast.showToast(msg: "${json.decode(response.body)["message"]}");
           changeLoading(false);
           getTeamMembers(context);
-          Get.back();
+          clearFields();
+          Get.offAll(()=>BottomBarScreen(screenid: 2,));
         }else{
           changeLoading(false);
         }
       });
     }
+  }
+
+  clearFields(){
+    nameteamClt.clear();
+    emailIDClt.clear();
+    phoneNumberClt.clear();
+    selectedBusinessType = null;
+    notifyListeners();
+
   }
 
 

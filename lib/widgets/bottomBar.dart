@@ -39,26 +39,35 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
 
 
   void selectTab(String tabItem, int index) {
-    if (tabItem == currentPage) {
-      navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
-    } else {
-      changeIndex(index);
-    }
+    // if (tabItem == currentPage) {
+    //   navigatorKeys[tabItem]!.currentState!.popUntil((route) => route.isFirst);
+    // } else {
+    //
+    // }
+    changeIndex(index);
   }
 
 
 
   changeIndex(index){
    setState(() {
+     _navigationqueue.add({
+       "index":cIndex,
+       "pageKey":currentPage
+     });
      currentPage = pageKeys[index];
      cIndex = index;
+
    });
   }
 
   @override
   void initState() {
-    if(widget.screenid!=null&&widget.screenid==2){
+    if(widget.screenid!=null&&widget.screenid==1){
       changeIndex(1);
+    }
+    if(widget.screenid!=null&&widget.screenid==2){
+      changeIndex(2);
     }
     getLead();
 
@@ -80,7 +89,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   }
 
 
-
+  List _navigationqueue =[];
   @override
   Widget build(BuildContext context) {
 
@@ -88,16 +97,26 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
     return WillPopScope(
       onWillPop: () async {
 
-        final isFirstRouteInCurrentTab = !await navigatorKeys[currentPage]!.currentState!.maybePop();
-        if (isFirstRouteInCurrentTab) {
-          if (currentPage != "Page1") {
-            selectTab("Page1", 1);
-
-            return false;
-          }
-        }
-        // let system handle back button if we're on the first route
-        return isFirstRouteInCurrentTab;
+        // final isFirstRouteInCurrentTab = !await navigatorKeys[currentPage]!.currentState!.maybePop();
+        // if (isFirstRouteInCurrentTab) {
+        //   if (currentPage != "Page1") {
+        //     selectTab("Page1", 1);
+        //
+        //     return false;
+        //   }
+        // }
+        // // let system handle back button if we're on the first route
+        // return isFirstRouteInCurrentTab;
+        print(_navigationqueue.length);
+        print(_navigationqueue.last["index"]);
+        if(_navigationqueue.isEmpty)
+          return true;
+        setState(() {
+          cIndex = _navigationqueue.last["index"];
+          currentPage = _navigationqueue.last["pageKey"];
+          _navigationqueue.removeLast();
+        });
+        return false;
 
 
 
@@ -190,7 +209,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
                       label: ('More')),
                 ],
                 onTap: (int index) {
-                 print(cIndex);
+
                   selectTab(pageKeys[index], index);
 
                 },

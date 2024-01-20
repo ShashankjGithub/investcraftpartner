@@ -279,7 +279,7 @@ class LeadProvider extends ChangeNotifier {
         leadId = "${json.decode(response.body)["lead_id"]}";
         changeLoading(false);
 
-        Get.offAll(()=>BottomBarScreen());
+        Get.offAll(()=>BottomBarScreen(screenid: 1,));
       } else {
         changeLoading(false);
       }
