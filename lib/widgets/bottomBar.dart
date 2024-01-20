@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -107,10 +109,13 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
         // }
         // // let system handle back button if we're on the first route
         // return isFirstRouteInCurrentTab;
-        print(_navigationqueue.length);
-        print(_navigationqueue.last["index"]);
-        if(_navigationqueue.isEmpty)
-          return true;
+
+
+        if(_navigationqueue.length.toString()==0.toString()){
+           exit(0);
+        }
+
+
         setState(() {
           cIndex = _navigationqueue.last["index"];
           currentPage = _navigationqueue.last["pageKey"];
